@@ -10,6 +10,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { WhatsappFab } from "@/components/layout/whatsapp-fab";
 import { ChatLauncher } from "@/components/chat/chat-launcher";
 import { MotionProvider } from "@/components/motion/motion-provider";
+import { OrganizationJsonLd } from "@/components/seo/json-ld";
 
 // Not preloaded: on 2G/3G and Data Saver the site uses system fonts and never downloads it.
 const sans = Instrument_Sans({
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <WhatsappFab />
         <ChatLauncher />
         <MotionProvider />
+        <OrganizationJsonLd />
       </body>
     </html>
   );

@@ -14,6 +14,7 @@ import { LiveDot } from "@/components/ui/live-dot";
 import { PageHero } from "@/components/page/page-hero";
 import { WorldRoutes } from "@/components/art/maps";
 import { ContactForm } from "@/components/forms/contact-form";
+import { SocialLinks } from "@/components/ui/social-links";
 import rio from "@/assets/stock/rio-sunset.jpg";
 
 export const metadata: Metadata = {
@@ -76,6 +77,10 @@ export default function ContactPage() {
                   );
                 })}
               </ul>
+            </Reveal>
+            <Reveal delay={120} className="mt-6 border-t border-line pt-6">
+              <div className="text-[13px] font-medium text-ink-3">Follow our client stories</div>
+              <SocialLinks className="mt-3" />
             </Reveal>
           </div>
           <div className="lg:col-span-7">

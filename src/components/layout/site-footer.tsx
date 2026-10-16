@@ -8,6 +8,9 @@ import { SITE } from "@/content/site";
 import { AppLink } from "@/components/ui/app-link";
 import { Rich } from "@/components/ui/rich";
 import { LiveDot } from "@/components/ui/live-dot";
+import { Button } from "@/components/ui/primitives";
+import { SocialLinks } from "@/components/ui/social-links";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr/ArrowUpRight";
 
 export function SiteFooter() {
   return (
@@ -60,7 +63,30 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="mt-14 flex flex-wrap items-center gap-2.5">
+          <div className="mt-14 grid gap-8 rounded-[22px] bg-white/[0.04] p-6 ring-1 ring-white/10 md:grid-cols-2 md:items-center md:p-8">
+            <div>
+              <div className="text-[13px] font-medium text-white/50">Newsletter · free guides</div>
+              <p className="mt-1.5 max-w-md text-[18px] font-medium leading-snug tracking-[-0.02em]">Get our free Brazil and Argentina guides, and every new client story.</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                <Button href="/guides/brazil" variant="paper">
+                  Brazil guide
+                </Button>
+                <Button href="/guides/argentina" variant="ghost-light">
+                  Argentina guide
+                </Button>
+              </div>
+            </div>
+            <div className="md:justify-self-end">
+              <div className="text-[13px] font-medium text-white/50">Follow our client stories</div>
+              <SocialLinks tone="dark" className="mt-3" />
+              <AppLink href="/podcast" className="group mt-4 inline-flex items-center gap-1.5 text-[14px] font-medium text-white/85 hover:text-white">
+                Listen to the podcast
+                <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+              </AppLink>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center gap-2.5">
             {["24/7 response", "No Win, No Fee", "{{Licensing authority logo}}", "English · Português · العربية"].map((b, i) => (
               <span key={b} className="inline-flex items-center gap-2 rounded-full bg-white/[0.06] px-3.5 py-2 text-[12.5px] text-white/80 ring-1 ring-white/10">
                 {i === 0 && <LiveDot className="size-1.5" />}

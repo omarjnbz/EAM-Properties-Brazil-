@@ -6,6 +6,7 @@ import { AppLink } from "@/components/ui/app-link";
 import { Button, Container, Eyebrow } from "@/components/ui/primitives";
 import { SplitHeading } from "@/components/ui/split-heading";
 import { Rich } from "@/components/ui/rich";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 
 type Crumb = { label: string; href?: string };
 
@@ -50,6 +51,7 @@ export function PageHero({ eyebrow, title, intro, crumbs, image, imageAlt = "", 
   return (
     <section className={cn("relative overflow-hidden bg-canvas pb-16 pt-32 md:pb-24 md:pt-40", className)}>
       <Container className="relative">
+        {crumbs && <BreadcrumbJsonLd crumbs={crumbs} />}
         {crumbs && (
           <nav aria-label="Breadcrumb" className="load-blur mb-8" style={d(0)}>
             <ol className="flex flex-wrap items-center gap-1.5 text-[13px] text-ink-3">

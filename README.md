@@ -10,7 +10,11 @@ npm install
 npm run dev        # http://localhost:3000
 npm run build      # production build (all pages are static)
 npm run geo        # regenerate the map artwork in public/art and src/lib/geo-data.ts
+npm run guides:pdf # print the free country guides to public/guides (needs the site running)
 ```
+
+`guides:pdf` defaults to `http://localhost:3000`; use `SITE_URL=http://localhost:3100 npm run guides:pdf`
+for another port, and `CHROME_PATH=...` if Chrome is not in the default macOS location.
 
 ## How it is organised
 
@@ -22,6 +26,27 @@ npm run geo        # regenerate the map artwork in public/art and src/lib/geo-da
 | `src/components/page/` | Shared page blocks: hero, tables, FAQ, country template. |
 | `src/components/art/` | Code-drawn visuals: maps, stamps, boarding pass, roadmap document. |
 | `scripts/build-geo.mjs` | Builds the maps from Natural Earth data (public domain). |
+
+### Sales pages and lead capture
+
+| Page | Purpose |
+| --- | --- |
+| `/refused-visa` | For people refused before: why files fail, how we reapply, any passport. |
+| `/guides`, `/guides/brazil`, `/guides/argentina` | Free country guides (newsletter signup): name, email, contact number and job unlock the PDF. |
+| `/podcast` | YouTube episodes with click-to-play previews. Add episodes in `src/content/podcast.ts`. |
+| `/free-roadmap` | The personal roadmap form. `?destination=brazil` and `?goal=refused` preselect it. |
+
+Social accounts (YouTube, Instagram, TikTok) live in `SOCIAL` in `src/content/site.ts`; until a URL
+is set they show as "coming soon". Founder facts (years, arrival in Brazil) live in `FOUNDER` there too.
+
+The guide PDFs are printed from `/guides/<country>/print`, using the same facts as the country pages.
+Edit `src/content/guides.ts` or the country copy, then run `npm run guides:pdf` again.
+
+### Search engines
+
+`sitemap.xml`, `robots.txt`, a share image for every page (`src/app/opengraph-image.jpg`) and
+structured data (business details, breadcrumbs, FAQs, the client film) are generated from the content.
+Unconfirmed `{{placeholders}}` are kept out of the structured data.
 
 ### Placeholders
 
@@ -86,7 +111,7 @@ A floating "Ask a question" button opens an AI assistant that answers from the c
   as a processor of chat messages in the privacy policy.
 
 - Wire `src/app/api/enquiry/route.ts` to the CRM and the on-duty advisor's WhatsApp.
-  Today it only validates and acknowledges; submissions are not stored.
+  Today it only validates and acknowledges; roadmap, contact and guide submissions are not stored.
 - Fill every `{{placeholder}}`, re-verify every program figure, and have the
   No Win, No Fee wording reviewed by a UAE lawyer.
 - Add the founder-and-client videos with English and Portuguese caption files.
