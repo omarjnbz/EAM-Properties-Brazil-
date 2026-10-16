@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+.env*
+!.env.example
+dist/
+.next/
+.vercel/
+
+# Internal content master (kept local, not for the public repo)
+*.pdf
