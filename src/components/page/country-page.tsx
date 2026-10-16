@@ -13,6 +13,9 @@ import { PageHero } from "./page-hero";
 import { CheckList, FaqSection, NumberedSteps } from "./blocks";
 import { RoutesTable } from "./tables";
 import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
+import { TestimonialPlayer } from "@/components/testimonials/testimonial-player";
+import { VideoJsonLd } from "@/components/seo/json-ld";
+import type { Explainer } from "@/content/videos";
 
 export type CountryPageData = {
   eyebrow: string;
@@ -36,6 +39,8 @@ export type CountryPageData = {
   costs: readonly { label: string; value: string }[];
   faqs: readonly Faq[];
   testimonialIds?: string[];
+  /** Optional explainer video from our team, with the text that frames it correctly. */
+  explainer?: { item: Explainer; title: string; note: string };
   primaryCta: { label: string; href: string };
   wording?: string;
 };
@@ -94,6 +99,30 @@ export function CountryPage({ data }: { data: CountryPageData }) {
           )}
         </Container>
       </Section>
+
+      {/* Explainer video (our team, not a client story) */}
+      {data.explainer && (
+        <Section tone="ink" id="explainer">
+          <Container className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <Reveal variant="scale" className="mx-auto w-full max-w-[360px] lg:col-span-5 lg:max-w-[400px]">
+              <TestimonialPlayer video={data.explainer.item.video} label={data.explainer.item.title} />
+            </Reveal>
+            <div className="lg:col-span-7">
+              <SectionHeading eyebrow={`Watch · ${data.explainer.item.video.duration}`} title={data.explainer.title} intro={data.explainer.item.summary} tone="ink" />
+              <Reveal delay={160} className="mt-8 rounded-[22px] bg-white/[0.06] p-6 ring-1 ring-white/10">
+                <div className="text-[13px] font-medium text-[#8fc24a]">How you get there</div>
+                <p className="mt-2 text-[15.5px] leading-relaxed text-white/80">
+                  <Rich text={data.explainer.note} />
+                </p>
+              </Reveal>
+              <Reveal delay={220} className="mt-8 flex flex-wrap gap-3">
+                <Button href={data.primaryCta.href}>{data.primaryCta.label}</Button>
+              </Reveal>
+            </div>
+          </Container>
+          <VideoJsonLd items={[{ name: data.explainer.item.title, description: data.explainer.item.summary, video: data.explainer.item.video }]} />
+        </Section>
+      )}
 
       {/* 3. What you get + 4. Life there */}
       <Section>

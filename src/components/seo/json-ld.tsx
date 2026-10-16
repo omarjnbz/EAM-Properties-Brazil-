@@ -1,7 +1,7 @@
 import logo from "@/assets/brand/eam-global-logo.png";
 import { SEO } from "@/content/pages";
 import { FOUNDER, PRESENCE, SITE, SOCIAL } from "@/content/site";
-import { TESTIMONIALS } from "@/content/testimonials";
+import { TESTIMONIALS, type TestimonialVideo } from "@/content/testimonials";
 import { plain } from "@/components/ui/rich";
 
 /**
@@ -73,22 +73,30 @@ export function BreadcrumbJsonLd({ crumbs, path }: { crumbs: { label: string; hr
   );
 }
 
-/** The client films that exist today, so they can appear in video search results. */
-export function VideoJsonLd() {
-  const films = TESTIMONIALS.filter((t) => t.video);
-  if (!films.length) return null;
+type VideoItem = { name: string; description: string; video: TestimonialVideo };
+
+/** Videos on a page, so they can appear in video search results. Defaults to the client films. */
+export function VideoJsonLd({ items }: { items?: VideoItem[] } = {}) {
+  const videos: VideoItem[] =
+    items ??
+    TESTIMONIALS.filter((t) => t.video).map((t) => ({
+      name: `${plain(t.client)} · ${t.program}`,
+      description: `${plain(t.client)} on securing a ${t.program.toLowerCase()} with EAM Global, filmed at our ${t.place.toLowerCase()} with founder ${FOUNDER.name}.`,
+      video: t.video!,
+    }));
+  if (!videos.length) return null;
   return (
     <JsonLd
-      data={films.map((t) => ({
+      data={videos.map((v) => ({
         "@context": "https://schema.org",
         "@type": "VideoObject",
-        name: `${plain(t.client)} · ${t.program}`,
-        description: `${plain(t.client)} on securing a ${t.program.toLowerCase()} with EAM Global, filmed at our ${t.place.toLowerCase()} with founder ${FOUNDER.name}.`,
-        thumbnailUrl: [abs(t.video!.poster.src)],
-        contentUrl: abs(t.video!.src),
-        uploadDate: t.video!.uploadDate,
-        duration: t.video!.isoDuration,
-        inLanguage: t.video!.inLanguage,
+        name: v.name,
+        description: v.description,
+        thumbnailUrl: [abs(v.video.poster.src)],
+        contentUrl: abs(v.video.src),
+        uploadDate: v.video.uploadDate,
+        duration: v.video.isoDuration,
+        inLanguage: v.video.inLanguage,
         publisher: { "@id": ORG_ID },
       }))}
     />

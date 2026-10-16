@@ -3,6 +3,7 @@ import { BRAZIL, SEO } from "@/content/pages";
 import brazilHouse from "@/assets/stock/brazil-house-stone.jpg";
 import { BrazilMap } from "@/components/art/maps";
 import { CountryPage } from "@/components/page/country-page";
+import { EXPLAINERS } from "@/content/videos";
 
 export const metadata: Metadata = {
   title: SEO.brazil.title,
@@ -39,6 +40,11 @@ export default function BrazilPage() {
         costs: BRAZIL.costs,
         faqs: BRAZIL.faqs,
         testimonialIds: ["brazil-residence"],
+        explainer: {
+          item: EXPLAINERS.find((e) => e.id === "brazil-passport")!,
+          title: "Why the Brazilian passport is *worth the journey.*",
+          note: "Brazil grants residence first, through investment, property, a pension or remote income, and citizenship follows naturalisation after a period of residence. Your free roadmap shows the route and the timeline for your family.",
+        },
         primaryCta: { label: "Get my Brazil roadmap", href: "/free-roadmap?destination=brazil" },
         wording:
           "A pathway to citizenship: Brazil grants residence first, and citizenship follows naturalisation after a period of residence. We plan that step with you at the right time.",
