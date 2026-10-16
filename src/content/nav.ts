@@ -62,6 +62,7 @@ export const NAV: NavItem[] = [
       {
         title: "Visas & documents",
         links: [
+          { label: "Refused before?", href: "/refused-visa", description: "We review your refusal and help you reapply" },
           { label: "Tourist & Visit Visas", href: "/visit-visas", description: "USA, UK, Schengen, Canada, Australia, UAE" },
           { label: "Legal Translation", href: "/legal-translation-attestation", description: "Ministry of Justice-approved translators" },
           { label: "Attestation & Document Clearing", href: "/legal-translation-attestation#attestation", description: "Notary, MOFA, embassy, apostille" },
@@ -107,10 +108,12 @@ export const NAV: NavItem[] = [
         title: "Why EAM Global",
         links: [
           { label: "The seven USPs", href: "/why-eam-global#pillars", description: "What changes when you work with us" },
-          { label: "Founder", href: "/why-eam-global#founder", description: "Alaa Marzouk, 16+ years in migration" },
+          { label: "Founder", href: "/why-eam-global#founder", description: "Alaa Marzouk, an immigrant to Brazil himself" },
           { label: "Our presence", href: "/why-eam-global#presence", description: "Dubai HQ and local teams" },
           { label: "No Win, No Fee", href: "/why-eam-global#guarantee", description: "Our guarantee, in plain language" },
           { label: "Testimonials", href: "/testimonials", description: "Real families, real approvals" },
+          { label: "Free country guides", href: "/guides", description: "Brazil and Argentina, free to download" },
+          { label: "Podcast", href: "/podcast", description: "Real moves, real families" },
         ],
       },
     ],
@@ -128,6 +131,7 @@ export const FOOTER = {
         { label: "Citizenship by Investment", href: "/citizenship-by-investment" },
         { label: "UAE Golden Visa", href: "/uae-golden-visa" },
         { label: "Tourist & Visit Visas", href: "/visit-visas" },
+        { label: "Refused before? Reapply with us", href: "/refused-visa" },
         { label: "Legal Translation & Attestation", href: "/legal-translation-attestation" },
         { label: "Company Formation", href: "/company-formation" },
         { label: "Door-to-Door Relocation", href: "/relocation" },
@@ -155,6 +159,8 @@ export const FOOTER = {
         { label: "Founder", href: "/why-eam-global#founder" },
         { label: "Our Presence", href: "/why-eam-global#presence" },
         { label: "Testimonials", href: "/testimonials" },
+        { label: "Free country guides", href: "/guides" },
+        { label: "Podcast", href: "/podcast" },
         { label: "How It Works", href: "/how-it-works" },
         { label: "FAQ", href: "/faq" },
         { label: "Free Roadmap", href: "/free-roadmap" },

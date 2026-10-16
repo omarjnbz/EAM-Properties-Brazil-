@@ -15,7 +15,13 @@ export type TestimonialVideo = {
   loop: string;
   poster: StaticImageData;
   duration: string;
+  /** ISO 8601 duration for search engines, e.g. PT1M51S. */
+  isoDuration: string;
+  /** Date the film was published on the site (replace with the original date if it was posted earlier). */
+  uploadDate: string;
   subtitles: string;
+  /** BCP 47 language of the spoken audio. */
+  inLanguage: string;
 };
 
 export type Testimonial = {
@@ -54,7 +60,10 @@ export const TESTIMONIALS: Testimonial[] = [
       loop: "/videos/testimonials/shamout-usa-visit-loop.mp4",
       poster: shamoutPoster,
       duration: "1:51",
+      isoDuration: "PT1M51S",
+      uploadDate: "2026-10-16",
       subtitles: "Spoken in Arabic, with Arabic subtitles",
+      inLanguage: "ar",
     },
     service: [
       "Eligibility check",

@@ -8,6 +8,27 @@ import { Button, Container, Section, SectionHeading } from "@/components/ui/prim
 import { Reveal } from "@/components/ui/reveal";
 import { Rich } from "@/components/ui/rich";
 
+/** Mission and vision, from the founder's story. */
+export function MissionVision({ tone = "paper", className }: { tone?: "paper" | "ink"; className?: string }) {
+  const dark = tone === "ink";
+  const items = [
+    { label: "Our mission", text: FOUNDER_STORY.mission },
+    { label: "Our vision", text: FOUNDER_STORY.vision },
+  ];
+  return (
+    <ul className={cn("grid gap-3 sm:grid-cols-2", className)}>
+      {items.map((it, i) => (
+        <Reveal as="li" key={it.label} delay={i * 80}>
+          <div className={cn("h-full rounded-[22px] p-6 ring-1", dark ? "bg-white/[0.05] ring-white/10" : "bg-white ring-ink/[0.05]")}>
+            <div className={cn("text-[12.5px] font-medium", dark ? "text-[#8fc24a]" : "text-leaf-deep")}>{it.label}</div>
+            <p className={cn("mt-2 text-[17px] font-medium leading-snug tracking-[-0.02em]", dark && "text-white")}>{it.text}</p>
+          </div>
+        </Reveal>
+      ))}
+    </ul>
+  );
+}
+
 /** The founder's own move, in four chapters, with a line that fills as you read. */
 export function FounderTimeline({ tone = "paper", className }: { tone?: "paper" | "ink"; className?: string }) {
   const dark = tone === "ink";
@@ -83,7 +104,9 @@ export function FounderStory() {
 
           <FounderTimeline className="mt-12" />
 
-          <Reveal className="mt-12">
+          <MissionVision className="mt-12" />
+
+          <Reveal className="mt-3">
             <figure className="rounded-[24px] bg-ink p-7 text-white md:p-9">
               <Quotes weight="fill" className="size-8 text-[#8fc24a]" aria-hidden />
               <blockquote className="mt-4 text-[clamp(1.2rem,2vw,1.5rem)] font-medium leading-snug tracking-[-0.02em]">“{HOME.founder.quote}”</blockquote>

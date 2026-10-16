@@ -9,6 +9,7 @@ import passports from "@/assets/stock/passports-hands.jpg";
 import stamps from "@/assets/stock/passport-stamps.jpg";
 import dubaiNight from "@/assets/stock/dubai-night.jpg";
 import planning from "@/assets/stock/travel-planning.jpg";
+import home from "@/assets/stock/brazil-house-carport.jpg";
 import { HOME } from "@/content/home";
 import { cn } from "@/lib/cn";
 import { AppLink } from "@/components/ui/app-link";
@@ -49,6 +50,16 @@ const GOALS: Goal[] = [
     cta: "Visas & Documents",
   },
   {
+    key: "refused",
+    title: "Reapply after a refusal",
+    line: "Refused before? We review what went wrong, rebuild the file and help you reapply, whatever passport you hold.",
+    image: planning,
+    alt: "A passport, map and camera laid out to plan a new application",
+    tags: ["Refusal letter review", "A stronger new file", "Interview preparation", "Any passport"],
+    href: "/refused-visa",
+    cta: "Refused before?",
+  },
+  {
     key: "business",
     title: tiles[3].heading,
     line: tiles[3].line,
@@ -62,8 +73,8 @@ const GOALS: Goal[] = [
     key: "relocate",
     title: "Move door to door",
     line: "Airport pickup, hotel, paperwork, appointments: one team handles every step of your move.",
-    image: planning,
-    alt: "A map, camera and passport laid out for a trip",
+    image: home,
+    alt: "A modern family home with a carport and palm trees in Bahia, Brazil",
     tags: ["Airport pickup", "Housing", "Appointments", "Bank account", "Schools"],
     href: "/relocation",
     cta: "Door-to-Door Relocation",

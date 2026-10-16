@@ -2,9 +2,7 @@ import Image, { type StaticImageData } from "next/image";
 import brazilHouse from "@/assets/stock/brazil-house-stone.jpg";
 import dubai from "@/assets/stock/dubai-orange.jpg";
 import buenosAires from "@/assets/stock/buenos-aires-obelisco.jpg";
-import asuncion from "@/assets/stock/asuncion-drone-2.jpg";
 import lisbon from "@/assets/stock/lisbon-cathedral.jpg";
-import caribbean from "@/assets/stock/caribbean-island.jpg";
 import { HOME } from "@/content/home";
 import { Badge, Button, Container, SectionHeading } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
@@ -40,6 +38,19 @@ const DESTINATIONS: Destination[] = [
     badge: "Local team",
   },
   {
+    key: "portugal",
+    country: "Portugal",
+    headline: cards[3].headline,
+    line: cards[3].line,
+    image: lisbon,
+    meta: [
+      ["Minimum", "EUR 250,000"],
+      ["Schengen", "Yes"],
+      ["In-country", "About 7 days a year"],
+    ],
+    href: cards[3].href,
+  },
+  {
     key: "uae",
     country: "United Arab Emirates",
     headline: cards[0].headline,
@@ -68,46 +79,6 @@ const DESTINATIONS: Destination[] = [
     href: cards[1].href,
     badge: "New 2026",
   },
-  {
-    key: "paraguay",
-    country: "Paraguay",
-    headline: cards[2].headline,
-    line: cards[2].line,
-    image: asuncion,
-    meta: [
-      ["Minimum", "USD 150,000"],
-      ["Rights", "Live, work, study"],
-      ["Team", "Asunción"],
-    ],
-    href: cards[2].href,
-    badge: "Local team",
-  },
-  {
-    key: "portugal",
-    country: "Portugal",
-    headline: cards[3].headline,
-    line: cards[3].line,
-    image: lisbon,
-    meta: [
-      ["Minimum", "EUR 250,000"],
-      ["Schengen", "Yes"],
-      ["In-country", "About 7 days a year"],
-    ],
-    href: cards[3].href,
-  },
-  {
-    key: "caribbean",
-    country: "Caribbean",
-    headline: cards[4].headline,
-    line: cards[4].line,
-    image: caribbean,
-    meta: [
-      ["Minimum", "USD 200,000"],
-      ["Programs", "Five"],
-      ["Family", "Included"],
-    ],
-    href: cards[4].href,
-  },
 ];
 
 /** Destinations as full-bleed cards that stack on top of each other while scrolling. */
@@ -119,10 +90,10 @@ export function DestinationsStack() {
           <SectionHeading eyebrow="Featured destinations" title="Where our clients are moving *in 2026*" className="lg:col-span-7" />
           <Reveal className="flex flex-col items-start gap-5 lg:col-span-5 lg:pb-2" delay={120}>
             <p className="max-w-md text-[16px] leading-relaxed text-ink-3">
-              Six destinations, four with our own people on the ground. Minimum amounts as publicly listed in October 2026; your free roadmap confirms the current figure.
+              Four of the destinations our clients choose most. Paraguay, Serbia, Greece, the Caribbean and many more are on the program pages. Minimum amounts as publicly listed in October 2026.
             </p>
             <Button href="/residence-by-investment" variant="ink">
-              Compare every program
+              All destinations
             </Button>
           </Reveal>
         </div>

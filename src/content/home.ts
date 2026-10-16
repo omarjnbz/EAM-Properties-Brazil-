@@ -203,27 +203,28 @@ export const ROADMAP_CONTENTS = [
 ] as const;
 
 /**
- * Founder story (homepage "Our founder" and Why EAM Global). DRAFT: written from
- * the outline given on 2026-10-16; dates and specifics in {{braces}} await Alaa
- * Marzouk's confirmation.
+ * Founder story (homepage and Why EAM Global), from the founder's own words in
+ * the 2026-10-16 call: an Egyptian immigrant to Brazil in 2014 who struggled to
+ * relocate and to speak with people, and solved it for others. Mission is his
+ * wording; the vision line is a draft for his approval.
  */
 export const FOUNDER_STORY = {
   eyebrow: "Our founder",
   title: "He made this move himself, *long before he made it his work.*",
   intro:
-    "Alaa Marzouk did not learn migration from a textbook. He lived it, as an Egyptian citizen starting a new life in Brazil, and that is why EAM Global works the way it does.",
+    "Alaa Marzouk did not learn migration from a textbook. He lived it, as an Egyptian immigrant to Brazil in 2014. Today he helps families relocate worldwide, especially to Brazil and Portugal.",
   chapters: [
     {
       label: "Arrival",
-      when: "{{Year}}",
-      title: "An Egyptian citizen, landing in Brazil",
-      body: "Alaa arrived in {{city}}, Brazil, with {{what he had when he arrived}}.",
+      when: "2014",
+      title: "An Egyptian immigrant, starting over in Brazil",
+      body: "Alaa moved to Brazil in 2014. From the airport onwards, almost everything happened in Portuguese.",
     },
     {
       label: "The hard part",
-      when: "{{How long it took}}",
-      title: "No language. No map of the process.",
-      body: "He didn't speak Portuguese and didn't know how the process worked. Every form, every office and every appointment took far longer than it should have.",
+      when: "",
+      title: "Relocating without the language",
+      body: "Finding a home, opening accounts, getting through every office: none of it was easy without Portuguese, and nobody explained the process.",
     },
     {
       label: "Learning it",
@@ -233,14 +234,62 @@ export const FOUNDER_STORY = {
     },
     {
       label: "Today",
-      when: "16+ years",
-      title: "So no family has to stand alone",
-      body: "With more than 16 years in global migration, he built EAM Global around everything he once had to work out on his own.",
+      when: "12+ years",
+      title: "So no family has to do it alone",
+      body: "With more than 12 years in the field, he built EAM Global to solve, for every client, the problems he once had to solve on his own.",
     },
   ],
+  mission:
+    "A dedicated team in your own language that assists you from day one until you and your family are fully settled.",
+  vision: "No family should have to face a new country alone, in a language they don't speak.",
   credentials: [
-    { value: "16+", label: "years in global migration" },
+    { value: "12+", label: "years in the field" },
     { value: "4", label: "languages: Arabic, English, Portuguese, Spanish" },
-    { value: "2009", label: "Cairo University, Economics & Political Science" },
+    { value: "2014", label: "moved to Brazil as an immigrant himself" },
   ],
+} as const;
+
+/** "Why so many files are refused": the problem the homepage leads with (from the 2026-10-16 call). */
+export const PROBLEM = {
+  eyebrow: "Why so many files are refused",
+  title: "Most refusals aren't about you. *They're about the paperwork.*",
+  intro:
+    "Many people try to do it on their own. The rules are confusing, the language is foreign, and nobody checks the file the way a specialist would. Then the refusal arrives.",
+  pains: [
+    {
+      key: "confusing",
+      title: "The process is confusing",
+      body: "Every country, nationality and family has different rules. Without a specialist, it is hard to know which program fits, let alone what each office expects.",
+    },
+    {
+      key: "language",
+      title: "The language is foreign",
+      body: "In Brazil almost everything happens in Portuguese, starting at the airport. Without it, every form and appointment becomes a guess.",
+    },
+    {
+      key: "documents",
+      title: "One wrong document means a refusal",
+      body: "Almost every refused file fails for a small reason: a document translated by the wrong person or missing a stamp.",
+    },
+  ],
+  refused: {
+    eyebrow: "Refused before?",
+    title: "That's where *we start.*",
+    body: "We talk to people who were refused before, find out what went wrong, rebuild the file and help them reapply. Many of our success stories began with a refusal.",
+    cta: "Get my refusal reviewed",
+  },
+  passports: {
+    title: "Worried your nationality means an automatic no?",
+    body: "You are not alone, and it doesn't have to be. We already have success stories with clients from Afghanistan, Iran, Yemen and many other countries.",
+    countries: ["Afghanistan", "Iran", "Yemen"],
+    note: "Every case is different and governments decide, so we tell you your honest chances before you pay anything.",
+  },
+} as const;
+
+/** "Two ways to start": the personal roadmap and the free country guides. */
+export const START = {
+  eyebrow: "Two ways to start",
+  title: "Start with a plan, *or start with a guide.*",
+  intro:
+    "Get a written roadmap for your family within 48 hours, or download a free country guide right now. Both are free, with no obligation.",
 } as const;

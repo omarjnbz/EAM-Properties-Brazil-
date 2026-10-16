@@ -15,6 +15,7 @@ const GOALS = [
   { value: "passport", label: "Second passport" },
   { value: "visit", label: "Visit or travel" },
   { value: "business", label: "Business" },
+  { value: "refused", label: "Reapply after a refusal" },
 ];
 
 const LANGUAGES = [
@@ -36,14 +37,21 @@ export function RoadmapForm({ variant = "compact", className }: { variant?: "com
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const destinationRef = useRef<HTMLSelectElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const full = variant === "full";
   const id = (s: string) => `${variant}-${s}`;
 
-  // Deep links such as /free-roadmap?destination=brazil preselect the destination.
+  // Deep links such as /free-roadmap?destination=brazil or ?goal=refused preselect the form.
   useEffect(() => {
-    const value = new URLSearchParams(window.location.search).get("destination");
+    const params = new URLSearchParams(window.location.search);
+    const value = params.get("destination");
     const select = destinationRef.current;
     if (value && select && Array.from(select.options).some((o) => o.value === value)) select.value = value;
+    const goal = params.get("goal");
+    if (goal && GOALS.some((g) => g.value === goal)) {
+      const radio = formRef.current?.querySelector<HTMLInputElement>(`input[name="goal"][value="${goal}"]`);
+      if (radio) radio.checked = true;
+    }
   }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -82,7 +90,7 @@ export function RoadmapForm({ variant = "compact", className }: { variant?: "com
   }
 
   return (
-    <form onSubmit={onSubmit} className={cn("flex flex-col gap-6 p-6 sm:p-8 md:p-10", className)}>
+    <form ref={formRef} onSubmit={onSubmit} className={cn("flex flex-col gap-6 p-6 sm:p-8 md:p-10", className)}>
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label={full ? "Full name" : "Name"} htmlFor={id("name")}>
           <input id={id("name")} name="name" required autoComplete="name" className={inputClass} placeholder="Your name" />

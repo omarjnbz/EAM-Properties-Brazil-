@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
 import { SEO } from "@/content/pages";
-import { Container, SectionHeading, Button } from "@/components/ui/primitives";
+import { Button, Container, SectionHeading } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Hero } from "@/components/home/hero";
-import { TeamsStrip } from "@/components/home/teams-strip";
-import { Statement } from "@/components/home/statement";
-import { HandledSplit } from "@/components/home/handled-split";
-import { PillarsGrid } from "@/components/home/pillars-grid";
-import { DestinationsStack } from "@/components/home/destinations-stack";
+import { ProblemSection } from "@/components/home/problem-section";
 import { GoalsAccordion } from "@/components/home/goals-accordion";
-import { HowSteps } from "@/components/home/how-steps";
-import { FounderStory } from "@/components/home/founder-story";
+import { PillarsGrid } from "@/components/home/pillars-grid";
 import { VideoShowcase } from "@/components/home/video-showcase";
-import { DoorSplit } from "@/components/home/door-split";
-import { RoadmapSplit } from "@/components/home/roadmap-split";
-import { FaqGrid } from "@/components/home/faq-grid";
+import { DestinationsStack } from "@/components/home/destinations-stack";
+import { FounderStory } from "@/components/home/founder-story";
+import { StartSection } from "@/components/home/start-section";
 
 export const metadata: Metadata = {
   title: SEO.home.title,
@@ -23,18 +18,15 @@ export const metadata: Metadata = {
 };
 
 /**
- * Homepage: the visitor's situation first, then proof, then programs.
- * The founder appears once, in the founder story.
+ * Homepage, built to sell on its own: the problem, the shortcut to every
+ * service, the proof, the destinations, the founder, then two ways to start.
+ * How It Works, Door-to-Door and the FAQ live on their own pages.
  */
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <TeamsStrip />
-      <Statement />
-      <HandledSplit />
-      <PillarsGrid />
-      <DestinationsStack />
+      <ProblemSection />
 
       <section className="bg-canvas pb-20 md:pb-28" id="goals">
         <Container>
@@ -51,12 +43,11 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <HowSteps />
-      <FounderStory />
+      <PillarsGrid />
       <VideoShowcase />
-      <DoorSplit />
-      <RoadmapSplit />
-      <FaqGrid />
+      <DestinationsStack />
+      <FounderStory />
+      <StartSection />
     </>
   );
 }

@@ -20,7 +20,7 @@ import { SplitHeading } from "@/components/ui/split-heading";
 import { LiveClock } from "@/components/ui/live-clock";
 import { LiveDot } from "@/components/ui/live-dot";
 import { PageHero } from "@/components/page/page-hero";
-import { FounderTimeline } from "@/components/home/founder-story";
+import { FounderTimeline, MissionVision } from "@/components/home/founder-story";
 import { Prose, SplitBlock } from "@/components/page/blocks";
 import { DataTable } from "@/components/page/tables";
 import { ChatCard, GuaranteeReceipt, RoadmapDoc } from "@/components/art/documents";
@@ -182,6 +182,7 @@ export default function WhyPage() {
               <h3 className="text-[13px] font-medium text-ink-3">His own move</h3>
             </Reveal>
             <FounderTimeline className="mt-5" />
+            <MissionVision className="mt-10" />
           </div>
         </Container>
       </Section>

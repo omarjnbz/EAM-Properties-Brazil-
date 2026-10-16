@@ -7,6 +7,8 @@ import { Button, Container, Section, SectionHeading, TextLink } from "@/componen
 import { Reveal } from "@/components/ui/reveal";
 import { Rich, plain } from "@/components/ui/rich";
 import { TestimonialPlayer } from "@/components/testimonials/testimonial-player";
+import { SocialLinks } from "@/components/ui/social-links";
+import { VideoJsonLd } from "@/components/seo/json-ld";
 
 /**
  * Real client films: the founder hands over the approved document on camera.
@@ -75,9 +77,12 @@ export function VideoShowcase() {
         </div>
 
         <div className="mt-16 md:mt-20">
-          <Reveal className="mb-5 flex items-center justify-between gap-4">
+          <Reveal className="mb-5 flex flex-wrap items-center justify-between gap-4">
             <span className="text-[14px] font-medium text-ink-2">More client stories, filmed the same way</span>
-            <span className="text-[13px] text-ink-3">{upcoming.length} on the way</span>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-[13px] text-ink-3">Follow every new story on</span>
+              <SocialLinks />
+            </div>
           </Reveal>
           <ul className="no-scrollbar -mx-5 flex gap-3 overflow-x-auto px-5 md:mx-0 md:grid md:grid-cols-5 md:overflow-visible md:px-0">
             {upcoming.map((u, i) => (
@@ -96,6 +101,7 @@ export function VideoShowcase() {
           </ul>
         </div>
       </Container>
+      <VideoJsonLd />
     </Section>
   );
 }
