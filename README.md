@@ -70,6 +70,20 @@ with EAM Global's own photography before launch. Maps come from public-domain Na
 - Scroll reveals (blur-up) and heading reveals are CSS, triggered by the head script, so
   they never wait for JavaScript bundles.
 
+## Deploying on Vercel
+
+1. On vercel.com, **Add New → Project** and import this GitHub repo. Vercel detects Next.js;
+   keep the default build settings. The production branch is `main`.
+2. Under **Settings → Environment Variables**, add `GROQ_API_KEY` for the "Ask AI" chat
+   (optional: `GROQ_MODEL`, `GROQ_REASONING`; see `.env.example`). Without it the chat
+   politely says it isn't configured; the rest of the site works.
+3. Deploy. Share images, canonical links and the sitemap follow the project's production
+   domain automatically (`VERCEL_PROJECT_PRODUCTION_URL`).
+4. Until launch, every page is sent with `X-Robots-Tag: noindex`, so the draft stays off
+   Google. At launch, connect eam-global.com, set `SITE_INDEXABLE=true` and redeploy.
+
+Vercel's free Hobby plan is for non-commercial use; the live business site needs a Pro plan.
+
 ## Slow networks (2G / 3G / Data Saver)
 
 An inline script in `<head>` (`src/lib/boot-script.ts`) reads the browser's Network

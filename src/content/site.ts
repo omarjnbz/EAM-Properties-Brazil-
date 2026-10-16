@@ -32,10 +32,20 @@ export const SOCIAL: { key: "youtube" | "instagram" | "tiktok"; label: string; u
   { key: "tiktok", label: "TikTok", url: null },
 ];
 
+/**
+ * The site's public address, used for share images, canonical links, the sitemap
+ * and search data. On Vercel it follows the project's production domain (the
+ * vercel.app address until eam-global.com is connected). NEXT_PUBLIC_SITE_URL
+ * overrides it.
+ */
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "https://www.eam-global.com");
+
 export const SITE = {
   name: "EAM Global",
   descriptor: "Documents Clearing Services",
-  url: "https://www.eam-global.com",
+  url: SITE_URL,
   phoneDisplay: "+971 58 507 8600",
   phoneHref: "tel:+971585078600",
   whatsappDisplay: "+971 56 563 6536",
