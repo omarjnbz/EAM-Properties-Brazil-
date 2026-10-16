@@ -46,3 +46,4 @@ next-env.d.ts
 
 # Raw testimonial uploads (web versions live in public/videos)
 /VIDEO-*.mp4
+!public/guides/*.pdf

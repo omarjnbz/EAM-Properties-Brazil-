@@ -4,8 +4,33 @@
  * Inline markup used across all content files:
  *   {{text}}  a placeholder the client must confirm. Rendered highlighted; nothing
  *             in double braces may go live.
- *   *text*    emphasis. In display headings it renders as the italic serif accent.
+ *   *text*    emphasis. In display headings it renders as the lighter second tone.
  */
+
+/**
+ * Founder facts used across the site. Years follow the founder's own words in the
+ * 2026-10-16 call ("more than 12 years of experience in the field", arrived in
+ * Brazil in 2014). The earlier content brief said 16+: confirm before launch.
+ */
+export const FOUNDER = {
+  name: "Alaa Marzouk",
+  role: "Founder and Senior Immigration Consultant",
+  years: 12,
+  yearsLabel: "12+",
+  arrivedBrazil: 2014,
+  origin: "Egyptian",
+  languages: ["Arabic", "English", "Portuguese", "Spanish"],
+} as const;
+
+/**
+ * New social channels. Set a full URL once each account exists; `null` renders
+ * as "coming soon". No Spotify (podcast episodes go to YouTube).
+ */
+export const SOCIAL: { key: "youtube" | "instagram" | "tiktok"; label: string; url: string | null }[] = [
+  { key: "youtube", label: "YouTube", url: null },
+  { key: "instagram", label: "Instagram", url: null },
+  { key: "tiktok", label: "TikTok", url: null },
+];
 
 export const SITE = {
   name: "EAM Global",
@@ -93,9 +118,9 @@ export const PILLARS = [
     key: "founder",
     label: "Founder-Led Expertise",
     promise:
-      "Alaa Marzouk, 16+ years in global migration, has guided hundreds of families and investors to approval.",
+      "Alaa Marzouk, 12+ years in global migration and an immigrant to Brazil himself, has guided hundreds of families and investors to approval.",
     lead: "Our founder leads your case.",
-    body: "Alaa Marzouk has spent more than 16 years in global migration and has personally guided hundreds of families and investors to approval. Your file is reviewed by the person whose name is on the door.",
+    body: "Alaa Marzouk moved to Brazil as an immigrant in 2014, has spent more than 12 years in the field and has personally guided hundreds of families and investors to approval. Your file is reviewed by the person whose name is on the door.",
     href: "/why-eam-global#founder",
   },
   {
@@ -125,7 +150,7 @@ export const PILLARS = [
     promise:
       "Airport pickup, hotel, paperwork, appointments: one team handles every step of your move.",
     lead: "Door-to-door relocation.",
-    body: "From airport pickup to hotel, appointments, translations and the final stamp. One team, one plan, one point of contact.",
+    body: "From airport pickup to hotel, appointments, translations and the final stamp. One team, one plan, one point of contact, in a package built around your family.",
     href: "/relocation",
   },
   {
@@ -135,7 +160,7 @@ export const PILLARS = [
     promise:
       "Before you pay anything, you get a written step-by-step plan: documents, timeline, costs.",
     lead: "Your roadmap is free.",
-    body: "Before you pay anything, you receive a written plan: every document, every step, the realistic timeline and the full cost.",
+    body: "A consultation built around your case. Before you pay anything, you receive a written plan: every document, every step, the realistic timeline and the full cost.",
     href: "/free-roadmap",
   },
   {

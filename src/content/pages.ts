@@ -79,6 +79,31 @@ export const SEO = {
     description:
       "Languages, response times, the free roadmap, No Win No Fee, offices and visit visas: straight answers from EAM Global.",
   },
+  refused: {
+    title: "Visa Refused? How We Turn It Around · EAM Global",
+    description:
+      "Refused before? We review your refusal letter, rebuild the file and help you reapply, in your language. No Win, No Fee.",
+  },
+  guides: {
+    title: "Free Country Guides: Brazil & Argentina · EAM Global",
+    description:
+      "Free step-by-step guides to the visa, your arrival, settling in and choosing a city. Download yours in seconds.",
+  },
+  guideBrazil: {
+    title: "Free Brazil Relocation Guide 2026 · EAM Global",
+    description:
+      "Visa routes, documents, your first week and choosing between São Paulo, Rio and Florianópolis. Free download.",
+  },
+  guideArgentina: {
+    title: "Free Argentina Relocation Guide 2026 · EAM Global",
+    description:
+      "Residence today, the new citizenship program, your first week in Buenos Aires and the costs. Free download.",
+  },
+  podcast: {
+    title: "The EAM Global Podcast · Real Moves, Real Families",
+    description:
+      "Conversations about residence, citizenship and starting over abroad, from the team that has made the move itself.",
+  },
 } as const;
 
 /* ------------------------------------------------------------------ Why EAM Global */
@@ -99,9 +124,9 @@ export const WHY = {
     title: "Founder-led, with a record to show",
     badge: "Trusted authority",
     headline: "Expert immigration guidance you can *trust*",
-    bio: "Alaa Marzouk, Senior Immigration Consultant and founder of EAM Global, has worked in global migration for more than 16 years. He holds a degree in Economics and Political Science from Cairo University (2009) and advises clients in Arabic, English, Portuguese and Spanish. In that time he has guided hundreds of families and investors to residence, visit visas and second citizenship, with a high approval rate built on preparing every file as if it will be scrutinised, because it will be.",
+    bio: "Alaa Marzouk, Senior Immigration Consultant and founder of EAM Global, moved to Brazil as an immigrant himself in 2014 and has worked in the field for more than 12 years. He holds a degree in Economics and Political Science from Cairo University (2009) and advises clients in Arabic, English, Portuguese and Spanish. In that time he has guided hundreds of families and investors to residence, visit visas and second citizenship, with a high approval rate built on preparing every file as if it will be scrutinised, because it will be.",
     credentials: [
-      { value: "16+", label: "Years in global migration" },
+      { value: "12+", label: "Years in the field" },
       { value: "Cairo University", label: "Economics & Political Science (2009)" },
       { value: "Multilingual", label: "Arabic, English, Portuguese, Spanish" },
       { value: "High", label: "Approval rate" },
@@ -621,3 +646,47 @@ export const PLACEHOLDER_PAGES = {
   terms: { title: "Terms", body: "{{Terms of service to be supplied by EAM Global before launch.}}" },
   careers: { title: "Careers", body: "{{Careers content to be supplied by EAM Global before launch.}}" },
 } as const;
+
+/* ------------------------------------------------------------------ Refused before? */
+export const REFUSED = {
+  eyebrow: "Refused before?",
+  headline: "Refused once? *That's where we start.*",
+  intro:
+    "Many people apply on their own and get refused, usually over documents, translations or the wrong program. We review what went wrong, rebuild the file and help you reapply, in your language.",
+  reasons: [
+    { title: "A document translated by the wrong person", body: "Legal translations have to come from approved translators. One uncertified page can undo a whole file." },
+    { title: "A missing stamp", body: "Notary, Ministry of Foreign Affairs, embassy, apostille: skip one step of the attestation chain and the document doesn't count." },
+    { title: "The wrong program", body: "Applying for a route that doesn't fit your nationality, income or family situation." },
+    { title: "A file that doesn't tell the story", body: "No cover letter, a thin itinerary or missing sponsor documents leave the officer guessing." },
+    { title: "An unprepared interview", body: "For US and UK visas, the interview matters as much as the paperwork." },
+  ],
+  steps: [
+    { title: "Send us your refusal letter", body: "WhatsApp, web form or email, any hour. A real advisor replies within 60 minutes.", time: "Within 60 minutes" },
+    { title: "We review it honestly", body: "What went wrong, what can be fixed, and whether reapplying now makes sense. If it doesn't, we tell you.", time: "Before you pay" },
+    { title: "We rebuild the file", body: "The right program, certified translations, the full attestation chain, a clear cover letter and sponsor documents." },
+    { title: "We prepare you", body: "Interview preparation for US and UK applications, in your language." },
+    { title: "We file and track it", body: "Submission, case tracking and passport collection, with No Win, No Fee on our professional fees." },
+  ],
+  faqs: [
+    {
+      q: "Can I reapply after a refusal?",
+      a: "Often, yes. It depends on why you were refused. We read your refusal letter first and tell you honestly whether reapplying now makes sense.",
+    },
+    {
+      q: "Will a previous refusal hurt my next application?",
+      a: "It stays on your record, which is why the next file has to be stronger. The new application should answer the reasons for the refusal directly.",
+    },
+    {
+      q: "My nationality is often refused. Can you still help?",
+      a: "Yes. We already have success stories with clients from Afghanistan, Iran, Yemen and many other countries. Every case is different and governments decide, so we pre-screen your file before you pay.",
+    },
+    {
+      q: "Which applications can you help with after a refusal?",
+      a: "Visit visas for the USA, UK, Schengen, Canada, Australia and the UAE, plus the residence and citizenship programs listed on this site.",
+    },
+    {
+      q: "What does it cost?",
+      a: "A fixed fee agreed in writing before you pay. If the new application is refused, our professional fees come back to you. Government and third-party costs are not refundable.",
+    },
+  ] as Faq[],
+};
