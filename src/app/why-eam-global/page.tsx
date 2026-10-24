@@ -8,7 +8,7 @@ import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
 import { Signature } from "@phosphor-icons/react/dist/ssr/Signature";
 import { SuitcaseRolling } from "@phosphor-icons/react/dist/ssr/SuitcaseRolling";
 import { Translate } from "@phosphor-icons/react/dist/ssr/Translate";
-import founder from "@/assets/images/founder-alaa-marzouk.png";
+import founder from "@/assets/images/founder-alaa-marzouk.jpg";
 import { DOOR_STAGES } from "@/content/home";
 import { SEO, WHY } from "@/content/pages";
 import { GREETINGS, PILLARS, PRESENCE, type PillarKey } from "@/content/site";

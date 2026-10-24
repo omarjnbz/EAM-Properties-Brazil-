@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Quotes } from "@phosphor-icons/react/dist/ssr/Quotes";
-import founder from "@/assets/images/founder-alaa-marzouk.png";
+import founder from "@/assets/images/founder-alaa-marzouk.jpg";
 import { FOUNDER_STORY, HOME } from "@/content/home";
 import { SITE } from "@/content/site";
 import { cn } from "@/lib/cn";
