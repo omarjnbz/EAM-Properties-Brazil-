@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Microphone } from "@phosphor-icons/react/dist/ssr/Microphone";
 import { YoutubeLogo } from "@phosphor-icons/react/dist/ssr/YoutubeLogo";
 import { SEO } from "@/content/pages";
-import { PODCAST } from "@/content/podcast";
+import { PODCAST, PODCAST_LIVE } from "@/content/podcast";
 import { SOCIAL } from "@/content/site";
 import { Button, Container, Section, SectionHeading } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   title: SEO.podcast.title,
   description: SEO.podcast.description,
   alternates: { canonical: "/podcast" },
+  // Not linked or indexed until the first episode is published.
+  ...(PODCAST_LIVE ? {} : { robots: { index: false } }),
 };
 
 export default function PodcastPage() {

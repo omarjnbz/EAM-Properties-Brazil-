@@ -4,6 +4,7 @@ import { Phone } from "@phosphor-icons/react/dist/ssr/Phone";
 import { WhatsappLogo } from "@phosphor-icons/react/dist/ssr/WhatsappLogo";
 import logo from "@/assets/brand/eam-global-logo.png";
 import { buildFooter } from "@/content/nav";
+import { PODCAST_LIVE } from "@/content/podcast";
 import { SITE } from "@/content/site";
 import { getI18n } from "@/i18n/server";
 import { LanguageLinks } from "@/components/layout/language-switcher";
@@ -84,10 +85,12 @@ export async function SiteFooter() {
             <div className="md:justify-self-end">
               <div className="text-[13px] font-medium text-white/50">{t.common.followStories}</div>
               <SocialLinks tone="dark" className="mt-3" />
-              <AppLink href="/podcast" className="group mt-4 inline-flex items-center gap-1.5 text-[14px] font-medium text-white/85 hover:text-white">
-                {f.podcast}
-                <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" aria-hidden />
-              </AppLink>
+              {PODCAST_LIVE && (
+                <AppLink href="/podcast" className="group mt-4 inline-flex items-center gap-1.5 text-[14px] font-medium text-white/85 hover:text-white">
+                  {f.podcast}
+                  <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" aria-hidden />
+                </AppLink>
+              )}
             </div>
           </div>
 

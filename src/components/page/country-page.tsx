@@ -2,7 +2,7 @@ import type { StaticImageData } from "next/image";
 import { Translate } from "@phosphor-icons/react/dist/ssr/Translate";
 import { UsersThree } from "@phosphor-icons/react/dist/ssr/UsersThree";
 import type { Faq } from "@/content/pages";
-import { TESTIMONIALS } from "@/content/testimonials";
+import { FILMS } from "@/content/testimonials";
 import { cn } from "@/lib/cn";
 import { Bezel, Button, Container, Eyebrow, Section, SectionHeading } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
@@ -47,7 +47,7 @@ export type CountryPageData = {
 
 /** The eight-block country template: hero, routes, rights, life, team, process, costs, FAQ. */
 export function CountryPage({ data }: { data: CountryPageData }) {
-  const videos = TESTIMONIALS.filter((t) => data.testimonialIds?.includes(t.id));
+  const videos = FILMS.filter((t) => data.testimonialIds?.includes(t.id));
   return (
     <>
       {/* 1. Hero */}

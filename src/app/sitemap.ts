@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
+import { PODCAST_LIVE } from "@/content/podcast";
 import { SITE } from "@/content/site";
 import { LOCALES, TRANSLATED_PATHS, languageAlternates } from "@/i18n/config";
 
-/** Every public page, for search engines. Placeholder legal pages are left out until they have real content. */
+/** Every public page, for search engines. Placeholder legal pages, and the podcast until its first episode, are left out. */
 const ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
   { path: "/", priority: 1, changeFrequency: "weekly" },
   { path: "/residence-by-investment/brazil", priority: 0.9, changeFrequency: "monthly" },
@@ -18,7 +19,7 @@ const ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.S
   { path: "/visit-visas", priority: 0.8, changeFrequency: "monthly" },
   { path: "/why-eam-global", priority: 0.7, changeFrequency: "monthly" },
   { path: "/testimonials", priority: 0.7, changeFrequency: "weekly" },
-  { path: "/podcast", priority: 0.6, changeFrequency: "weekly" },
+  ...(PODCAST_LIVE ? [{ path: "/podcast", priority: 0.6, changeFrequency: "weekly" as const }] : []),
   { path: "/legal-translation-attestation", priority: 0.6, changeFrequency: "monthly" },
   { path: "/company-formation", priority: 0.6, changeFrequency: "monthly" },
   { path: "/relocation", priority: 0.6, changeFrequency: "monthly" },

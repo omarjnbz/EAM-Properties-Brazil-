@@ -52,7 +52,7 @@ export function TestimonialGrid({ items, variant = "home" }: { items: Testimonia
             : variant === "compact"
               ? "mx-auto grid w-full max-w-[220px] grid-cols-1"
               : items.length === 1
-                ? "grid grid-cols-1"
+                ? "mx-auto grid w-full max-w-[320px] grid-cols-1"
                 : "grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4",
         )}
       >

@@ -1,4 +1,5 @@
 import { CITIZENSHIP_PROGRAMS, CITIZENSHIP_REGIONS, RESIDENCE_REGIONS, citizenshipHref, residenceHref } from "./programs";
+import { PODCAST_LIVE } from "./podcast";
 
 export type NavLink = { label: string; href: string; badge?: string; badgeNew?: boolean; description?: string };
 export type NavColumn = { title: string; links: NavLink[] };
@@ -180,7 +181,7 @@ export function buildNav(t: NavText, country: (name: string) => string = same, r
             link(t.why.guarantee, "/why-eam-global#guarantee"),
             link(t.why.testimonials, "/testimonials"),
             link(t.why.guides, "/guides"),
-            link(t.why.podcast, "/podcast"),
+            ...(PODCAST_LIVE ? [link(t.why.podcast, "/podcast")] : []),
           ],
         },
       ],
@@ -305,7 +306,7 @@ export function buildFooter(t: FooterText) {
           { label: c.presence, href: "/why-eam-global#presence" },
           { label: c.testimonials, href: "/testimonials" },
           { label: c.guides, href: "/guides" },
-          { label: c.podcast, href: "/podcast" },
+          ...(PODCAST_LIVE ? [{ label: c.podcast, href: "/podcast" }] : []),
           { label: c.how, href: "/how-it-works" },
           { label: c.faq, href: "/faq" },
           { label: c.roadmap, href: "/free-roadmap" },

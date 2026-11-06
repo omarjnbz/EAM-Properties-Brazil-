@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SEO, UAE } from "@/content/pages";
-import { TESTIMONIALS } from "@/content/testimonials";
-import { Container, Section, SectionHeading } from "@/components/ui/primitives";
+import { FILMS } from "@/content/testimonials";
+import { Button, Container, Section, SectionHeading } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Rich } from "@/components/ui/rich";
 import { PageHero } from "@/components/page/page-hero";
@@ -19,6 +19,8 @@ export const metadata: Metadata = {
 type Route = (typeof UAE.routes)[number];
 
 export default function UaeGoldenVisaPage() {
+  // The UAE client film shows here once it exists (testimonials.ts).
+  const film = FILMS.filter((t) => t.id === "uae-golden-visa");
   return (
     <>
       <PageHero
@@ -89,19 +91,25 @@ export default function UaeGoldenVisaPage() {
 
       <Section>
         <Container className="grid gap-12 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-6">
+          <div className={film.length ? "lg:col-span-6" : "lg:col-span-8"}>
             <SectionHeading eyebrow="Beyond property" title="Not buying property? There is still a *category*" intro={UAE.beyond} />
           </div>
-          <div className="lg:col-span-6">
-            <div className="grid items-center gap-6 rounded-[2rem] bg-ink p-5 sm:grid-cols-[200px_1fr] md:p-6">
-              <TestimonialGrid items={TESTIMONIALS.filter((t) => t.id === "uae-golden-visa")} variant="compact" />
-              <div className="pe-2">
-                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/50">Client video · UAE Golden Visa</div>
-                <p className="mt-3 font-display text-[1.45rem] leading-snug text-paper">From property selection to Emirates ID, filmed at our Dubai office.</p>
-                <p className="mt-2 text-[14px] text-paper/60">Plays with English and Portuguese captions.</p>
+          {film.length > 0 ? (
+            <div className="lg:col-span-6">
+              <div className="grid items-center gap-6 rounded-[2rem] bg-ink p-5 sm:grid-cols-[200px_1fr] md:p-6">
+                <TestimonialGrid items={film} variant="compact" />
+                <div className="pe-2">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/50">Client video · UAE Golden Visa</div>
+                  <p className="mt-3 font-display text-[1.45rem] leading-snug text-paper">From property selection to Emirates ID, filmed at our Dubai office.</p>
+                  <p className="mt-2 text-[14px] text-paper/60">Plays with English and Portuguese captions.</p>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="lg:col-span-4 lg:justify-self-end">
+              <Button href="/free-roadmap?destination=uae">Find my Golden Visa category</Button>
+            </div>
+          )}
         </Container>
       </Section>
 

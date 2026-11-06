@@ -28,3 +28,9 @@ export const PODCAST = {
     { title: "The UAE Golden Visa through property", line: "2, 5 or 10 years: which route fits your age and budget." },
   ],
 };
+
+/**
+ * The menu, footer and sitemap link to /podcast only once there is an episode,
+ * so visitors never land on an empty show.
+ */
+export const PODCAST_LIVE = PODCAST.episodes.length > 0;

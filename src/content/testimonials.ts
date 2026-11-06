@@ -2,6 +2,8 @@
  * Founder-and-client video testimonials. Only the first entry exists today; the
  * other five are the launch targets from the production checklist and stay
  * marked as placeholders until consent, transcripts and caption files arrive.
+ * Pages show FILMS, so a placeholder only appears once it is set `available: true`
+ * with its video.
  */
 import type { StaticImageData } from "next/image";
 import shamoutPoster from "@/assets/testimonials/shamout-usa-visit-poster.jpg";
@@ -140,3 +142,6 @@ export const TESTIMONIALS: Testimonial[] = [
     tone: "ink",
   },
 ];
+
+/** The testimonials the site shows: only the ones with a real film. */
+export const FILMS = TESTIMONIALS.filter((t) => t.available && t.video);

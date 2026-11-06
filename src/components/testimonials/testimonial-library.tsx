@@ -19,10 +19,13 @@ export function TestimonialLibrary({ items }: { items: Testimonial[] }) {
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="flex flex-col gap-4">
-        <Filter label="Program" options={programs} value={program} onChange={setProgram} />
-        <Filter label="Language" options={languages} value={language} onChange={setLanguage} />
-      </div>
+      {/* A filter only appears once there is more than one choice to make. */}
+      {(programs.length > 2 || languages.length > 2) && (
+        <div className="flex flex-col gap-4">
+          {programs.length > 2 && <Filter label="Program" options={programs} value={program} onChange={setProgram} />}
+          {languages.length > 2 && <Filter label="Language" options={languages} value={language} onChange={setLanguage} />}
+        </div>
+      )}
       {visible.length ? (
         <TestimonialGrid key={`${program}-${language}`} items={visible} variant="library" />
       ) : (

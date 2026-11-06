@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SEO, TESTIMONIALS_PAGE } from "@/content/pages";
-import { TESTIMONIALS } from "@/content/testimonials";
+import { FILMS } from "@/content/testimonials";
 import { Container, Section } from "@/components/ui/primitives";
 import { PageHero } from "@/components/page/page-hero";
 import { TestimonialLibrary } from "@/components/testimonials/testimonial-library";
@@ -19,7 +19,7 @@ export default function TestimonialsPage() {
       <PageHero eyebrow={TESTIMONIALS_PAGE.eyebrow} title={TESTIMONIALS_PAGE.headline} intro={TESTIMONIALS_PAGE.intro} crumbs={[{ label: "Testimonials" }]} />
       <Section tone="ink">
         <Container>
-          <TestimonialLibrary items={TESTIMONIALS} />
+          <TestimonialLibrary items={FILMS} />
           <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-8">
             <p className="max-w-md text-[17px] font-medium leading-snug tracking-[-0.02em]">More client stories on our new channels.</p>
             <SocialLinks tone="dark" />
