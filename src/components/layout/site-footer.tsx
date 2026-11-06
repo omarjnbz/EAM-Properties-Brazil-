@@ -3,8 +3,10 @@ import { EnvelopeSimple } from "@phosphor-icons/react/dist/ssr/EnvelopeSimple";
 import { Phone } from "@phosphor-icons/react/dist/ssr/Phone";
 import { WhatsappLogo } from "@phosphor-icons/react/dist/ssr/WhatsappLogo";
 import logo from "@/assets/brand/eam-global-logo.png";
-import { FOOTER } from "@/content/nav";
+import { buildFooter } from "@/content/nav";
 import { SITE } from "@/content/site";
+import { getI18n } from "@/i18n/server";
+import { LanguageLinks } from "@/components/layout/language-switcher";
 import { AppLink } from "@/components/ui/app-link";
 import { Rich } from "@/components/ui/rich";
 import { LiveDot } from "@/components/ui/live-dot";
@@ -12,7 +14,10 @@ import { Button } from "@/components/ui/primitives";
 import { SocialLinks } from "@/components/ui/social-links";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr/ArrowUpRight";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const { locale, t } = await getI18n();
+  const f = t.footer;
+  const FOOTER = buildFooter(f.text);
   return (
     <footer className="bg-canvas px-3 pb-3 md:px-4 md:pb-4">
       <div className="rounded-[28px] bg-ink text-white">
@@ -20,21 +25,21 @@ export function SiteFooter() {
           <div className="grid gap-14 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <Image src={logo} alt="EAM Global" width={120} height={47} className="h-11 w-auto brightness-0 invert" />
-              <p className="mt-6 max-w-sm text-[22px] font-medium leading-snug tracking-[-0.025em]">We don&apos;t just get you the visa. We get you home.</p>
+              <p className="mt-6 max-w-sm text-[22px] font-medium leading-snug tracking-[-0.025em]">{f.blurb}</p>
               <p className="mt-4 text-[13.5px] leading-relaxed text-white/55">
-                <Rich text={FOOTER.facts} />
+                <Rich text={f.facts} />
               </p>
-              <p className="mt-1 text-[12px] font-medium uppercase tracking-[0.08em] text-white/35">{SITE.descriptor}</p>
+              <p className="mt-1 text-[12px] font-medium uppercase tracking-[0.08em] text-white/35">{f.descriptor}</p>
 
               <ul className="mt-8 flex flex-col gap-3 text-[14.5px]">
                 <li>
                   <a href={SITE.whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-white/80 transition-colors hover:text-white">
-                    <WhatsappLogo className="size-4 text-[#7fbf3a]" aria-hidden /> WhatsApp {SITE.whatsappDisplay}
+                    <WhatsappLogo className="size-4 text-[#7fbf3a]" aria-hidden /> {t.common.whatsapp}: <bdi dir="ltr">{SITE.whatsappDisplay}</bdi>
                   </a>
                 </li>
                 <li>
                   <a href={SITE.phoneHref} className="inline-flex items-center gap-2.5 text-white/80 transition-colors hover:text-white">
-                    <Phone className="size-4" aria-hidden /> {SITE.phoneDisplay}
+                    <Phone className="size-4" aria-hidden /> {t.common.call}: <bdi dir="ltr">{SITE.phoneDisplay}</bdi>
                   </a>
                 </li>
                 <li>
@@ -65,29 +70,29 @@ export function SiteFooter() {
 
           <div className="mt-14 grid gap-8 rounded-[22px] bg-white/[0.04] p-6 ring-1 ring-white/10 md:grid-cols-2 md:items-center md:p-8">
             <div>
-              <div className="text-[13px] font-medium text-white/50">Newsletter · free guides</div>
-              <p className="mt-1.5 max-w-md text-[18px] font-medium leading-snug tracking-[-0.02em]">Get our free Brazil and Argentina guides, and every new client story.</p>
+              <div className="text-[13px] font-medium text-white/50">{f.newsletterEyebrow}</div>
+              <p className="mt-1.5 max-w-md text-[18px] font-medium leading-snug tracking-[-0.02em]">{f.newsletterTitle}</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 <Button href="/guides/brazil" variant="paper">
-                  Brazil guide
+                  {f.brazilGuide}
                 </Button>
                 <Button href="/guides/argentina" variant="ghost-light">
-                  Argentina guide
+                  {f.argentinaGuide}
                 </Button>
               </div>
             </div>
             <div className="md:justify-self-end">
-              <div className="text-[13px] font-medium text-white/50">Follow our client stories</div>
+              <div className="text-[13px] font-medium text-white/50">{t.common.followStories}</div>
               <SocialLinks tone="dark" className="mt-3" />
               <AppLink href="/podcast" className="group mt-4 inline-flex items-center gap-1.5 text-[14px] font-medium text-white/85 hover:text-white">
-                Listen to the podcast
-                <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                {f.podcast}
+                <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" aria-hidden />
               </AppLink>
             </div>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-2.5">
-            {["24/7 response", "No Win, No Fee", "{{Licensing authority logo}}", "English · Português · العربية"].map((b, i) => (
+            {f.badges.map((b, i) => (
               <span key={b} className="inline-flex items-center gap-2 rounded-full bg-white/[0.06] px-3.5 py-2 text-[12.5px] text-white/80 ring-1 ring-white/10">
                 {i === 0 && <LiveDot className="size-1.5" />}
                 <Rich text={b} />
@@ -96,7 +101,7 @@ export function SiteFooter() {
           </div>
 
           <div className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-6 text-[12.5px] text-white/45 md:flex-row md:items-center md:justify-between">
-            <p>© 2026 EAM Global. All rights reserved.</p>
+            <p>{f.rights}</p>
             <ul className="flex flex-wrap gap-x-6 gap-y-2">
               {FOOTER.legal.map((l) => (
                 <li key={l.label}>
@@ -106,13 +111,7 @@ export function SiteFooter() {
                 </li>
               ))}
             </ul>
-            <p className="flex items-center gap-3">
-              <span className="text-white">English</span>
-              <span title="Coming soon">Português</span>
-              <span title="Coming soon" lang="ar">
-                العربية
-              </span>
-            </p>
+            <LanguageLinks locale={locale} label={t.language.label} tone="dark" className="-mx-3" />
           </div>
         </div>
       </div>

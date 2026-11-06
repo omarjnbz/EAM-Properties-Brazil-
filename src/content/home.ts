@@ -280,8 +280,21 @@ export const PROBLEM = {
   },
   passports: {
     title: "Worried your nationality means an automatic no?",
-    body: "You are not alone, and it doesn't have to be. We already have success stories with clients from Afghanistan, Iran, Yemen and many other countries.",
-    countries: ["Afghanistan", "Iran", "Yemen"],
+    body: "You are not alone, and it doesn't have to be. We already have success stories with clients from India, Pakistan, Bangladesh, Egypt, Syria, Lebanon, Jordan, Palestine, Afghanistan, Iran, Yemen and many other countries.",
+    /** Nationalities we have success stories for, with ISO codes for the badges. */
+    countries: [
+      { code: "IN", name: "India" },
+      { code: "PK", name: "Pakistan" },
+      { code: "BD", name: "Bangladesh" },
+      { code: "EG", name: "Egypt" },
+      { code: "SY", name: "Syria" },
+      { code: "LB", name: "Lebanon" },
+      { code: "JO", name: "Jordan" },
+      { code: "PS", name: "Palestine" },
+      { code: "AF", name: "Afghanistan" },
+      { code: "IR", name: "Iran" },
+      { code: "YE", name: "Yemen" },
+    ],
     note: "Every case is different and governments decide, so we tell you your honest chances before you pay anything.",
   },
 } as const;

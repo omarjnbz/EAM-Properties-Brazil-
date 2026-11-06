@@ -10,82 +10,27 @@ import stamps from "@/assets/stock/passport-stamps.jpg";
 import dubaiNight from "@/assets/stock/dubai-night.jpg";
 import planning from "@/assets/stock/travel-planning.jpg";
 import home from "@/assets/stock/brazil-house-carport.jpg";
-import { HOME } from "@/content/home";
+import type { Dictionary } from "@/content/i18n";
 import { cn } from "@/lib/cn";
 import { AppLink } from "@/components/ui/app-link";
 
-type Goal = { key: string; title: string; line: string; image: StaticImageData; alt: string; tags: string[]; href: string; cta: string };
+type Item = Dictionary["home"]["goals"]["items"][number];
 
-const tiles = HOME.goals.tiles;
-
-const GOALS: Goal[] = [
-  {
-    key: "live",
-    title: tiles[0].heading,
-    line: tiles[0].line,
-    image: houseWindows,
-    alt: "A modern house with large windows and palm trees in Bahia, Brazil",
-    tags: ["UAE Golden Visa", "Brazil investor visa", "Portugal", "Greece", "Paraguay"],
-    href: tiles[0].href,
-    cta: "Residence by Investment",
-  },
-  {
-    key: "passport",
-    title: tiles[1].heading,
-    line: tiles[1].line,
-    image: passports,
-    alt: "Travellers holding passports from different countries",
-    tags: ["Argentina · new 2026", "Dominica", "Grenada", "St. Kitts and Nevis", "Türkiye"],
-    href: tiles[1].href,
-    cta: "Citizenship by Investment",
-  },
-  {
-    key: "visit",
-    title: tiles[2].heading,
-    line: tiles[2].line,
-    image: stamps,
-    alt: "An open passport with entry stamps",
-    tags: ["USA", "UK", "Schengen", "Canada", "Australia", "UAE"],
-    href: tiles[2].href,
-    cta: "Visas & Documents",
-  },
-  {
-    key: "refused",
-    title: "Reapply after a refusal",
-    line: "Refused before? We review what went wrong, rebuild the file and help you reapply, whatever passport you hold.",
-    image: planning,
-    alt: "A passport, map and camera laid out to plan a new application",
-    tags: ["Refusal letter review", "A stronger new file", "Interview preparation", "Any passport"],
-    href: "/refused-visa",
-    cta: "Refused before?",
-  },
-  {
-    key: "business",
-    title: tiles[3].heading,
-    line: tiles[3].line,
-    image: dubaiNight,
-    alt: "Downtown Dubai at night",
-    tags: ["UAE mainland", "Free zone", "Offshore", "Serbia", "Paraguay", "Brazil"],
-    href: tiles[3].href,
-    cta: "Company Formation",
-  },
-  {
-    key: "relocate",
-    title: "Move door to door",
-    line: "Airport pickup, hotel, paperwork, appointments: one team handles every step of your move.",
-    image: home,
-    alt: "A modern family home with a carport and palm trees in Bahia, Brazil",
-    tags: ["Airport pickup", "Housing", "Appointments", "Bank account", "Schools"],
-    href: "/relocation",
-    cta: "Door-to-Door Relocation",
-  },
-];
+/** Picture and destination for each goal; the words come from the page's language. */
+const GOALS: Record<string, { image: StaticImageData; href: string }> = {
+  live: { image: houseWindows, href: "/residence-by-investment" },
+  passport: { image: passports, href: "/citizenship-by-investment" },
+  visit: { image: stamps, href: "/visit-visas" },
+  refused: { image: planning, href: "/refused-visa" },
+  business: { image: dubaiNight, href: "/company-formation" },
+  relocate: { image: home, href: "/relocation" },
+};
 
 /**
  * "What are you planning?" as an accordion. Several rows can be open; the
  * picture beside the list follows the row opened last.
  */
-export function GoalsAccordion() {
+export function GoalsAccordion({ items }: { items: readonly Item[] }) {
   const [open, setOpen] = useState<Set<string>>(() => new Set(["live"]));
   const [active, setActive] = useState("live");
 
@@ -102,7 +47,8 @@ export function GoalsAccordion() {
   return (
     <div className="grid gap-6 lg:grid-cols-12 lg:gap-10">
       <ul className="flex flex-col gap-2.5 lg:col-span-7">
-        {GOALS.map((g, i) => {
+        {items.map((g, i) => {
+          const { image, href } = GOALS[g.key];
           const isOpen = open.has(g.key);
           const panelId = `goal-panel-${g.key}`;
           return (
@@ -134,7 +80,7 @@ export function GoalsAccordion() {
                 <div className="overflow-hidden">
                   <div className={cn("px-5 pb-6 transition-[opacity,filter,transform] duration-500 ease-fluid md:ps-[4.75rem] md:pe-6", isOpen ? "opacity-100 blur-0" : "-translate-y-1 opacity-0 blur-sm")}>
                     <div className="relative mb-5 aspect-[16/9] overflow-hidden rounded-2xl lg:hidden">
-                      <Image src={g.image} alt={g.alt} fill placeholder="blur" sizes="100vw" className="object-cover" />
+                      <Image src={image} alt={g.alt} fill placeholder="blur" sizes="100vw" className="object-cover" />
                     </div>
                     <p className="max-w-lg text-[15.5px] leading-relaxed text-ink-3">{g.line}</p>
                     <ul className="mt-4 flex flex-wrap gap-1.5">
@@ -144,9 +90,9 @@ export function GoalsAccordion() {
                         </li>
                       ))}
                     </ul>
-                    <AppLink href={g.href} className="group mt-5 inline-flex items-center gap-1.5 text-[14.5px] font-medium">
+                    <AppLink href={href} className="group mt-5 inline-flex items-center gap-1.5 text-[14.5px] font-medium">
                       {g.cta}
-                      <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                      <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" aria-hidden />
                     </AppLink>
                   </div>
                 </div>
@@ -158,10 +104,10 @@ export function GoalsAccordion() {
 
       <div className="hidden lg:col-span-5 lg:block">
         <div className="sticky top-28 aspect-[4/5] overflow-hidden rounded-[28px] bg-paper-2" data-reveal="scale" suppressHydrationWarning>
-          {GOALS.map((g) => (
+          {items.map((g) => (
             <Image
               key={g.key}
-              src={g.image}
+              src={GOALS[g.key].image}
               alt={g.alt}
               fill
               placeholder="blur"
@@ -170,7 +116,7 @@ export function GoalsAccordion() {
             />
           ))}
           <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-white/90 px-4 py-3 text-[13.5px] font-medium backdrop-blur-md">
-            {GOALS.find((g) => g.key === active)?.cta}
+            {items.find((g) => g.key === active)?.cta}
           </div>
         </div>
       </div>

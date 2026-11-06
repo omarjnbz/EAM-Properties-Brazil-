@@ -384,3 +384,26 @@ html.lenis body {
     animation: none !important;
   }
 }
+
+/* ------------------------------------------------------------------ Arabic (right to left) */
+/* IBM Plex Sans Arabic on Arabic pages; slow networks keep system fonts. */
+html[lang="ar"]:not([data-net="lite"]) {
+  --font-sans: var(--font-arabic), var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-arabic), var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-arabic), var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Arabic letters join, so the Latin display tracking would pull words apart. */
+html[lang="ar"] * {
+  letter-spacing: normal;
+}
+
+/* Arabic shapes are taller than Latin ones: open up the tight display line heights. */
+html[lang="ar"] :is(.leading-none, .leading-tight, [class*="leading-[0."], [class*="leading-[1.0"], [class*="leading-[1.1"]) {
+  line-height: 1.3;
+}
+
+/* Arabic type has no italics; a slanted fake reads as a mistake. */
+html[lang="ar"] :is(.italic, em, i) {
+  font-style: normal;
+}

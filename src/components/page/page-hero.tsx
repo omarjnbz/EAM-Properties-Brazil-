@@ -1,6 +1,8 @@
 import Image, { type StaticImageData } from "next/image";
 import { CaretRight } from "@phosphor-icons/react/dist/ssr/CaretRight";
 import { SITE } from "@/content/site";
+import { localizeHref } from "@/i18n/config";
+import { getI18n } from "@/i18n/server";
 import { cn } from "@/lib/cn";
 import { AppLink } from "@/components/ui/app-link";
 import { Button, Container, Eyebrow } from "@/components/ui/primitives";
@@ -32,7 +34,9 @@ type Props = {
 const d = (ms: number) => ({ "--d": ms }) as React.CSSProperties;
 
 /** Inner-page hero: breadcrumb, title and calls to action, with a photo beside them. */
-export function PageHero({ eyebrow, title, intro, crumbs, image, imageAlt = "", imagePosition, imageCaption, aside, ctas = true, primary, children, className }: Props) {
+export async function PageHero({ eyebrow, title, intro, crumbs, image, imageAlt = "", imagePosition, imageCaption, aside, ctas = true, primary, children, className }: Props) {
+  const { locale, t } = await getI18n();
+  const { common } = t;
   const side = image ? (
     <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-paper-2 sm:aspect-[5/4] lg:aspect-[4/5]">
       <div className="load-zoom absolute inset-0">
@@ -51,18 +55,18 @@ export function PageHero({ eyebrow, title, intro, crumbs, image, imageAlt = "", 
   return (
     <section className={cn("relative overflow-hidden bg-canvas pb-16 pt-32 md:pb-24 md:pt-40", className)}>
       <Container className="relative">
-        {crumbs && <BreadcrumbJsonLd crumbs={crumbs} />}
+        {crumbs && <BreadcrumbJsonLd crumbs={crumbs} home={{ label: common.home, href: localizeHref("/", locale) }} />}
         {crumbs && (
-          <nav aria-label="Breadcrumb" className="load-blur mb-8" style={d(0)}>
+          <nav aria-label={common.breadcrumb} className="load-blur mb-8" style={d(0)}>
             <ol className="flex flex-wrap items-center gap-1.5 text-[13px] text-ink-3">
               <li>
                 <AppLink href="/" className="transition-colors hover:text-ink">
-                  Home
+                  {common.home}
                 </AppLink>
               </li>
               {crumbs.map((c) => (
                 <li key={c.label} className="flex items-center gap-1.5">
-                  <CaretRight weight="bold" className="size-2.5" aria-hidden />
+                  <CaretRight weight="bold" className="size-2.5 rtl:-scale-x-100" aria-hidden />
                   {c.href ? (
                     <AppLink href={c.href} className="transition-colors hover:text-ink">
                       {c.label}
@@ -99,10 +103,10 @@ export function PageHero({ eyebrow, title, intro, crumbs, image, imageAlt = "", 
             {ctas && (
               <div className="load-blur mt-8 flex flex-wrap gap-3" style={d(640)}>
                 <Button href={primary?.href ?? "/free-roadmap"} size="lg">
-                  {primary?.label ?? SITE.cta.roadmap}
+                  {primary?.label ?? common.getRoadmap}
                 </Button>
                 <Button href={SITE.whatsappHref} variant="ghost" size="lg" icon="whatsapp">
-                  {SITE.cta.talk}
+                  {common.talk}
                 </Button>
               </div>
             )}

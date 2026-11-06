@@ -124,7 +124,7 @@ export function TextLink({ href, children, className, tone = "ink" }: { href: st
   return (
     <AppLink href={href} className={cn("group inline-flex items-center gap-1.5 text-[14.5px] font-medium", tone === "ink" ? "text-ink" : "text-white", className)}>
       <span className="underline decoration-current/25 underline-offset-4 transition-[text-decoration-color] duration-300 group-hover:decoration-current">{children}</span>
-      <ArrowUpRight weight="bold" aria-hidden className="size-3.5 transition-transform duration-300 ease-fluid group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+      <ArrowUpRight weight="bold" aria-hidden className="size-3.5 transition-transform duration-300 ease-fluid group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
     </AppLink>
   );
 }

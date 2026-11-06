@@ -34,23 +34,23 @@ export const SOCIAL: { key: "youtube" | "instagram" | "tiktok"; label: string; u
 
 /**
  * The site's public address, used for share images, canonical links, the sitemap
- * and search data. On Vercel it follows the project's production domain (the
- * vercel.app address until eam-global.com is connected). NEXT_PUBLIC_SITE_URL
- * overrides it.
+ * and search data. Fixed rather than taken from Vercel's production domain: that
+ * picks the shortest custom domain (the bare eam-global.lat, which redirects) or
+ * the vercel.app address, and both made canonical links point at the wrong place.
+ * Previews keep pointing at the live site, which is what search engines should see.
+ * NEXT_PUBLIC_SITE_URL overrides it (no trailing slash), e.g. after a domain move.
  */
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "https://www.eam-global.com");
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.eam-global.lat").replace(/\/+$/, "");
 
 export const SITE = {
   name: "EAM Global",
   descriptor: "Documents Clearing Services",
   url: SITE_URL,
-  phoneDisplay: "+971 58 507 8600",
-  phoneHref: "tel:+971585078600",
-  whatsappDisplay: "+971 56 563 6536",
+  phoneDisplay: "+55 11 98209-5635",
+  phoneHref: "tel:+5511982095635",
+  whatsappDisplay: "+55 11 98209-5635",
   whatsappHref:
-    "https://wa.me/971565636536?text=Hello%20EAM%20Global%2C%20I%27d%20like%20to%20talk%20to%20an%20advisor.",
+    "https://wa.me/5511982095635?text=Hello%20EAM%20Global%2C%20I%27d%20like%20to%20talk%20to%20an%20advisor.",
   email: "info@eam-global.com",
   emailHref: "mailto:info@eam-global.com",
   headline: "We don't just get you the visa. We get you *home*.",

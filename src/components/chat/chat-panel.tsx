@@ -5,18 +5,12 @@ import { PaperPlaneRight } from "@phosphor-icons/react/dist/csr/PaperPlaneRight"
 import { Sparkle } from "@phosphor-icons/react/dist/csr/Sparkle";
 import { WhatsappLogo } from "@phosphor-icons/react/dist/csr/WhatsappLogo";
 import { X } from "@phosphor-icons/react/dist/csr/X";
+import type { Dictionary } from "@/content/i18n";
 import { SITE } from "@/content/site";
 import { cn } from "@/lib/cn";
 import { AppLink } from "@/components/ui/app-link";
 
 type Message = { role: "user" | "assistant"; content: string; error?: boolean };
-
-const SUGGESTIONS = [
-  "How does the UAE Golden Visa work?",
-  "Which residence programs include Schengen?",
-  "Can I get residence in Brazil?",
-  "What does No Win, No Fee cover?",
-];
 
 /** Links the model may produce: site pages and EAM Global's own contact channels only. */
 function safeHref(href: string) {
@@ -26,18 +20,18 @@ function safeHref(href: string) {
 }
 
 /** Renders **bold**, [label](href) and bare site paths (/free-roadmap) inside one line of a reply. */
-function Inline({ text, onNavigate }: { text: string; onNavigate: () => void }) {
+function Inline({ text, onNavigate, seePage }: { text: string; onNavigate: () => void; seePage: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)\s]+\)|(?<=^|[\s(])\/[a-z][a-z0-9/-]*(?:#[a-z0-9-]+)?)/g);
   return parts.map((part, i) => {
     const bold = part.match(/^\*\*([^*]+)\*\*$/);
     if (bold)
       return (
         <strong key={i} className="font-semibold text-ink">
-          <Inline text={bold[1]} onNavigate={onNavigate} />
+          <Inline text={bold[1]} onNavigate={onNavigate} seePage={seePage} />
         </strong>
       );
     const md = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
-    const link = md ? { label: md[1], href: md[2] } : /^\/[a-z]/.test(part) ? { label: "see page", href: part } : null;
+    const link = md ? { label: md[1], href: md[2] } : /^\/[a-z]/.test(part) ? { label: seePage, href: part } : null;
     if (link) {
       const href = safeHref(link.href);
       if (!href) return <Fragment key={i}>{link.label}</Fragment>;
@@ -57,7 +51,7 @@ function Inline({ text, onNavigate }: { text: string; onNavigate: () => void }) 
 }
 
 /** Paragraphs and "- " lists, the only block formatting the assistant is asked to use. */
-function Reply({ text, onNavigate }: { text: string; onNavigate: () => void }) {
+function Reply({ text, onNavigate, seePage }: { text: string; onNavigate: () => void; seePage: string }) {
   const blocks: { list: boolean; lines: string[] }[] = [];
   // The model often writes non-breaking hyphens (U+2011), which would break page paths.
   for (const raw of text.replace(/‑/g, "-").split("\n")) {
@@ -76,13 +70,13 @@ function Reply({ text, onNavigate }: { text: string; onNavigate: () => void }) {
           <ul key={i} className="flex list-disc flex-col gap-1 ps-5 marker:text-ink-3">
             {b.lines.map((l, j) => (
               <li key={j}>
-                <Inline text={l} onNavigate={onNavigate} />
+                <Inline text={l} onNavigate={onNavigate} seePage={seePage} />
               </li>
             ))}
           </ul>
         ) : (
           <p key={i}>
-            <Inline text={b.lines[0]} onNavigate={onNavigate} />
+            <Inline text={b.lines[0]} onNavigate={onNavigate} seePage={seePage} />
           </p>
         ),
       )}
@@ -90,7 +84,7 @@ function Reply({ text, onNavigate }: { text: string; onNavigate: () => void }) {
   );
 }
 
-export default function ChatPanel({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function ChatPanel({ copy, open, onClose }: { copy: Dictionary["chat"]; open: boolean; onClose: () => void }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -135,7 +129,7 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
       });
       if (!res.ok || !res.body) {
         const json = (await res.json().catch(() => ({}))) as { error?: string };
-        throw new Error(json.error || "Something went wrong.");
+        throw new Error(json.error || copy.error);
       }
       const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
       for (;;) {
@@ -146,7 +140,7 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
       update((m) => (m.content ? m : { ...m, error: true, content: "Sorry, I couldn't answer that. Please message an advisor on WhatsApp." }));
     } catch (err) {
       if (controller.signal.aborted) return;
-      update((m) => ({ ...m, error: true, content: err instanceof Error ? err.message : "Something went wrong." }));
+      update((m) => ({ ...m, error: true, content: err instanceof Error ? err.message : copy.error }));
     } finally {
       setBusy(false);
     }
@@ -157,7 +151,7 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
       id="site-chat"
       data-lenis-prevent
       role="dialog"
-      aria-label={`${SITE.name} assistant`}
+      aria-label={copy.dialogLabel}
       hidden={!open}
       onKeyDown={(e) => e.key === "Escape" && onClose()}
       className="fixed inset-x-2 bottom-2 z-50 flex h-[min(82dvh,640px)] flex-col overflow-hidden rounded-[22px] bg-surface text-ink shadow-[0_30px_80px_-20px_rgba(11,27,47,0.45)] ring-1 ring-ink/[0.08] motion-safe:animate-[fade-in_0.25s_ease-out] md:inset-x-auto md:bottom-[84px] md:end-6 md:h-[min(70vh,600px)] md:w-[390px]"
@@ -167,9 +161,9 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
           <Sparkle weight="fill" className="size-[18px]" aria-hidden />
         </span>
         <div className="flex-1">
-          <p className="text-[15px] font-semibold tracking-[-0.01em]">{SITE.name} AI</p>
+          <p className="text-[15px] font-semibold tracking-[-0.01em]">{copy.title}</p>
           <p className="mt-0.5 text-[12.5px] leading-snug text-ink-3">
-            AI answers from our website. A real advisor replies within 60 minutes on WhatsApp.
+            {copy.intro}
           </p>
         </div>
         <button
@@ -178,18 +172,18 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
           className="grid size-8 shrink-0 place-items-center rounded-full text-ink-3 transition-colors hover:bg-paper-2 hover:text-ink"
         >
           <X className="size-4" aria-hidden />
-          <span className="sr-only">Close chat</span>
+          <span className="sr-only">{copy.close}</span>
         </button>
       </header>
 
       <div ref={listRef} className="flex-1 overflow-y-auto overscroll-contain px-5 py-4" aria-live="polite">
         <div className="flex flex-col gap-3 text-[14.5px] leading-relaxed">
           <div className="max-w-[88%] rounded-2xl rounded-ss-md bg-paper px-4 py-3 text-ink-2">
-            Hello! Ask me about residence, citizenship, visas or relocation. I answer in your language: Olá, Hola, مرحبا.
+            {copy.hello}
           </div>
           {messages.length === 0 && (
             <div className="flex flex-wrap gap-2">
-              {SUGGESTIONS.map((s) => (
+              {copy.suggestions.map((s) => (
                 <button
                   key={s}
                   type="button"
@@ -216,9 +210,9 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
                 )}
               >
                 {m.content ? (
-                  <Reply text={m.content} onNavigate={onNavigate} />
+                  <Reply text={m.content} onNavigate={onNavigate} seePage={copy.seePage} />
                 ) : (
-                  <span className="inline-flex gap-1 py-1" aria-label="Typing">
+                  <span className="inline-flex gap-1 py-1" aria-label={copy.typing}>
                     {[0, 150, 300].map((d) => (
                       <span key={d} className="size-1.5 animate-pulse rounded-full bg-ink-3" style={{ animationDelay: `${d}ms` }} />
                     ))}
@@ -239,7 +233,7 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
           className="flex items-end gap-2 rounded-2xl bg-paper px-3 py-2 ring-1 ring-transparent focus-within:ring-navy/30"
         >
           <label htmlFor="chat-input" className="sr-only">
-            Your question
+            {copy.inputLabel}
           </label>
           <textarea
             id="chat-input"
@@ -255,7 +249,7 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
             rows={1}
             maxLength={1000}
             dir="auto"
-            placeholder="Type your question…"
+            placeholder={copy.placeholder}
             className="max-h-28 min-h-[28px] flex-1 resize-none bg-transparent py-1 text-[16px] leading-snug outline-none placeholder:text-ink-3 md:text-[14.5px]"
           />
           <button
@@ -264,7 +258,7 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
             className="grid size-8 shrink-0 place-items-center rounded-full bg-navy text-white transition-opacity disabled:opacity-35"
           >
             <PaperPlaneRight weight="fill" className="size-4 rtl:-scale-x-100" aria-hidden />
-            <span className="sr-only">Send</span>
+            <span className="sr-only">{copy.send}</span>
           </button>
         </form>
         <a
@@ -274,7 +268,7 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
           className="mt-2 flex items-center justify-center gap-1.5 text-[12.5px] font-medium text-leaf-deep hover:underline"
         >
           <WhatsappLogo weight="fill" className="size-4" aria-hidden />
-          Prefer a person? Message an advisor on WhatsApp
+          {copy.human}
         </a>
       </div>
     </section>

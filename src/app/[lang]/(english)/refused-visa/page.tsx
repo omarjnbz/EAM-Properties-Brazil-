@@ -30,7 +30,7 @@ export default function RefusedVisaPage() {
         primary={{ label: "Get my refusal reviewed", href: "/free-roadmap?goal=refused" }}
         image={passports}
         imageAlt="Travellers holding passports from different countries"
-        imageCaption="Afghanistan · Iran · Yemen · and many more: we already have success stories"
+        imageCaption="India · Pakistan · Egypt · Syria · Afghanistan · and many more: we already have success stories"
       />
 
       <Section tone="paper-2" id="reasons">
@@ -88,8 +88,8 @@ export default function RefusedVisaPage() {
             <Reveal delay={160} className="mt-8">
               <ul className="flex flex-wrap gap-2">
                 {PROBLEM.passports.countries.map((c) => (
-                  <li key={c} className="rounded-full bg-white px-4 py-2 text-[14px] font-medium ring-1 ring-ink/[0.07]">
-                    {c}
+                  <li key={c.code} className="rounded-full bg-white px-4 py-2 text-[14px] font-medium ring-1 ring-ink/[0.07]">
+                    {c.name}
                   </li>
                 ))}
                 <li className="px-1 py-2 text-[14px] text-ink-3">and many more</li>

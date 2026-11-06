@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/content/site";
+import { LOCALES, TRANSLATED_PATHS, languageAlternates } from "@/i18n/config";
 
 /** Every public page, for search engines. Placeholder legal pages are left out until they have real content. */
 const ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
@@ -26,7 +27,21 @@ const ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.S
   { path: "/contact", priority: 0.5, changeFrequency: "yearly" },
 ];
 
+const abs = (path: string) => new URL(path, SITE.url).toString();
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date("2026-10-16");
-  return ROUTES.map((r) => ({ url: new URL(r.path, SITE.url).toString(), lastModified, changeFrequency: r.changeFrequency, priority: r.priority }));
+  return ROUTES.flatMap((r) => {
+    if (!TRANSLATED_PATHS.has(r.path)) return [{ url: abs(r.path), lastModified, changeFrequency: r.changeFrequency, priority: r.priority }];
+    // Translated pages: one entry per language, each listing the others (hreflang).
+    const alt = languageAlternates(r.path, "en").languages;
+    const languages = Object.fromEntries(Object.entries(alt).map(([k, v]) => [k, abs(v)]));
+    return LOCALES.map((l) => ({
+      url: abs(languageAlternates(r.path, l).canonical),
+      lastModified,
+      changeFrequency: r.changeFrequency,
+      priority: r.priority,
+      alternates: { languages },
+    }));
+  });
 }

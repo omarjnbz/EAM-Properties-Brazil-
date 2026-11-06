@@ -53,7 +53,7 @@ export default function GuidesPage() {
                       </ul>
                       <span className="mt-auto inline-flex items-center gap-1.5 pt-7 text-[14.5px] font-medium">
                         Get the free {g.country} guide
-                        <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                        <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" aria-hidden />
                       </span>
                     </div>
                   </AppLink>

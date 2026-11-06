@@ -55,8 +55,8 @@ export function OrganizationJsonLd() {
 }
 
 /** Breadcrumb trail for an inner page. */
-export function BreadcrumbJsonLd({ crumbs, path }: { crumbs: { label: string; href?: string }[]; path?: string }) {
-  const items = [{ label: "Home", href: "/" }, ...crumbs].filter((c) => confirmed(c.label));
+export function BreadcrumbJsonLd({ crumbs, path, home = { label: "Home", href: "/" } }: { crumbs: { label: string; href?: string }[]; path?: string; home?: { label: string; href: string } }) {
+  const items = [home, ...crumbs].filter((c) => confirmed(c.label));
   return (
     <JsonLd
       data={{

@@ -49,8 +49,8 @@ export function GuidePrint({ guide }: { guide: Guide }) {
           <h1 className="mt-3 text-[64px] font-medium leading-[0.98] tracking-[-0.045em]">{guide.title}</h1>
           <p className="mt-5 max-w-[125mm] text-[15px] leading-relaxed text-white/85">{guide.summary}</p>
           <div className="mt-10 flex flex-wrap gap-x-6 gap-y-1 border-t border-white/25 pt-4 text-[11px] text-white/75">
-            <span>www.eam-global.com</span>
-            <span>WhatsApp {SITE.whatsappDisplay}</span>
+            <span>{SITE.url.replace("https://", "")}</span>
+            <span>WhatsApp: {SITE.whatsappDisplay}</span>
             <span>{SITE.email}</span>
           </div>
         </div>
@@ -109,7 +109,7 @@ export function GuidePrint({ guide }: { guide: Guide }) {
               <div className="mt-0.5 text-[14px] font-medium">{SITE.whatsappDisplay}</div>
             </div>
             <div>
-              <div className="text-white/55">Phone</div>
+              <div className="text-white/55">Call</div>
               <div className="mt-0.5 text-[14px] font-medium">{SITE.phoneDisplay}</div>
             </div>
             <div>
@@ -118,7 +118,7 @@ export function GuidePrint({ guide }: { guide: Guide }) {
             </div>
             <div>
               <div className="text-white/55">Your free roadmap</div>
-              <div className="mt-0.5 text-[14px] font-medium">eam-global.com/free-roadmap</div>
+              <div className="mt-0.5 text-[14px] font-medium">{SITE.url.replace("https://www.", "")}/free-roadmap</div>
             </div>
           </div>
         </section>

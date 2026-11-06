@@ -2,6 +2,7 @@ import { InstagramLogo } from "@phosphor-icons/react/dist/ssr/InstagramLogo";
 import { TiktokLogo } from "@phosphor-icons/react/dist/ssr/TiktokLogo";
 import { YoutubeLogo } from "@phosphor-icons/react/dist/ssr/YoutubeLogo";
 import { SOCIAL } from "@/content/site";
+import { getDictionary } from "@/i18n/server";
 import { cn } from "@/lib/cn";
 
 const ICONS = { youtube: YoutubeLogo, instagram: InstagramLogo, tiktok: TiktokLogo } as const;
@@ -10,10 +11,11 @@ const ICONS = { youtube: YoutubeLogo, instagram: InstagramLogo, tiktok: TiktokLo
  * YouTube, Instagram and TikTok. Accounts without a URL yet show as
  * "coming soon" instead of a dead link.
  */
-export function SocialLinks({ tone = "light", className }: { tone?: "light" | "dark"; className?: string }) {
+export async function SocialLinks({ tone = "light", className }: { tone?: "light" | "dark"; className?: string }) {
   const dark = tone === "dark";
+  const { common } = await getDictionary();
   return (
-    <ul className={cn("flex flex-wrap gap-2", className)} aria-label="Social channels">
+    <ul className={cn("flex flex-wrap gap-2", className)} aria-label={common.socialChannels}>
       {SOCIAL.map((s) => {
         const Icon = ICONS[s.key];
         const chip = cn(
@@ -28,10 +30,10 @@ export function SocialLinks({ tone = "light", className }: { tone?: "light" | "d
                 {s.label}
               </a>
             ) : (
-              <span className={cn(chip, "cursor-default")} aria-label={`${s.label}: coming soon`}>
+              <span className={cn(chip, "cursor-default")} aria-label={`${s.label}: ${common.comingSoon}`}>
                 <Icon weight="fill" className={cn("size-[18px]", dark ? "text-white/50" : "text-ink-3")} aria-hidden />
                 <span className={dark ? "text-white/70" : "text-ink-2"}>{s.label}</span>
-                <span className={cn("rounded-full px-1.5 py-0.5 text-[10.5px] font-medium", dark ? "bg-white/10 text-white/60" : "bg-canvas text-ink-3")}>Soon</span>
+                <span className={cn("rounded-full px-1.5 py-0.5 text-[10.5px] font-medium", dark ? "bg-white/10 text-white/60" : "bg-canvas text-ink-3")}>{common.soon}</span>
               </span>
             )}
           </li>

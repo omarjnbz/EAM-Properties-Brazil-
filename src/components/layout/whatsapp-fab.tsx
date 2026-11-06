@@ -1,8 +1,10 @@
 import { WhatsappLogo } from "@phosphor-icons/react/dist/ssr/WhatsappLogo";
 import { SITE } from "@/content/site";
+import { getDictionary } from "@/i18n/server";
 
 /** Mobile-only floating WhatsApp button with the 60-minute promise. */
-export function WhatsappFab() {
+export async function WhatsappFab() {
+  const { common } = await getDictionary();
   return (
     <a
       href={SITE.whatsappHref}
@@ -13,7 +15,7 @@ export function WhatsappFab() {
       <span className="grid size-9 place-items-center rounded-full bg-leaf">
         <WhatsappLogo weight="fill" className="size-[18px] text-white" aria-hidden />
       </span>
-      Reply in 60 min
+      {common.replyIn60}
     </a>
   );
 }

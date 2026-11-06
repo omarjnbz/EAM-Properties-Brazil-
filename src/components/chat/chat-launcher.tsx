@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { Sparkle } from "@phosphor-icons/react/dist/csr/Sparkle";
+import type { Dictionary } from "@/content/i18n";
 import { cn } from "@/lib/cn";
 
 const loadPanel = () => import("./chat-panel");
@@ -13,7 +14,7 @@ const ChatPanel = dynamic(loadPanel, { ssr: false });
  * tap, so it never weighs on the first page load (or on 2G/3G visitors who never
  * open it). On mobile it sits above the WhatsApp button.
  */
-export function ChatLauncher() {
+export function ChatLauncher({ copy }: { copy: Dictionary["chat"] }) {
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -35,9 +36,9 @@ export function ChatLauncher() {
         )}
       >
         <Sparkle weight="fill" className="size-6 md:size-5" aria-hidden />
-        <span className="sr-only md:not-sr-only">{open ? "Close chat" : "Ask AI"}</span>
+        <span className="sr-only md:not-sr-only">{open ? copy.close : copy.open}</span>
       </button>
-      {mounted && <ChatPanel open={open} onClose={() => setOpen(false)} />}
+      {mounted && <ChatPanel copy={copy} open={open} onClose={() => setOpen(false)} />}
     </>
   );
 }

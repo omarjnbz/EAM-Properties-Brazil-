@@ -185,39 +185,87 @@ export const CITIZENSHIP_REGIONS = ["Americas", "Caribbean", "Europe", "Middle E
 export const residenceHref = (p: ResidenceProgram) => p.href ?? `/residence-by-investment#${slugify(p.country)}`;
 export const citizenshipHref = (p: CitizenshipProgram) => p.href ?? `/citizenship-by-investment#${slugify(p.country)}`;
 
-/** Options for the destination dropdown in the roadmap forms. */
-export const DESTINATION_OPTIONS: { group: string; options: { value: string; label: string }[] }[] = [
-  {
-    group: "Featured",
-    options: [
-      { value: "brazil", label: "Brazil · investor residence" },
-      { value: "uae", label: "UAE · Golden Visa" },
-      { value: "argentina", label: "Argentina · residence or citizenship" },
-      { value: "paraguay", label: "Paraguay · residence" },
-      { value: "portugal", label: "Portugal · Golden Visa" },
-      { value: "caribbean", label: "Caribbean · second passport" },
-    ],
+export type DestinationOption = { value: string; label: string };
+export type DestinationGroup = { group: string; options: DestinationOption[] };
+
+/** Every word in the destination dropdown that is not a country or region name. */
+export type DestinationText = {
+  featured: string;
+  residence: string;
+  citizenship: string;
+  visas: string;
+  featuredLabels: { brazil: string; uae: string; argentina: string; paraguay: string; portugal: string; caribbean: string };
+  visaLabels: { usa: string; uk: string; schengen: string; canada: string; australia: string; uae: string };
+};
+
+export const DESTINATION_TEXT_EN: DestinationText = {
+  featured: "Featured",
+  residence: "Residence",
+  citizenship: "Citizenship",
+  visas: "Visas & documents",
+  featuredLabels: {
+    brazil: "Brazil · investor residence",
+    uae: "UAE · Golden Visa",
+    argentina: "Argentina · residence or citizenship",
+    paraguay: "Paraguay · residence",
+    portugal: "Portugal · Golden Visa",
+    caribbean: "Caribbean · second passport",
   },
-  ...RESIDENCE_REGIONS.map((r) => ({
-    group: `Residence · ${r.name}`,
-    options: r.programs.map((p) => ({ value: `res-${slugify(p.country)}`, label: p.country })),
-  })),
-  ...CITIZENSHIP_REGIONS.map((region) => ({
-    group: `Citizenship · ${region}`,
-    options: CITIZENSHIP_PROGRAMS.filter((p) => p.region === region).map((p) => ({
-      value: `cit-${slugify(p.country)}`,
-      label: p.country,
+  visaLabels: {
+    usa: "Visit visa · United States",
+    uk: "Visit visa · United Kingdom",
+    schengen: "Visit visa · Schengen",
+    canada: "Visit visa · Canada",
+    australia: "Visit visa · Australia",
+    uae: "Visit or transit visa · UAE",
+  },
+};
+
+const same = (s: string) => s;
+
+/**
+ * Options for the destination dropdown in the roadmap forms, in one language.
+ * Option values stay the same in every language (they are what /api/enquiry receives).
+ */
+export function buildDestinationOptions(t: DestinationText, country: (name: string) => string = same, region: (name: string) => string = same): DestinationGroup[] {
+  const f = t.featuredLabels;
+  const v = t.visaLabels;
+  return [
+    {
+      group: t.featured,
+      options: [
+        { value: "brazil", label: f.brazil },
+        { value: "uae", label: f.uae },
+        { value: "argentina", label: f.argentina },
+        { value: "paraguay", label: f.paraguay },
+        { value: "portugal", label: f.portugal },
+        { value: "caribbean", label: f.caribbean },
+      ],
+    },
+    ...RESIDENCE_REGIONS.map((r) => ({
+      group: `${t.residence} · ${region(r.name)}`,
+      options: r.programs.map((p) => ({ value: `res-${slugify(p.country)}`, label: country(p.country) })),
     })),
-  })),
-  {
-    group: "Visas & documents",
-    options: [
-      { value: "visit-usa", label: "Visit visa · United States" },
-      { value: "visit-uk", label: "Visit visa · United Kingdom" },
-      { value: "visit-schengen", label: "Visit visa · Schengen" },
-      { value: "visit-canada", label: "Visit visa · Canada" },
-      { value: "visit-australia", label: "Visit visa · Australia" },
-      { value: "visit-uae", label: "Visit or transit visa · UAE" },
-    ],
-  },
-];
+    ...CITIZENSHIP_REGIONS.map((r) => ({
+      group: `${t.citizenship} · ${region(r)}`,
+      options: CITIZENSHIP_PROGRAMS.filter((p) => p.region === r).map((p) => ({
+        value: `cit-${slugify(p.country)}`,
+        label: country(p.country),
+      })),
+    })),
+    {
+      group: t.visas,
+      options: [
+        { value: "visit-usa", label: v.usa },
+        { value: "visit-uk", label: v.uk },
+        { value: "visit-schengen", label: v.schengen },
+        { value: "visit-canada", label: v.canada },
+        { value: "visit-australia", label: v.australia },
+        { value: "visit-uae", label: v.uae },
+      ],
+    },
+  ];
+}
+
+/** The English destination dropdown. */
+export const DESTINATION_OPTIONS: DestinationGroup[] = buildDestinationOptions(DESTINATION_TEXT_EN);

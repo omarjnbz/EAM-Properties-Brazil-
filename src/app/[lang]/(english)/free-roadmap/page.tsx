@@ -5,7 +5,7 @@ import { Bezel, Container, Section, SectionHeading } from "@/components/ui/primi
 import { Reveal } from "@/components/ui/reveal";
 import { PageHero } from "@/components/page/page-hero";
 import { RoadmapDoc } from "@/components/art/documents";
-import { RoadmapForm } from "@/components/forms/roadmap-form";
+import { LocalizedRoadmapForm } from "@/components/forms/localized-roadmap-form";
 
 export const metadata: Metadata = {
   title: SEO.roadmap.title,
@@ -60,7 +60,7 @@ export default function FreeRoadmapPage() {
                   <h2 className="font-display text-[2rem] leading-tight">Tell us about your move</h2>
                   <p className="mt-2 pb-6 text-[15px] text-ink-3">Takes about two minutes. An advisor confirms the details with you on WhatsApp.</p>
                 </div>
-                <RoadmapForm variant="full" />
+                <LocalizedRoadmapForm variant="full" />
               </Bezel>
             </Reveal>
           </div>

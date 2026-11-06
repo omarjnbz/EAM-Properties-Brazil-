@@ -678,7 +678,7 @@ export const REFUSED = {
     },
     {
       q: "My nationality is often refused. Can you still help?",
-      a: "Yes. We already have success stories with clients from Afghanistan, Iran, Yemen and many other countries. Every case is different and governments decide, so we pre-screen your file before you pay.",
+      a: "Yes. We already have success stories with clients from India, Pakistan, Bangladesh, Egypt, Syria, Lebanon, Jordan, Palestine, Afghanistan, Iran, Yemen and many other countries. Every case is different and governments decide, so we pre-screen your file before you pay.",
     },
     {
       q: "Which applications can you help with after a refusal?",

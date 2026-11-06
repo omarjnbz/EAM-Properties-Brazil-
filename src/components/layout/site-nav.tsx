@@ -2,17 +2,28 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/csr/ArrowUpRight";
 import { CaretDown } from "@phosphor-icons/react/dist/csr/CaretDown";
 import { WhatsappLogo } from "@phosphor-icons/react/dist/csr/WhatsappLogo";
 import { Phone } from "@phosphor-icons/react/dist/csr/Phone";
 import logo from "@/assets/brand/eam-global-logo.png";
-import { NAV, type NavItem } from "@/content/nav";
+import type { NavItem } from "@/content/nav";
+import type { Dictionary } from "@/content/i18n";
 import { SITE } from "@/content/site";
+import { type Locale, pathWithoutLocale } from "@/i18n/config";
 import { cn } from "@/lib/cn";
 import { AppLink } from "@/components/ui/app-link";
 import { setScrollLocked } from "@/components/motion/motion-provider";
+import { LanguageMenu, LanguageLinks } from "@/components/layout/language-switcher";
+
+export type NavCopy = {
+  nav: Omit<Dictionary["nav"], "text">;
+  common: Dictionary["common"];
+  language: Dictionary["language"];
+};
+
+type Props = { locale: Locale; nav: NavItem[]; copy: NavCopy };
 
 /** Pages that open on a full-bleed dark photo, where the bar starts white-on-image. */
 const DARK_HERO = new Set(["/"]);
@@ -25,8 +36,9 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z]+/g, "-");
  * floating white pill once the page scrolls. Menus mount on first use, so their
  * 100+ links never weigh down the initial HTML on slow connections.
  */
-export function SiteNav() {
-  const pathname = usePathname();
+export function SiteNav({ locale, nav, copy }: Props) {
+  // Without the language prefix, so the server render (/en/…) and the browser (/…) agree.
+  const pathname = pathWithoutLocale(usePathname() ?? "/");
   const [scrolled, setScrolled] = useState(false);
   const [openState, setOpenState] = useState<{ label: string; path: string } | null>(null);
   const [mobilePath, setMobilePath] = useState<string | null>(null);
@@ -48,22 +60,20 @@ export function SiteNav() {
     return () => io.disconnect();
   }, []);
 
-  const openMenu = useCallback(
-    (label: string) => {
-      clearTimeout(closeTimer.current);
-      if (!panelsMounted) {
-        setPanelsMounted(true);
-        afterPaint(() => setOpenState({ label, path: pathname }));
-        return;
-      }
-      setOpenState({ label, path: pathname });
-    },
-    [pathname, panelsMounted],
-  );
-  const scheduleClose = useCallback(() => {
+  // Plain functions: the React Compiler memoizes them.
+  const openMenu = (label: string) => {
+    clearTimeout(closeTimer.current);
+    if (!panelsMounted) {
+      setPanelsMounted(true);
+      afterPaint(() => setOpenState({ label, path: pathname }));
+      return;
+    }
+    setOpenState({ label, path: pathname });
+  };
+  const scheduleClose = () => {
     clearTimeout(closeTimer.current);
     closeTimer.current = setTimeout(() => setOpenState(null), 160);
-  }, []);
+  };
 
   const toggleMobile = () => {
     if (!mobileMounted) {
@@ -114,24 +124,24 @@ export function SiteNav() {
     >
       <div className="relative w-full max-w-[1240px]">
         <nav
-          aria-label="Main"
+          aria-label={copy.nav.mainAria}
           className={cn(
             "relative z-[2] mx-auto flex items-center gap-2 rounded-full transition-[max-width,background-color,box-shadow,padding] duration-500 ease-fluid",
             condensed
-              ? "max-w-[1100px] bg-white/92 py-1.5 ps-4 pe-1.5 shadow-[0_1px_2px_rgba(11,27,47,0.06),0_18px_40px_-20px_rgba(11,27,47,0.28)] ring-1 ring-ink/[0.06] backdrop-blur-xl"
+              ? "max-w-[1100px] xl:min-w-fit bg-white/92 py-1.5 ps-4 pe-1.5 shadow-[0_1px_2px_rgba(11,27,47,0.06),0_18px_40px_-20px_rgba(11,27,47,0.28)] ring-1 ring-ink/[0.06] backdrop-blur-xl"
               : "max-w-[1240px] bg-transparent py-2 ps-2 pe-2 md:ps-4",
           )}
         >
           <AppLink
             href="/"
             className={cn("me-1 flex shrink-0 items-center rounded-full transition-[background-color,padding] duration-500 ease-fluid", onImage ? "bg-white/95 px-3 py-1" : "px-0 py-0")}
-            aria-label="EAM Global home"
+            aria-label={copy.nav.homeAria}
           >
             <Image src={logo} alt="EAM Global" width={104} height={41} loading="eager" className="h-8 w-auto md:h-9" />
           </AppLink>
 
           <ul className="hidden flex-1 items-center justify-center gap-0.5 xl:flex">
-            {NAV.map((item) => (
+            {nav.map((item) => (
               <li key={item.label} onMouseEnter={() => openMenu(item.label)}>
                 <button
                   type="button"
@@ -153,29 +163,32 @@ export function SiteNav() {
           </ul>
 
           <div className="ms-auto flex items-center gap-1.5 xl:ms-0">
+            {/* Phones narrower than 390px pick their language in the menu instead. */}
+            <LanguageMenu locale={locale} label={copy.language.label} note={copy.language.note} onImage={onImage} className="hidden min-[390px]:block" />
             <a
               href={SITE.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="WhatsApp: a real advisor replies within 60 minutes"
-              title="Reply in 60 min"
+              aria-label={copy.common.whatsappAria}
+              title={copy.common.replyIn60}
               className={cn(
                 "hidden h-10 items-center gap-2 whitespace-nowrap rounded-full px-3 text-[13px] font-medium transition-colors duration-300 sm:inline-flex",
                 onImage ? "text-white/90 hover:bg-white/10" : "text-ink-2 hover:bg-ink/[0.05]",
               )}
             >
               <WhatsappLogo weight="regular" className="size-[18px]" aria-hidden />
-              <span className={cn("hidden", !condensed && "xl:inline")}>Reply in 60 min</span>
+              {/* Only where the bar has room for it; the longer Portuguese menu labels never leave room. */}
+              <span className={cn("hidden", !condensed && locale !== "pt" && "min-[1380px]:inline")}>{copy.common.replyIn60}</span>
             </a>
             <AppLink
               href="/free-roadmap"
               className="inline-flex h-10 items-center whitespace-nowrap rounded-full bg-leaf px-4 text-[14px] font-medium text-white shadow-[0_8px_20px_-10px_rgba(62,105,11,0.7)] transition-[background-color,transform] duration-300 hover:bg-leaf-deep active:scale-[0.97]"
             >
-              Free Roadmap
+              {copy.common.freeRoadmap}
             </AppLink>
             <button
               type="button"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-label={mobileOpen ? copy.nav.closeMenu : copy.nav.openMenu}
               aria-expanded={mobileOpen}
               aria-controls={mobileMounted ? "mobile-menu" : undefined}
               onClick={toggleMobile}
@@ -189,16 +202,16 @@ export function SiteNav() {
           </div>
         </nav>
 
-        {panelsMounted && NAV.map((item) => <MenuPanel key={item.label} item={item} open={open === item.label} onEnter={() => openMenu(item.label)} />)}
+        {panelsMounted && nav.map((item) => <MenuPanel key={item.label} item={item} note={copy.nav.figuresNote} open={open === item.label} onEnter={() => openMenu(item.label)} />)}
       </div>
 
-      {mobileMounted && <MobileMenu open={mobileOpen} onClose={() => setMobilePath(null)} />}
+      {mobileMounted && <MobileMenu nav={nav} copy={copy} locale={locale} open={mobileOpen} onClose={() => setMobilePath(null)} />}
     </header>
   );
 }
 
 /* ------------------------------------------------------------------ Desktop dropdown */
-function MenuPanel({ item, open, onEnter }: { item: NavItem; open: boolean; onEnter: () => void }) {
+function MenuPanel({ item, note, open, onEnter }: { item: NavItem; note: string; open: boolean; onEnter: () => void }) {
   const mega = item.columns.length > 1;
   return (
     <div
@@ -223,7 +236,7 @@ function MenuPanel({ item, open, onEnter }: { item: NavItem; open: boolean; onEn
                 <AppLink key={p.href} href={p.href} className="group rounded-2xl bg-canvas p-4 transition-colors duration-300 hover:bg-paper-2">
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-[16px] font-semibold tracking-[-0.02em]">{p.label}</span>
-                    <ArrowUpRight weight="bold" className="size-3.5 text-ink-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                    <ArrowUpRight weight="bold" className="size-3.5 text-ink-3 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" aria-hidden />
                   </div>
                   {p.badge && <span className="mt-2 inline-block rounded-full bg-leaf-soft px-2 py-0.5 text-[11px] font-medium text-leaf-deep">{p.badge}</span>}
                   {p.description && <p className="mt-2 text-[13px] leading-snug text-ink-3">{p.description}</p>}
@@ -242,7 +255,7 @@ function MenuPanel({ item, open, onEnter }: { item: NavItem; open: boolean; onEn
                         <AppLink href={l.href} className="flex items-center gap-2 py-[5px] text-[14px] text-ink-2 transition-colors duration-200 hover:text-ink">
                           {l.label}
                           {l.badge && (
-                            <span className={cn("rounded-full px-1.5 py-0.5 text-[10px] font-medium", l.badge.startsWith("New") ? "bg-sun-soft text-[#7a5a0c]" : "bg-leaf-soft text-leaf-deep")}>{l.badge}</span>
+                            <span className={cn("rounded-full px-1.5 py-0.5 text-[10px] font-medium", l.badgeNew ? "bg-sun-soft text-[#7a5a0c]" : "bg-leaf-soft text-leaf-deep")}>{l.badge}</span>
                           )}
                         </AppLink>
                       </li>
@@ -262,10 +275,10 @@ function MenuPanel({ item, open, onEnter }: { item: NavItem; open: boolean; onEn
         </div>
         {item.footer && (
           <div className="mt-4 flex items-center justify-between border-t border-line pt-4">
-            <span className="text-[12.5px] text-ink-3">Figures as publicly listed, October 2026. Your free roadmap confirms the current figure.</span>
+            <span className="text-[12.5px] text-ink-3">{note}</span>
             <AppLink href={item.footer.href} className="group inline-flex items-center gap-1.5 text-[13.5px] font-medium text-ink">
               {item.footer.label}
-              <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+              <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" aria-hidden />
             </AppLink>
           </div>
         )}
@@ -275,7 +288,7 @@ function MenuPanel({ item, open, onEnter }: { item: NavItem; open: boolean; onEn
 }
 
 /* ------------------------------------------------------------------ Mobile overlay */
-function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+function MobileMenu({ nav, copy, locale, open, onClose }: { nav: NavItem[]; copy: NavCopy; locale: Locale; open: boolean; onClose: () => void }) {
   return (
     <div
       id="mobile-menu"
@@ -288,7 +301,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
     >
       <div className="flex min-h-full flex-col px-5 pb-10 pt-24">
         <ul className="flex flex-col">
-          {NAV.map((item, i) => (
+          {nav.map((item, i) => (
             <li
               key={item.label}
               className={cn("border-b border-line transition-[opacity,transform,filter] duration-700 ease-fluid", open ? "translate-y-0 opacity-100 blur-0" : "translate-y-8 opacity-0 blur-sm")}
@@ -307,7 +320,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                     </AppLink>
                   ))}
                   <AppLink href={item.href} onClick={onClose} className="px-4 py-2.5 text-[15px] text-ink-2">
-                    Overview
+                    {copy.nav.overview}
                   </AppLink>
                   {item.columns.length === 1 &&
                     item.columns[0].links.map((l) => (
@@ -325,16 +338,16 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
           style={{ transitionDelay: open ? "380ms" : "0ms" }}
         >
           <AppLink href="/free-roadmap" onClick={onClose} className="flex h-12 items-center justify-center rounded-full bg-leaf text-[15px] font-medium text-white">
-            Get your free roadmap
+            {copy.common.getRoadmap}
           </AppLink>
           <a href={SITE.whatsappHref} target="_blank" rel="noopener noreferrer" className="flex h-12 items-center justify-center gap-2 rounded-full bg-ink text-[15px] font-medium text-white">
-            <WhatsappLogo className="size-[18px]" aria-hidden /> Talk to an advisor now · 24/7
+            <WhatsappLogo className="size-[18px]" aria-hidden /> {copy.common.talk247}
           </a>
-          <div className="mt-4 flex items-center justify-between text-[14px] text-ink-3">
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-[14px] text-ink-3">
             <a href={SITE.phoneHref} className="inline-flex items-center gap-2">
-              <Phone className="size-4" aria-hidden /> {SITE.phoneDisplay}
+              <Phone className="size-4" aria-hidden /> {copy.common.call}: <bdi dir="ltr">{SITE.phoneDisplay}</bdi>
             </a>
-            <span className="text-[12px] font-medium tracking-[0.06em]">EN · PT · AR</span>
+            <LanguageLinks locale={locale} label={copy.language.label} />
           </div>
         </div>
       </div>
