@@ -1,6 +1,6 @@
 # EAM Global website
 
-English master of eam-global.com, built from `EAM-Global-Website-Content-v1.pdf`
+English master of the EAM Global site, live at https://www.eam-global.lat, built from `EAM-Global-Website-Content-v1.pdf`
 (kept locally, not in git). First draft: English only, Brazil featured.
 
 ## Run it
@@ -72,17 +72,48 @@ with EAM Global's own photography before launch. Maps come from public-domain Na
 
 ## Deploying on Vercel
 
-1. On vercel.com, **Add New → Project** and import this GitHub repo. Vercel detects Next.js;
-   keep the default build settings. The production branch is `main`.
-2. Under **Settings → Environment Variables**, add `GROQ_API_KEY` for the "Ask AI" chat
-   (optional: `GROQ_MODEL`, `GROQ_REASONING`; see `.env.example`). Without it the chat
-   politely says it isn't configured; the rest of the site works.
-3. Deploy. Share images, canonical links and the sitemap follow the project's production
-   domain automatically (`VERCEL_PROJECT_PRODUCTION_URL`).
-4. Until launch, every page is sent with `X-Robots-Tag: noindex`, so the draft stays off
-   Google. At launch, connect eam-global.com, set `SITE_INDEXABLE=true` and redeploy.
+The site is live on Vercel (project `eam-properties-brazil`, production branch `main`) at
+https://www.eam-global.lat; the bare eam-global.lat and the vercel.app address redirect there.
 
-Vercel's free Hobby plan is for non-commercial use; the live business site needs a Pro plan.
+Environment variables (**Settings → Environment Variables**, see `.env.example`):
+
+| Variable | Needed for |
+| --- | --- |
+| `LEADS_WEBHOOK_URL`, `LEADS_WEBHOOK_SECRET` | Form leads. Required: without them production forms send visitors to WhatsApp. See "Website leads". |
+| `GROQ_API_KEY` (+ optional `GROQ_MODEL`, `GROQ_REASONING`) | The "Ask AI" chat. Without it the chat button is hidden. |
+| `SITE_INDEXABLE=true` | Lets Google index the site. Set only once no `{{placeholder}}` is left. |
+| `NEXT_PUBLIC_SITE_URL` | Only when the site moves domain. Defaults to https://www.eam-global.lat. |
+
+Environment variables apply on the next deployment: redeploy after changing one.
+
+Vercel's free Hobby plan is for non-commercial use; the live business site needs a Pro plan
+(also required for the conversion events below).
+
+## Website leads
+
+Every roadmap, contact and guide form goes to `/api/enquiry`, which posts it as JSON to
+`LEADS_WEBHOOK_URL`. The visitor sees "success" only after the lead is delivered; otherwise
+they are asked to message WhatsApp. Today the webhook is a Google Sheet:
+
+1. Create a Google Sheet (e.g. "EAM Global website leads") with the account that should own the leads.
+2. **Extensions → Apps Script**, replace the code with `scripts/leads-webhook.gs`, save.
+3. **Project Settings → Script properties**: add `SECRET` (a long random string) and
+   `NOTIFY_EMAIL` (who gets an email per lead, comma-separated).
+4. **Deploy → New deployment → Web app**: execute as *Me*, access *Anyone*. Authorise, then
+   copy the web app URL (ends in `/exec`). Opening it in a browser should show `{"ok":true,...}`.
+5. On Vercel set `LEADS_WEBHOOK_URL` (that URL) and `LEADS_WEBHOOK_SECRET` (the same secret), then redeploy.
+6. Send a test from /contact: a row appears in the "Leads" tab and the email arrives.
+
+After editing the script, use **Deploy → Manage deployments → Edit → New version** so the
+URL stays the same. To move to a CRM later, point `LEADS_WEBHOOK_URL` at its webhook.
+
+## Analytics
+
+`src/components/analytics/site-analytics.tsx` loads Vercel Web Analytics (visits) and
+Speed Insights (real visitors' loading speed); both must also be enabled in the Vercel
+dashboard. Conversion events (Pro plan): **Lead** (a delivered form, with type, destination
+and goal; sent from the server), **WhatsApp click**, **Call click**, **Email click** and
+**Guide PDF click** (with the page and where the link sat).
 
 ## Slow networks (2G / 3G / Data Saver)
 
@@ -120,12 +151,12 @@ A floating "Ask a question" button opens an AI assistant that answers from the c
 
 ## Before launch
 
-- Move Groq to the paid Developer plan (about USD 1 per 1,000 chat messages at today's
+- Before setting `GROQ_API_KEY` on Vercel, move Groq to the paid Developer plan (about USD 1 per 1,000 chat messages at today's
   prices) and replace the in-memory chat rate limit with a shared store. Mention Groq
   as a processor of chat messages in the privacy policy.
 
-- Wire `src/app/api/enquiry/route.ts` to the CRM and the on-duty advisor's WhatsApp.
-  Today it only validates and acknowledges; roadmap, contact and guide submissions are not stored.
+- Optionally move leads from the Google Sheet to a CRM (change `LEADS_WEBHOOK_URL`) and add
+  an instant WhatsApp alert for the on-duty advisor.
 - Fill every `{{placeholder}}`, re-verify every program figure, and have the
   No Win, No Fee wording reviewed by a UAE lawyer.
 - Add the founder-and-client videos with English and Portuguese caption files.

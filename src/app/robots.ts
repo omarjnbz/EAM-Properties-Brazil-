@@ -10,6 +10,5 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ["/api/", "/guides/brazil/print", "/guides/argentina/print"],
     },
     sitemap: new URL("/sitemap.xml", SITE.url).toString(),
-    host: SITE.url,
   };
 }
