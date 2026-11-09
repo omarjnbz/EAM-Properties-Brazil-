@@ -80,7 +80,7 @@ Environment variables (**Settings → Environment Variables**, see `.env.example
 | Variable | Needed for |
 | --- | --- |
 | `LEADS_WEBHOOK_URL`, `LEADS_WEBHOOK_SECRET` | Form leads. Required: without them production forms send visitors to WhatsApp. See "Website leads". |
-| `GROQ_API_KEY` (+ optional `GROQ_MODEL`, `GROQ_REASONING`) | The "Ask AI" chat. Without it the chat button is hidden. |
+| `OPENAI_API_KEY` and/or `GROQ_API_KEY` (+ optional `CHAT_PROVIDER`, `OPENAI_MODEL`, `OPENAI_REASONING`, `GROQ_MODEL`, `GROQ_REASONING`) | The "Ask AI" chat. Without a key the chat button is hidden. |
 | `SITE_INDEXABLE=true` | Lets Google index the site. Set only once no `{{placeholder}}` is left. |
 | `NEXT_PUBLIC_SITE_URL` | Only when the site moves domain. Defaults to https://www.eam-global.lat. |
 
@@ -130,16 +130,24 @@ Safari and Firefox do not expose the API, so the default experience is built lig
 static pages, AVIF images, map artwork as cached files and menus that mount on first use.
 Motion also switches off for visitors who ask for reduced motion.
 
-## Chat assistant (Groq)
+## Chat assistant (OpenAI or Groq)
 
 A floating "Ask a question" button opens an AI assistant that answers from the copy in
 `src/content/` and hands visitors to WhatsApp or the free roadmap.
 
-- Setup: copy `.env.example` to `.env.local` and set `GROQ_API_KEY`
-  ([console.groq.com/keys](https://console.groq.com/keys)). On Vercel, add it under
-  Project → Settings → Environment Variables. The key is only read on the server.
-- Model: `openai/gpt-oss-120b` with medium reasoning by default; `GROQ_MODEL` and
-  `GROQ_REASONING` change them (low reasoning was faster but dropped items from lists).
+- Setup: copy `.env.example` to `.env.local` and set `OPENAI_API_KEY`
+  ([platform.openai.com/api-keys](https://platform.openai.com/api-keys)), `GROQ_API_KEY`
+  ([console.groq.com/keys](https://console.groq.com/keys)) or both. On Vercel, add them under
+  Project → Settings → Environment Variables, then redeploy. Keys are only read on the server.
+- Which one answers: OpenAI when its key is set, else Groq; `CHAT_PROVIDER=groq|openai`
+  overrides that. With both keys, if the first one fails (busy, down, out of credit) the
+  other answers instead (`src/lib/chat/providers.ts`).
+- Models: OpenAI `gpt-6-luna` (cheapest current OpenAI model; `OPENAI_MODEL`,
+  `OPENAI_REASONING`) and Groq `openai/gpt-oss-120b` (`GROQ_MODEL`, `GROQ_REASONING`), both
+  with medium reasoning by default (low was faster but dropped items from lists on Groq).
+- Cost, November 2026 prices: about USD 0.50–1 per 1,000 messages on `gpt-6-luna` (the
+  repeated site facts bill at the cached rate), about USD 1.25 on `gpt-oss-120b`. The server
+  log prints the provider and token counts for each reply.
 - What it knows: `src/lib/chat/knowledge.ts` builds the system prompt from the content
   files, so editing copy updates the bot. `{{placeholders}}` reach it as "[not confirmed]"
   and it refers those questions to an advisor.
@@ -148,12 +156,13 @@ A floating "Ask a question" button opens an AI assistant that answers from the c
   only when first opened).
 - Limits: each message sends about 4,500 prompt tokens. Groq's free tier allows 8,000 tokens
   a minute, so it only handles about one message a minute: enough for testing, not for visitors.
+  OpenAI's free tier cannot use `gpt-6-luna`; add prepaid credit first.
 
 ## Before launch
 
-- Before setting `GROQ_API_KEY` on Vercel, move Groq to the paid Developer plan (about USD 1 per 1,000 chat messages at today's
-  prices) and replace the in-memory chat rate limit with a shared store. Mention Groq
-  as a processor of chat messages in the privacy policy.
+- Before switching the chat on for visitors: add prepaid credit on OpenAI (and/or move Groq to
+  the paid Developer plan), replace the in-memory chat rate limit with a shared store, and
+  name OpenAI (and Groq, if used) as processors of chat messages in the privacy policy.
 
 - Optionally move leads from the Google Sheet to a CRM (change `LEADS_WEBHOOK_URL`) and add
   an instant WhatsApp alert for the on-duty advisor.

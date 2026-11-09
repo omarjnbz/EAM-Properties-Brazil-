@@ -13,6 +13,7 @@ import { EndCta } from "@/components/layout/end-cta";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { WhatsappFab } from "@/components/layout/whatsapp-fab";
 import { ChatLauncher } from "@/components/chat/chat-launcher";
+import { chatEnabled } from "@/lib/chat/providers";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { OrganizationJsonLd } from "@/components/seo/json-ld";
 import { SiteAnalytics } from "@/components/analytics/site-analytics";
@@ -92,8 +93,8 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
         <EndCta />
         <SiteFooter />
         <WhatsappFab />
-        {/* Hidden until the Groq key is set on Vercel; without it every question gets "not configured yet". */}
-        {process.env.GROQ_API_KEY ? <ChatLauncher copy={t.chat} /> : null}
+        {/* Hidden until an AI key (OpenAI or Groq) is set on Vercel; without one every question gets "not configured yet". */}
+        {chatEnabled() ? <ChatLauncher copy={t.chat} /> : null}
         <MotionProvider />
         <OrganizationJsonLd />
         <SiteAnalytics />

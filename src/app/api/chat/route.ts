@@ -1,16 +1,13 @@
 /**
- * Website chat assistant, powered by Groq (OpenAI-compatible API).
+ * Website chat assistant, powered by OpenAI or Groq (both OpenAI-style chat
+ * APIs; see src/lib/chat/providers.ts for which one answers and the fallback).
  *
- * The API key stays on the server (GROQ_API_KEY in .env.local / the host's env
- * settings). The reply streams back as plain text so the widget can render it
- * word by word. Message content is never logged; only token counts.
+ * The API keys stay on the server (.env.local / the host's env settings). The
+ * reply streams back as plain text so the widget can render it word by word.
+ * Message content is never logged; only the provider and token counts.
  */
 import { SYSTEM_PROMPT } from "@/lib/chat/knowledge";
-
-const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODEL = process.env.GROQ_MODEL || "openai/gpt-oss-120b";
-// "medium" keeps lists and figures accurate; "low" answers faster but skips details.
-const REASONING = process.env.GROQ_REASONING || "medium";
+import { chatProviders, type ChatProvider } from "@/lib/chat/providers";
 
 const MAX_MESSAGE = 1000; // characters per message
 const MAX_HISTORY = 10; // messages sent to the model
@@ -44,9 +41,27 @@ function parseMessages(body: unknown): ChatMessage[] | null {
   return messages.at(-1)?.role === "user" ? messages : null;
 }
 
+/** Asks one provider; null when it can't answer right now (so the next one can try). */
+async function ask(provider: ChatProvider, messages: ChatMessage[], signal: AbortSignal) {
+  const response = await fetch(provider.url, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${provider.apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      ...provider.options,
+      stream: true,
+      messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
+    }),
+    signal,
+  }).catch(() => null);
+  if (response?.ok && response.body) return { response, status: 200 };
+  console.warn(`[chat] ${provider.id} error`, response?.status ?? "network");
+  await response?.body?.cancel().catch(() => {});
+  return { response: null, status: response?.status ?? 0 };
+}
+
 export async function POST(request: Request) {
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) {
+  const providers = chatProviders();
+  if (providers.length === 0) {
     return Response.json({ error: "The assistant is not configured yet." }, { status: 503 });
   }
 
@@ -60,27 +75,26 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const upstream = await fetch(GROQ_URL, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: MODEL,
-      stream: true,
-      temperature: 0.3,
-      max_completion_tokens: 1200,
-      reasoning_effort: REASONING,
-      include_reasoning: false,
-      messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
-    }),
-    signal: request.signal,
-  }).catch(() => null);
-
-  if (!upstream?.ok || !upstream.body) {
-    console.warn("[chat] upstream error", upstream?.status ?? "network");
-    return Response.json({ error: BUSY }, { status: upstream?.status === 429 ? 429 : 502 });
+  // First choice, then the other provider if it has a key.
+  let upstream: Response | null = null;
+  let used: ChatProvider | null = null;
+  let status = 0;
+  for (const provider of providers) {
+    const attempt = await ask(provider, messages, request.signal);
+    status = attempt.status;
+    if (attempt.response) {
+      upstream = attempt.response;
+      used = provider;
+      break;
+    }
+    if (request.signal.aborted) break;
+  }
+  if (!upstream?.body || !used) {
+    return Response.json({ error: BUSY }, { status: status === 429 ? 429 : 502 });
   }
 
-  // Groq streams server-sent events; forward only the text deltas.
+  // Both providers stream server-sent events; forward only the text deltas.
+  const provider = used.id;
   let buffer = "";
   const text = upstream.body.pipeThrough(new TextDecoderStream()).pipeThrough(
     new TransformStream<string, string>({
@@ -94,8 +108,12 @@ export async function POST(request: Request) {
             const event = JSON.parse(line.slice(6));
             const delta = event.choices?.[0]?.delta?.content;
             if (delta) controller.enqueue(delta);
-            const usage = event.x_groq?.usage;
-            if (usage) console.info(`[chat] tokens: prompt ${usage.prompt_tokens}, completion ${usage.completion_tokens}`);
+            // OpenAI sends usage in a final chunk; Groq under x_groq.
+            const usage = event.usage ?? event.x_groq?.usage;
+            if (usage) {
+              const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
+              console.info(`[chat] ${provider} tokens: prompt ${usage.prompt_tokens} (cached ${cached}), completion ${usage.completion_tokens}`);
+            }
           } catch {
             // Ignore keep-alive or partial lines.
           }

@@ -9,6 +9,7 @@
 import { SITE, PILLARS, PRESENCE } from "@/content/site";
 import { CITIZENSHIP_EXPECTED, CITIZENSHIP_PROGRAMS, RESIDENCE_REGIONS } from "@/content/programs";
 import { ARGENTINA, BRAZIL, COMPANY, FAQS, HOW, LEGAL, RELOCATION, ROADMAP, UAE, VISIT, WHY } from "@/content/pages";
+import { en } from "@/content/i18n/en";
 
 const clean = (s: string) => s.replace(/\{\{[^}]*\}\}/g, "[not confirmed]").replace(/\*/g, "");
 
@@ -47,6 +48,7 @@ ${SITE.name} (${SITE.descriptor}), migration and document-clearing firm headquar
 Contact: WhatsApp ${SITE.whatsappDisplay} (fastest), phone ${SITE.phoneDisplay}, email ${SITE.email}, contact page /contact.
 Offices and teams: ${PRESENCE.map((p) => clean(`${p.city}, ${p.country} (${p.type})`)).join("; ")}.
 Founder: ${clean(WHY.founder.bio)}
+Licensing (same as the site footer): ${clean(en.footer.badges.filter((b) => /licen|regist/i.test(b)).join("; "))}.
 
 # What makes EAM Global different
 ${PILLARS.map((p) => clean(`- ${p.label}: ${p.promise}`)).join("\n")}
