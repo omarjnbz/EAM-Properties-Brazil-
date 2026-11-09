@@ -66,7 +66,7 @@ export const en = {
     brazilGuide: "Brazil guide",
     argentinaGuide: "Argentina guide",
     podcast: "Listen to the podcast",
-    badges: ["24/7 response", "No Win, No Fee", "{{Licensing authority logo}}"],
+    badges: ["24/7 response", "No Win, No Fee", "Licensed by Dubai DED", "Registered in Brazil with JUCESP and Receita Federal"],
     rights: "© 2026 EAM Global. All rights reserved.",
   },
 

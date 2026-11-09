@@ -234,16 +234,16 @@ export const FOUNDER_STORY = {
     },
     {
       label: "Today",
-      when: "12+ years",
+      when: "17+ years",
       title: "So no family has to do it alone",
-      body: "With more than 12 years in the field, he built EAM Global to solve, for every client, the problems he once had to solve on his own.",
+      body: "With more than 17 years in the field, he built EAM Global to solve, for every client, the problems he once had to solve on his own.",
     },
   ],
   mission:
     "A dedicated team in your own language that assists you from day one until you and your family are fully settled.",
   vision: "No family should have to face a new country alone, in a language they don't speak.",
   credentials: [
-    { value: "12+", label: "years in the field" },
+    { value: "17+", label: "years in the field" },
     { value: "4", label: "languages: Arabic, English, Portuguese, Spanish" },
     { value: "2014", label: "moved to Brazil as an immigrant himself" },
   ],

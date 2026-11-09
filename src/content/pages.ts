@@ -124,9 +124,9 @@ export const WHY = {
     title: "Founder-led, with a record to show",
     badge: "Trusted authority",
     headline: "Expert immigration guidance you can *trust*",
-    bio: "Alaa Marzouk, Senior Immigration Consultant and founder of EAM Global, moved to Brazil as an immigrant himself in 2014 and has worked in the field for more than 12 years. He holds a degree in Economics and Political Science from Cairo University (2009) and advises clients in Arabic, English, Portuguese and Spanish. In that time he has guided hundreds of families and investors to residence, visit visas and second citizenship, with a high approval rate built on preparing every file as if it will be scrutinised, because it will be.",
+    bio: "Alaa Marzouk, Senior Immigration Consultant and founder of EAM Global, moved to Brazil as an immigrant himself in 2014 and has worked in the field for more than 17 years. He holds a degree in Economics and Political Science from Cairo University (2009) and advises clients in Arabic, English, Portuguese and Spanish. In that time he has guided hundreds of families and investors to residence, visit visas and second citizenship, with a high approval rate built on preparing every file as if it will be scrutinised, because it will be.",
     credentials: [
-      { value: "12+", label: "Years in the field" },
+      { value: "17+", label: "Years in the field" },
       { value: "Cairo University", label: "Economics & Political Science (2009)" },
       { value: "Multilingual", label: "Arabic, English, Portuguese, Spanish" },
       { value: "High", label: "Approval rate" },

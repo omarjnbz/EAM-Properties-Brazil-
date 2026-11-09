@@ -155,7 +155,7 @@ export const pt: Dictionary = {
     brazilGuide: "Guia do Brasil",
     argentinaGuide: "Guia da Argentina",
     podcast: "Ouça o podcast",
-    badges: ["Resposta 24/7", "Sem aprovação, sem honorários", "{{Licensing authority logo}}"],
+    badges: ["Resposta 24/7", "Sem aprovação, sem honorários", "Licenciada pelo DED de Dubai", "Registrada na JUCESP e na Receita Federal"],
     rights: "© 2026 EAM Global. Todos os direitos reservados.",
   },
 
@@ -323,7 +323,7 @@ export const pt: Dictionary = {
           key: "founder",
           label: "Experiência do fundador",
           lead: "Nosso fundador conduz o seu caso.",
-          body: "Alaa Marzouk chegou ao Brasil como imigrante em 2014, tem mais de 12 anos de experiência na área e já levou pessoalmente centenas de famílias e investidores até a aprovação. Quem revisa o seu processo é quem dá nome à empresa.",
+          body: "Alaa Marzouk chegou ao Brasil como imigrante em 2014, tem mais de 17 anos de experiência na área e já levou pessoalmente centenas de famílias e investidores até a aprovação. Quem revisa o seu processo é quem dá nome à empresa.",
         },
         {
           key: "response",
@@ -531,9 +531,9 @@ export const pt: Dictionary = {
         },
         {
           label: "Hoje",
-          when: "12+ anos",
+          when: "17+ anos",
           title: "Para que nenhuma família passe por isso sozinha",
-          body: "Com mais de 12 anos de experiência na área, ele criou a EAM Global para resolver, para cada cliente, os problemas que um dia teve de resolver sozinho.",
+          body: "Com mais de 17 anos de experiência na área, ele criou a EAM Global para resolver, para cada cliente, os problemas que um dia teve de resolver sozinho.",
         },
       ],
       missionLabel: "Nossa missão",
@@ -542,7 +542,7 @@ export const pt: Dictionary = {
       visionLabel: "Nossa visão",
       vision: "Nenhuma família deveria enfrentar um novo país sozinha, num idioma que não fala.",
       credentials: [
-        { value: "12+", label: "anos de experiência na área" },
+        { value: "17+", label: "anos de experiência na área" },
         { value: "4", label: "idiomas: árabe, inglês, português e espanhol" },
         { value: "2014", label: "o ano em que ele mesmo imigrou para o Brasil" },
       ],

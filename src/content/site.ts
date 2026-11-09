@@ -8,15 +8,15 @@
  */
 
 /**
- * Founder facts used across the site. Years follow the founder's own words in the
- * 2026-10-16 call ("more than 12 years of experience in the field", arrived in
- * Brazil in 2014). The earlier content brief said 16+: confirm before launch.
+ * Founder facts used across the site. The client confirmed "+17 years of
+ * experience" in November 2026 (the 2026-10-16 call said 12+, the first brief
+ * 16+). He arrived in Brazil in 2014.
  */
 export const FOUNDER = {
   name: "Alaa Marzouk",
   role: "Founder and Senior Immigration Consultant",
-  years: 12,
-  yearsLabel: "12+",
+  years: 17,
+  yearsLabel: "17+",
   arrivedBrazil: 2014,
   origin: "Egyptian",
   languages: ["Arabic", "English", "Portuguese", "Spanish"],
@@ -128,9 +128,9 @@ export const PILLARS = [
     key: "founder",
     label: "Founder-Led Expertise",
     promise:
-      "Alaa Marzouk, 12+ years in global migration and an immigrant to Brazil himself, has guided hundreds of families and investors to approval.",
+      "Alaa Marzouk, 17+ years in global migration and an immigrant to Brazil himself, has guided hundreds of families and investors to approval.",
     lead: "Our founder leads your case.",
-    body: "Alaa Marzouk moved to Brazil as an immigrant in 2014, has spent more than 12 years in the field and has personally guided hundreds of families and investors to approval. Your file is reviewed by the person whose name is on the door.",
+    body: "Alaa Marzouk moved to Brazil as an immigrant in 2014, has spent more than 17 years in the field and has personally guided hundreds of families and investors to approval. Your file is reviewed by the person whose name is on the door.",
     href: "/why-eam-global#founder",
   },
   {
