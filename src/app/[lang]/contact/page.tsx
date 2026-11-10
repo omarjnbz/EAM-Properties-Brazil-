@@ -16,6 +16,7 @@ import { PageHero } from "@/components/page/page-hero";
 import { WorldRoutes } from "@/components/art/maps";
 import { ContactForm } from "@/components/forms/contact-form";
 import { SocialLinks } from "@/components/ui/social-links";
+import { BookCall } from "@/components/booking/book-call";
 import rio from "@/assets/stock/rio-sunset.jpg";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -101,6 +102,8 @@ export default async function ContactPage() {
           </div>
         </Container>
       </Section>
+
+      <BookCall copy={t.booking} className="border-t border-line" />
 
       <Section>
         <Container>

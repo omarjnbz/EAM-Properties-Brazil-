@@ -35,7 +35,7 @@ const arabic = IBM_Plex_Sans_Arabic({
   preload: false,
 });
 
-/** English, Arabic and Portuguese are all prerendered; English is served at unprefixed URLs (next.config.ts). */
+/** English, Arabic and Portuguese are all prerendered; English is served at unprefixed URLs (next.config.ts, src/proxy.ts). */
 export function generateStaticParams() {
   return LOCALES.map((lang) => ({ lang }));
 }

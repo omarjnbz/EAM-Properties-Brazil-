@@ -91,9 +91,18 @@ Vercel's free Hobby plan is for non-commercial use; the live business site needs
 
 ## Website leads
 
-Every roadmap, contact and guide form goes to `/api/enquiry`, which posts it as JSON to
-`LEADS_WEBHOOK_URL`. The visitor sees "success" only after the lead is delivered; otherwise
-they are asked to message WhatsApp. Today the webhook is a Google Sheet:
+Leads reach the team without a CRM: the AI does the sorting.
+
+- **Forms** (roadmap, contact, guide download, and the chat's "Plan my move" questions) go to
+  `/api/enquiry`.
+- **The AI chat**: when a visitor types a phone number or email, `/api/chat` turns the
+  conversation into a lead before it replies.
+
+Both add an **AI score** (hot / warm / cold) and a **two-line AI summary**
+(`src/lib/chat/lead.ts`), then post the lead as JSON to `LEADS_WEBHOOK_URL`
+(`src/lib/leads.ts`). Chat leads also carry the transcript. The visitor sees "success", or
+the assistant confirms, only after delivery; otherwise they are asked to message WhatsApp.
+Today the webhook is a Google Sheet:
 
 1. Create a Google Sheet (e.g. "EAM Global website leads") with the account that should own the leads.
 2. **Extensions → Apps Script**, replace the code with `scripts/leads-webhook.gs`, save.
@@ -104,8 +113,9 @@ they are asked to message WhatsApp. Today the webhook is a Google Sheet:
 5. On Vercel set `LEADS_WEBHOOK_URL` (that URL) and `LEADS_WEBHOOK_SECRET` (the same secret), then redeploy.
 6. Send a test from /contact: a row appears in the "Leads" tab and the email arrives.
 
-After editing the script, use **Deploy → Manage deployments → Edit → New version** so the
-URL stays the same. To move to a CRM later, point `LEADS_WEBHOOK_URL` at its webhook.
+After editing the script (for example the November 2026 version, which adds the AI score,
+AI summary and chat transcript columns and the "AI chat (Daniel)" lead type), use
+**Deploy → Manage deployments → Edit → New version** so the URL stays the same. To move to a CRM later, point `LEADS_WEBHOOK_URL` at its webhook.
 
 ## Analytics
 

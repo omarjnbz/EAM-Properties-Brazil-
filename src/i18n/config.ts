@@ -1,7 +1,8 @@
 /**
  * Languages of the site. English is the master and keeps its unprefixed URLs
  * (/contact); Arabic and Portuguese live under /ar and /pt. next.config.ts maps
- * the unprefixed English URLs onto app/[lang] with lang = "en".
+ * the unprefixed English URLs onto app/[lang] with lang = "en" (src/proxy.ts does
+ * the homepage).
  *
  * Safe to import from client components (no server-only APIs here).
  */
@@ -23,7 +24,7 @@ export const LOCALE_META: Record<Locale, { label: string; short: string; dir: "l
  * open the English page. Add a path here (and move its folder out of
  * app/[lang]/(english)) once its copy is translated.
  */
-export const TRANSLATED_PATHS: ReadonlySet<string> = new Set(["/", "/contact"]);
+export const TRANSLATED_PATHS: ReadonlySet<string> = new Set(["/", "/contact", "/book"]);
 
 const PREFIX = /^\/(ar|pt|en)(?=\/|$)/;
 

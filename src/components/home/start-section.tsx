@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr/ArrowUpRight";
 import { DownloadSimple } from "@phosphor-icons/react/dist/ssr/DownloadSimple";
+import { VideoCamera } from "@phosphor-icons/react/dist/ssr/VideoCamera";
+import { BOOKING } from "@/content/site";
 import { getDictionary } from "@/i18n/server";
 import { AppLink } from "@/components/ui/app-link";
 import { Container, Section, SectionHeading } from "@/components/ui/primitives";
@@ -9,9 +11,11 @@ import { LocalizedRoadmapForm } from "@/components/forms/localized-roadmap-form"
 import { GUIDE_COVERS } from "@/components/guides/guide-images";
 import { AdvisorStatus } from "@/components/home/advisor-status";
 
-/** The two offers side by side (a personal roadmap in 48 hours, or a country guide now), with a live advisor card for anyone who would rather talk. */
+/** The two free offers side by side (a personal roadmap in 48 hours, or a country guide now), a live advisor card, and a paid video call with the founder below. */
 export async function StartSection() {
-  const s = (await getDictionary()).home.start;
+  const t = await getDictionary();
+  const s = t.home.start;
+  const b = t.booking;
   return (
     <Section tone="paper-2" id="roadmap">
       <Container>
@@ -75,6 +79,27 @@ export async function StartSection() {
             })}
           </div>
         </div>
+
+        <Reveal delay={120} className="mt-4">
+          <AppLink
+            href="/book"
+            className="group flex flex-col gap-4 rounded-[24px] bg-white px-6 py-5 shadow-[0_1px_2px_rgba(11,27,47,0.05),0_20px_50px_-36px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.05] transition-shadow duration-300 hover:ring-ink/15 sm:flex-row sm:items-center sm:px-8 md:px-10"
+          >
+            <span className="flex items-center gap-3">
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-navy text-[13px] font-semibold text-white">3</span>
+              <span>
+                <span className="block text-[17px] font-semibold tracking-[-0.02em]">{b.startTitle}</span>
+                <span className="block text-[13.5px] text-ink-3">
+                  {b.startSub} · {BOOKING.price}
+                </span>
+              </span>
+            </span>
+            <span className="inline-flex h-11 shrink-0 items-center gap-2 self-start rounded-full bg-ink px-5 text-[14.5px] font-medium text-white transition-colors duration-300 group-hover:bg-ink-2 sm:ms-auto sm:self-auto">
+              <VideoCamera weight="regular" className="size-[18px]" aria-hidden />
+              {b.cta}
+            </span>
+          </AppLink>
+        </Reveal>
       </Container>
     </Section>
   );

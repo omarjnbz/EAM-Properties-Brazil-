@@ -58,6 +58,11 @@ export const SITE = {
   address: "{{Full Dubai address}}, Dubai, United Arab Emirates",
   walkIn: "Walk-in {{Sat–Thu, 9:00–18:00}}; messages answered 24/7",
   licence: "{{number}}",
+  /** Brazilian company number (CNPJ) of Alaa Marzouk's company, confirmed by the client November 2026 and listed in the public registry. */
+  cnpj: "70.030.039/0001-37",
+  /** Google Calendar booking page for a video call with the founder (see BOOKING). */
+  bookingHref:
+    "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2F0InAFBREl7f4jz7bycNADljI1aNdfK_s95kZ4R8e07GUsh4SWLSItrd7ZBa2hA7irsKlHxJj",
   founded: "{{year}}",
   cta: {
     roadmap: "Get your free roadmap",
@@ -65,6 +70,22 @@ export const SITE = {
     talk: "Talk to an advisor now",
     talkSuffix: "24/7",
   },
+} as const;
+
+/**
+ * The paid video consultation with the founder, booked on his Google Calendar
+ * appointment page (no payment on the site: the team sends payment details after
+ * booking). It is NOT free; the free offer is the written roadmap.
+ * `price` is a stand-in the client asked for until the real fee is set.
+ */
+export const BOOKING = {
+  href: SITE.bookingHref,
+  /** The same page in Google's embeddable form. */
+  embedHref: `${SITE.bookingHref}?gv=true`,
+  minutes: 30,
+  price: "USD 100",
+  with: FOUNDER.name,
+  via: "Google Meet",
 } as const;
 
 /** Offices and local teams. Cities and team types in braces await confirmation. */

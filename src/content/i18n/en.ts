@@ -66,7 +66,7 @@ export const en = {
     brazilGuide: "Brazil guide",
     argentinaGuide: "Argentina guide",
     podcast: "Listen to the podcast",
-    badges: ["24/7 response", "No Win, No Fee", "Licensed by Dubai DED", "Registered in Brazil with JUCESP and Receita Federal"],
+    badges: ["24/7 response", "No Win, No Fee", "Licensed by Dubai DED", "Registered in Brazil with JUCESP and Receita Federal", `CNPJ ${SITE.cnpj}`],
     rights: "© 2026 EAM Global. All rights reserved.",
   },
 
@@ -409,6 +409,34 @@ export const en = {
     mapNote: "Map embed of the Dubai office will be added once the address is confirmed:",
     localTeam: "Local team",
     presence: PRESENCE.map(({ key, country, city, type, languages }) => ({ key, country, city, type, languages })),
+  },
+
+  /** The paid video call with the founder (/book, the contact page, the homepage). Facts in BOOKING (site.ts). */
+  booking: {
+    metaTitle: "Book a video call with Alaa Marzouk · EAM Global",
+    metaDescription: "A 30-minute video consultation on Google Meet with Alaa Marzouk, founder of EAM Global. Pick a time that suits you.",
+    crumb: "Book a call",
+    eyebrow: "Book a call",
+    title: "Talk to *Alaa* face to face.",
+    intro: "A 30-minute video call with Alaa Marzouk, our founder. Bring your questions and leave with a clear next step for your family.",
+    lengthLabel: "Length",
+    lengthValue: "30 minutes",
+    viaLabel: "Where",
+    viaValue: "Google Meet video call",
+    feeLabel: "Fee",
+    feeNote: "We send payment details on WhatsApp after you book.",
+    languagesLabel: "Languages",
+    languagesValue: "Arabic, English, Portuguese, Spanish",
+    show: "See available times",
+    loading: "Loading available times…",
+    open: "Open the booking page in a new tab",
+    timezone: "Times show in your own time zone.",
+    calendarTitle: "Booking calendar for a video call with Alaa Marzouk",
+    free: "Prefer to start free?",
+    freeLink: "Get your written roadmap",
+    startTitle: "Or talk to Alaa directly",
+    startSub: "A 30-minute video call with our founder",
+    cta: "Book a call",
   },
 
   notFound: {

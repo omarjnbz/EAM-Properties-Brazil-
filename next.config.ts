@@ -20,14 +20,12 @@ const nextConfig: NextConfig = {
   },
   // Every page is under app/[lang]. Arabic and Portuguese URLs (/ar, /pt) match it
   // directly; everything else is English and is served from /en internally.
+  // The homepage "/" is mapped in src/proxy.ts instead (see the note there).
   // afterFiles: static files, /api and metadata routes are matched first.
   async rewrites() {
     return {
       beforeFiles: [],
-      afterFiles: [
-        { source: "/", destination: "/en" },
-        { source: "/:path((?!(?:ar|pt|en)(?:/|$)).+)", destination: "/en/:path" },
-      ],
+      afterFiles: [{ source: "/:path((?!(?:ar|pt|en)(?:/|$)).+)", destination: "/en/:path" }],
       fallback: [],
     };
   },
