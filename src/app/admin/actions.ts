@@ -28,6 +28,9 @@ export async function login(_prev: LoginState, form: FormData): Promise<LoginSta
   }
 
   attempts.delete(ip);
+  // Back to the section the visitor was opening; only admin paths, never another site.
+  const next = String(form.get("next") ?? "");
+  const target = /^\/admin(\/[a-z-]+)?$/.test(next) ? next : "/admin";
   (await cookies()).set(ADMIN_COOKIE, newSessionToken(), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -35,7 +38,7 @@ export async function login(_prev: LoginState, form: FormData): Promise<LoginSta
     path: "/admin",
     maxAge: SESSION_DAYS * 24 * 60 * 60,
   });
-  redirect("/admin");
+  redirect(target);
 }
 
 export async function logout() {

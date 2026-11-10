@@ -1,22 +1,14 @@
-import { Suspense } from "react";
-import { adminConfigured, isAdmin } from "@/lib/admin/session";
-import { Dashboard } from "./dashboard";
-import { LoginForm } from "./login-form";
+import { AdminGate } from "./gate";
+import { LeadsView } from "./leads-view";
+import { Shell } from "./ui";
 
-/**
- * /admin: one password, then everything on one page (AI usage and cost, leads,
- * Daniel's set-up). The session check reads a cookie, so it streams in behind
- * <Suspense> (cacheComponents); nothing private is ever prerendered.
- */
-export default function AdminPage() {
+/** /admin opens on the leads: the page the team uses every day. */
+export default function LeadsPage() {
   return (
-    <Suspense fallback={<p className="p-8 text-[14px] text-ink-3">Loading…</p>}>
-      <Gate />
-    </Suspense>
+    <AdminGate next="/admin">
+      <Shell active="leads">
+        <LeadsView />
+      </Shell>
+    </AdminGate>
   );
-}
-
-async function Gate() {
-  if (!(await isAdmin())) return <LoginForm configured={adminConfigured()} />;
-  return <Dashboard />;
 }

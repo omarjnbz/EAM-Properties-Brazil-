@@ -832,3 +832,19 @@ html[lang="ar"] :is(.italic, em, i) {
     animation-name: rise-in;
   }
 }
+
+/* ------------------------------------------------------------------ admin panel (/admin)
+   Cards settle in once on load (transform + opacity only), 60 ms apart (--d). */
+@keyframes admin-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .admin-rise {
+    animation: admin-rise 0.7s var(--ease-expo) both;
+    animation-delay: calc(var(--d, 0) * 1ms);
+  }
+}
