@@ -6,6 +6,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Rich, plain } from "@/components/ui/rich";
 import { SplitHeading } from "@/components/ui/split-heading";
 import { Disclosure } from "@/components/ui/disclosure";
+import { AskDaniel } from "@/components/daniel/ask-daniel";
 
 /* ------------------------------------------------------------------ Check list */
 export function CheckList({ items, tone = "paper", columns = 1, className }: { items: readonly string[]; tone?: "paper" | "ink"; columns?: 1 | 2; className?: string }) {
@@ -68,6 +69,9 @@ export function FaqList({ faqs, className }: { faqs: readonly Faq[]; className?:
         <Reveal key={f.q} delay={(i % 5) * 50}>
           <Disclosure title={f.q} defaultOpen={i === 0}>
             <Rich text={f.a} />
+            <span className="mt-3 flex">
+              <AskDaniel kind="faq" question={plain(f.q)} variant="link" className="-ms-0.5" />
+            </span>
           </Disclosure>
         </Reveal>
       ))}

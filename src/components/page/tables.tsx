@@ -5,6 +5,7 @@ import { AppLink } from "@/components/ui/app-link";
 import { Badge } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Rich } from "@/components/ui/rich";
+import { AskDaniel } from "@/components/daniel/ask-daniel";
 
 /* Shared table styling: a real <table> on desktop, stacked cards on phones. */
 const tableCls =
@@ -47,7 +48,22 @@ export function DataTable<T>({ rows, columns, rowKey, rowId, caption }: { rows: 
   );
 }
 
-function CountryCell({ country, href, localTeam, homeOffice, isNew }: { country: string; href?: string; localTeam?: boolean; homeOffice?: boolean; isNew?: boolean }) {
+function CountryCell({
+  country,
+  href,
+  localTeam,
+  homeOffice,
+  isNew,
+  ask,
+}: {
+  country: string;
+  href?: string;
+  localTeam?: boolean;
+  homeOffice?: boolean;
+  isNew?: boolean;
+  /** "Ask Daniel" for this program (hidden while the chat is off). */
+  ask?: React.ReactNode;
+}) {
   const name = <span className="font-display text-[1.2rem] leading-tight text-ink">{country}</span>;
   return (
     <div className="flex flex-wrap items-center gap-2">
@@ -62,6 +78,12 @@ function CountryCell({ country, href, localTeam, homeOffice, isNew }: { country:
       {localTeam && <Badge>Local team</Badge>}
       {homeOffice && <Badge tone="sun">Home office</Badge>}
       {isNew && <Badge tone="sun">New 2026</Badge>}
+      {/* With a mouse it appears on row hover or keyboard focus, so 40 rows don't shout; touch screens always show it. */}
+      {ask && (
+        <span className="basis-full transition-opacity duration-300 md:basis-auto md:pointer-fine:opacity-0 md:pointer-fine:group-hover/row:opacity-100 md:pointer-fine:focus-within:opacity-100">
+          {ask}
+        </span>
+      )}
     </div>
   );
 }
@@ -76,7 +98,9 @@ export function ResidenceDirectory() {
             key: "country",
             label: "Country",
             className: "md:w-[24%]",
-            render: (p) => <CountryCell country={p.country} href={p.href} localTeam={p.localTeam} homeOffice={p.homeOffice} />,
+            render: (p) => (
+              <CountryCell country={p.country} href={p.href} localTeam={p.localTeam} homeOffice={p.homeOffice} ask={<AskDaniel kind="residence" country={p.country} />} />
+            ),
           },
           { key: "amount", label: "Minimum qualifying amount", wide: true, className: "md:w-[30%]", render: (p) => <span className="text-ink"><Rich text={p.amount} /></span> },
           { key: "rights", label: "Live / work / study", render: (p) => p.rights },
@@ -112,7 +136,7 @@ export function CitizenshipDirectory() {
       key: "country",
       label: "Country",
       className: "md:w-[22%]",
-      render: (p) => <CountryCell country={p.country} href={p.href} localTeam={p.localTeam} isNew={p.isNew} />,
+      render: (p) => <CountryCell country={p.country} href={p.href} localTeam={p.localTeam} isNew={p.isNew} ask={<AskDaniel kind="passport" country={p.country} />} />,
     },
     { key: "amount", label: "Minimum qualifying amount", wide: true, className: "md:w-[28%]", render: (p) => <span className="text-ink">{p.amount}</span> },
     { key: "visa", label: "Visa-free (approx.)", render: (p) => <span className="font-display text-[1.2rem] text-ink">{p.visaFree}</span> },

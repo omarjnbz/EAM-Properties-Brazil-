@@ -1,9 +1,14 @@
 import { WhatsappLogo } from "@phosphor-icons/react/dist/ssr/WhatsappLogo";
 import { SITE } from "@/content/site";
 import { getDictionary } from "@/i18n/server";
+import { chatEnabled } from "@/lib/chat/providers";
 
-/** Mobile-only floating WhatsApp button with the 60-minute promise. */
+/**
+ * Mobile-only floating WhatsApp button with the 60-minute promise. While Daniel
+ * (the AI chat) is on, his dock carries WhatsApp instead (components/chat/chat-launcher.tsx).
+ */
 export async function WhatsappFab() {
+  if (chatEnabled()) return null;
   const { common } = await getDictionary();
   return (
     <a

@@ -3,6 +3,9 @@ import { getDictionary } from "@/i18n/server";
 import { Button, Container } from "@/components/ui/primitives";
 import { Rich } from "@/components/ui/rich";
 import { Stamp } from "@/components/art/stamp";
+import { chatEnabled } from "@/lib/chat/providers";
+import { AskInput } from "@/components/daniel/ask-input";
+import { DanielMark } from "@/components/daniel/daniel-mark";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getDictionary();
@@ -20,6 +23,15 @@ export default async function NotFound() {
         </h1>
         <p className="max-w-lg text-[17px] text-ink-3">{t.notFound.body}</p>
         <Button href="/">{t.notFound.back}</Button>
+        {chatEnabled() && (
+          <div className="mt-4 w-full max-w-xl">
+            <p className="mb-3 flex items-center gap-2.5 text-[15px] font-medium text-ink">
+              <DanielMark size={30} />
+              {t.chat.notFound.title}
+            </p>
+            <AskInput label={t.chat.notFound.title} placeholder={t.chat.notFound.placeholder} submit={t.chat.notFound.submit} template={t.chat.notFound.question} size="md" />
+          </div>
+        )}
       </Container>
     </section>
   );

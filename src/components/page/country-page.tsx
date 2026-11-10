@@ -16,6 +16,7 @@ import { TestimonialGrid } from "@/components/testimonials/testimonial-grid";
 import { TestimonialPlayer } from "@/components/testimonials/testimonial-player";
 import { VideoJsonLd } from "@/components/seo/json-ld";
 import type { Explainer } from "@/content/videos";
+import { DanielRoutesCallout } from "@/components/daniel/daniel-callout";
 
 export type CountryPageData = {
   eyebrow: string;
@@ -97,6 +98,7 @@ export function CountryPage({ data }: { data: CountryPageData }) {
               </div>
             </Reveal>
           )}
+          <DanielRoutesCallout country={data.crumbs.at(-1)?.label ?? ""} />
         </Container>
       </Section>
 

@@ -11,6 +11,7 @@ import { VideoShowcase } from "@/components/home/video-showcase";
 import { DestinationsStack } from "@/components/home/destinations-stack";
 import { FounderStory } from "@/components/home/founder-story";
 import { StartSection } from "@/components/home/start-section";
+import { DanielBand } from "@/components/daniel/daniel-band";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { locale, t } = await getI18n();
@@ -32,6 +33,8 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
+      {/* Daniel, the AI guide, introduces himself right after the hero (hidden while the chat is off). */}
+      <DanielBand />
       <ProblemSection />
 
       <section className="bg-canvas pb-20 md:pb-28" id="goals">
