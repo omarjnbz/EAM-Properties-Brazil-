@@ -93,7 +93,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
         <EndCta />
         <SiteFooter />
         <WhatsappFab />
-        {/* Hidden until an AI key (OpenAI or Groq) is set on Vercel; without one every question gets "not configured yet". */}
+        {/* Hidden until OPENAI_API_KEY is set on Vercel; without it every question gets "not configured yet". */}
         {chatEnabled() ? <ChatLauncher copy={t.chat} /> : null}
         <MotionProvider />
         <OrganizationJsonLd />

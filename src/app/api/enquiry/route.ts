@@ -19,7 +19,7 @@ import { LEAD_FIELDS, MAX_FIELD, deliverLead, pagePath, type LeadType } from "@/
 
 const GUIDES = new Set(["brazil", "argentina"]);
 const TYPES: LeadType[] = ["roadmap", "contact", "guide", "chat"];
-const FORM_NAMES: Record<LeadType, string> = { roadmap: "Free roadmap form", contact: "Contact form", guide: "Guide download form", chat: "Chat assistant's Plan my move questions" };
+const FORM_NAMES: Record<LeadType, string> = { roadmap: "Free roadmap form", contact: "Contact form", guide: "Guide download form", chat: "Chat assistant's Plan my move questions", booking: "Video call booking" };
 /** Fields a visitor can submit; score, summary and transcript only ever come from the server. */
 const SUBMITTED = LEAD_FIELDS.filter((k) => k !== "score" && k !== "summary" && k !== "transcript");
 

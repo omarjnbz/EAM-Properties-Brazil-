@@ -109,6 +109,24 @@ export const BOOKING = {
   price: "USD 100",
   with: FOUNDER.name,
   via: "Google Meet",
+  /**
+   * When the site's own booking calendar offers slots (src/lib/booking). Copied
+   * from the founder's Google appointment page: Monday to Saturday, first call
+   * 10:00 and last call 17:00, Dubai time. Busy times in his calendar are removed.
+   */
+  schedule: {
+    timeZone: "Asia/Dubai",
+    /** Dubai has no daylight saving time, so its offset from UTC never changes. */
+    utcOffsetHours: 4,
+    /** 0 = Sunday … 6 = Saturday. */
+    days: [1, 2, 3, 4, 5, 6],
+    firstStart: "10:00",
+    lastStart: "17:00",
+    /** Earliest bookable slot, counted from now. */
+    minNoticeHours: 4,
+    /** How far ahead visitors can book. */
+    horizonDays: 30,
+  },
 } as const;
 
 /** Offices and local teams. Cities and team types in braces await confirmation. */

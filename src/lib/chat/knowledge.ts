@@ -1,8 +1,8 @@
 /**
  * The chat assistant's system prompt, built from `src/content/` so the bot always
  * answers from the same copy the site shows, plus a few facts the site doesn't show
- * (the Brazilian company registration). Two sizes: the full prompt for OpenAI, a
- * compact one for Groq's free tier (8K tokens a minute, prompt and reply included).
+ * (the Brazilian company registration). Sent to OpenAI with every message and
+ * billed at the cached rate after the first one.
  *
  * Placeholders in {{double braces}} are unconfirmed, so they reach the model as
  * "[not confirmed]" and the rules tell it to hand those questions to an advisor.
@@ -166,7 +166,7 @@ ${country(ARGENTINA)}
 ${FAQS.map((f) => clean(`Q: ${f.q} A: ${f.a}`)).join("\n")}
 `.trim();
 
-/** Details only the full prompt carries (OpenAI). Groq's free tier is too small for them. */
+/** The rest of the fact sheet: the founder's story, the company registration, the refusal details and the guides. */
 const EXTRA_FACTS = `
 # Founder's story
 ${clean(FOUNDER_STORY.intro)} ${FOUNDER_STORY.chapters.map((c) => clean(`${c.title}${c.when ? ` (${c.when})` : ""}: ${c.body}`)).join(" ")}
@@ -221,17 +221,8 @@ Language and tone:
 FACTS
 ${facts}`;
 
-/** The full prompt, for OpenAI (about 7.5K tokens; repeated input is billed at the cached rate). */
+/** Daniel's instructions and the whole fact sheet (about 7.9K tokens; repeated input is billed at OpenAI's cached rate). */
 export const SYSTEM_PROMPT = prompt(`${FACTS}\n\n${EXTRA_FACTS}`);
-
-/**
- * A shorter prompt (about 5K tokens) for Groq, whose free tier allows 8K tokens a
- * minute including the reply. It leaves out the founder's story, the company
- * registration, the door-to-door stages, the refusal details and the guides.
- */
-export const SYSTEM_PROMPT_COMPACT = prompt(
-  `${FACTS}\n\n(This is a shorter fact sheet. For details about refusals, the free guides, the founder's story or the company registration, link the right page or offer an advisor.)`,
-);
 
 /**
  * Sent after the system prompt only when the chat widget can render cards

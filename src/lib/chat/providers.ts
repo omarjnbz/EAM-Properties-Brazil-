@@ -1,22 +1,19 @@
 /**
- * The AI services the website chat can use. Both speak the same OpenAI-style
- * chat API, so only the address, key, model and a few settings differ.
+ * The AI service behind the website chat (Daniel): OpenAI only. The Groq backup
+ * was removed in November 2026; the chat runs on OPENAI_API_KEY alone.
  *
- * Which one answers:
- *   CHAT_PROVIDER=openai | groq  picks it explicitly;
- *   otherwise OpenAI when OPENAI_API_KEY is set, else Groq.
- * If the first choice fails (busy, down, out of credit) and the other one has a
- * key, the chat quietly retries there, so visitors still get an answer.
+ * Kept as a list of providers so the chat route and the admin panel don't change
+ * if a second service is ever added again.
  *
- * Server-only: the keys never reach the browser.
+ * Server-only: the key never reaches the browser.
  */
-export type ChatProviderId = "openai" | "groq";
+export type ChatProviderId = "openai";
 
 export type ChatProvider = {
   id: ChatProviderId;
   url: string;
   apiKey: string;
-  /** Model and settings for this provider; the route adds messages and stream. */
+  /** Model and settings; the route adds messages and stream. */
   options: Record<string, unknown>;
 };
 
@@ -36,41 +33,20 @@ function openai(): ChatProvider | null {
       // Sends every chat to the same cache, so the long system prompt is billed at the
       // cached rate after the first message (without it most calls missed the cache).
       prompt_cache_key: "eam-daniel",
-      // Reasoning tokens count toward this cap, so it sits above Groq's.
+      // Reasoning tokens count toward this cap.
       max_completion_tokens: 1600,
       stream_options: { include_usage: true },
     },
   };
 }
 
-function groq(): ChatProvider | null {
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) return null;
-  return {
-    id: "groq",
-    url: "https://api.groq.com/openai/v1/chat/completions",
-    apiKey,
-    options: {
-      model: process.env.GROQ_MODEL || "openai/gpt-oss-120b",
-      // "medium" keeps lists and figures accurate; "low" answers faster but skips details.
-      reasoning_effort: process.env.GROQ_REASONING || "medium",
-      include_reasoning: false,
-      temperature: 0.3,
-      max_completion_tokens: 1200,
-    },
-  };
-}
-
-/** The providers to try, in order. Empty when no key is set. */
+/** The providers to try, in order: OpenAI, or none when its key is missing. */
 export function chatProviders(): ChatProvider[] {
-  const available = { openai: openai(), groq: groq() };
-  const wanted = process.env.CHAT_PROVIDER?.trim().toLowerCase();
-  const first: ChatProviderId = wanted === "groq" || wanted === "openai" ? wanted : available.openai ? "openai" : "groq";
-  const second: ChatProviderId = first === "openai" ? "groq" : "openai";
-  return [available[first], available[second]].filter((p): p is ChatProvider => p !== null);
+  const provider = openai();
+  return provider ? [provider] : [];
 }
 
-/** True when at least one AI key is set; the "Ask AI" button only shows then. */
+/** True when the OpenAI key is set; Daniel only shows then. */
 export function chatEnabled() {
-  return Boolean(process.env.OPENAI_API_KEY || process.env.GROQ_API_KEY);
+  return Boolean(process.env.OPENAI_API_KEY);
 }

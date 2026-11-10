@@ -67,10 +67,7 @@ export async function analyseLead(messages: Message[], timeoutMs = 8000): Promis
   for (const provider of chatProviders()) {
     // The chat's model, with settings for a quick, small, structured answer.
     const { model } = provider.options;
-    const options =
-      provider.id === "openai"
-        ? { model, reasoning_effort: "low", max_completion_tokens: 900 }
-        : { model, reasoning_effort: "low", include_reasoning: false, temperature: 0, max_completion_tokens: 700 };
+    const options = { model, reasoning_effort: "low", max_completion_tokens: 900 };
     try {
       const res = await fetch(provider.url, {
         method: "POST",

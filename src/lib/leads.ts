@@ -35,7 +35,7 @@ export const LEAD_FIELDS = [
 ] as const;
 
 export type LeadField = (typeof LEAD_FIELDS)[number];
-export type LeadType = "roadmap" | "contact" | "guide" | "chat";
+export type LeadType = "roadmap" | "contact" | "guide" | "chat" | "booking";
 export type Lead = { type: LeadType; page: string; visitorCountry: string } & Partial<Record<LeadField, string>>;
 
 /**

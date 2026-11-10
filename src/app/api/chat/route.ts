@@ -1,6 +1,5 @@
 /**
- * Website chat assistant ("Daniel"), powered by OpenAI or Groq (both OpenAI-style
- * chat APIs; see src/lib/chat/providers.ts for which one answers and the fallback).
+ * Website chat assistant ("Daniel"), powered by OpenAI (src/lib/chat/providers.ts).
  *
  * The API keys stay on the server (.env.local / the host's env settings). The
  * reply streams back as plain text so the widget can render it word by word.
@@ -19,7 +18,7 @@
  */
 import { after } from "next/server";
 import { track } from "@vercel/analytics/server";
-import { SYSTEM_PROMPT, SYSTEM_PROMPT_COMPACT, CARDS_GUIDE } from "@/lib/chat/knowledge";
+import { SYSTEM_PROMPT, CARDS_GUIDE } from "@/lib/chat/knowledge";
 import { chatProviders, type ChatProvider } from "@/lib/chat/providers";
 import { analyseLead, contactDetails, hasContactDetails } from "@/lib/chat/lead";
 import { deliverLead, pagePath } from "@/lib/leads";
@@ -164,9 +163,7 @@ export async function POST(request: Request) {
   let used: ChatProvider | null = null;
   let status = 0;
   for (const provider of providers) {
-    // Groq's free tier (8K tokens a minute, reply included) only fits the compact prompt.
-    const system = provider.id === "groq" ? SYSTEM_PROMPT_COMPACT : SYSTEM_PROMPT;
-    const attempt = await ask(provider, [{ role: "system", content: system }, ...prompt], request.signal);
+    const attempt = await ask(provider, [{ role: "system", content: SYSTEM_PROMPT }, ...prompt], request.signal);
     status = attempt.status;
     if (attempt.response) {
       upstream = attempt.response;
@@ -195,8 +192,8 @@ export async function POST(request: Request) {
             const event = JSON.parse(line.slice(6));
             const delta = event.choices?.[0]?.delta?.content;
             if (delta) controller.enqueue(delta);
-            // OpenAI sends usage in a final chunk; Groq under x_groq.
-            const usage = event.usage ?? event.x_groq?.usage;
+            // OpenAI sends the token usage in a final chunk.
+            const usage = event.usage;
             if (usage) {
               const cached = usage.prompt_tokens_details?.cached_tokens ?? 0;
               console.info(`[chat] ${provider} tokens: prompt ${usage.prompt_tokens} (cached ${cached}), completion ${usage.completion_tokens}`);

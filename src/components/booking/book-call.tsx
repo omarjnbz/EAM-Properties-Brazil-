@@ -7,7 +7,9 @@ import type { Dictionary } from "@/content/i18n";
 import { cn } from "@/lib/cn";
 import { Bezel, Container, Section, SectionHeading, TextLink } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
+import { bookingMode } from "@/lib/booking/calendar";
 import { BookingCalendar } from "./booking-calendar";
+import { BookingPicker } from "./booking-picker";
 
 /**
  * "Book a call": the paid 30-minute video call with the founder, with its facts
@@ -15,6 +17,7 @@ import { BookingCalendar } from "./booking-calendar";
  * page and anywhere else that links to /book or #book.
  */
 export function BookCall({ copy, as = "h2", id = "book", className }: { copy: Dictionary["booking"]; as?: "h1" | "h2"; id?: string; className?: string }) {
+  const mode = bookingMode();
   const facts = [
     { Icon: Clock, label: copy.lengthLabel, value: copy.lengthValue },
     { Icon: VideoCamera, label: copy.viaLabel, value: copy.viaValue },
@@ -25,7 +28,7 @@ export function BookCall({ copy, as = "h2", id = "book", className }: { copy: Di
   return (
     <Section tone="paper-2" id={id} className={cn("scroll-mt-20", className)}>
       <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-5">
+        <div className="min-w-0 lg:col-span-5">
           <SectionHeading as={as} eyebrow={copy.eyebrow} title={copy.title} intro={copy.intro} />
           <Reveal delay={160}>
             <dl className="mt-10 flex flex-col">
@@ -48,9 +51,11 @@ export function BookCall({ copy, as = "h2", id = "book", className }: { copy: Di
           </Reveal>
         </div>
 
-        <Reveal variant="scale" className="lg:col-span-7">
+        {/* min-w-0: the picker's day strip scrolls inside the card instead of widening the page. */}
+        <Reveal variant="scale" className="min-w-0 lg:col-span-7">
           <Bezel tone="white">
-            <BookingCalendar copy={copy} />
+            {/* The site's own calendar once Google is connected (or as a preview off production); Google's page until then. */}
+            {mode === "off" ? <BookingCalendar copy={copy} /> : <BookingPicker copy={copy} preview={mode === "preview"} />}
           </Bezel>
         </Reveal>
       </Container>
