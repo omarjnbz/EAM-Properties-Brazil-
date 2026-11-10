@@ -24,6 +24,8 @@ const TEASER_DELAY_PHONE = 900;
 const noSubscribe = () => () => {};
 const shortcutKey = () => (/Mac|iPhone|iPad/.test(navigator.userAgent) ? "⌘K" : "Ctrl K");
 const isPhone = () => window.matchMedia("(width < 48rem)").matches;
+/** The visitor is filling in a form or using an embedded page (the booking calendar). */
+const busyWithForm = () => !!document.activeElement?.closest("input, textarea, select, iframe, [contenteditable]");
 
 /**
  * Daniel's home on every page: one "Ask Daniel" launcher, his greeting bubble,
@@ -114,7 +116,7 @@ export function ChatLauncher({ copy }: { copy: Dictionary["chat"] }) {
     const passed = anchor ? anchor.getBoundingClientRect().bottom < window.innerHeight * 0.4 : window.scrollY > window.innerHeight * 0.45;
     if (!passed) return false;
     setShown(true);
-    if (!open && !mounted && !teaserSeen() && !danielQuietPage(path)) {
+    if (!open && !mounted && !teaserSeen() && !danielQuietPage(path) && !busyWithForm()) {
       markTeaserSeen();
       const returning = lastQuestion();
       teaserTimer.current = window.setTimeout(() => setTeaser({ returning, path }), isPhone() ? TEASER_DELAY_PHONE : 0);
@@ -139,6 +141,19 @@ export function ChatLauncher({ copy }: { copy: Dictionary["chat"] }) {
       cancelAnimationFrame(frame);
     };
   }, [path]);
+
+  // The greeting never sits on top of a form: it tucks away as soon as the visitor
+  // taps into a field, or into an embedded page (focus moving into an iframe blurs the window).
+  useEffect(() => {
+    if (!teaser) return;
+    const away = () => window.setTimeout(() => busyWithForm() && setTeaser(null), 0);
+    document.addEventListener("focusin", away);
+    window.addEventListener("blur", away);
+    return () => {
+      document.removeEventListener("focusin", away);
+      window.removeEventListener("blur", away);
+    };
+  }, [teaser]);
 
   useEffect(() => {
     if (!teaser) return;

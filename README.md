@@ -83,6 +83,8 @@ Environment variables (**Settings → Environment Variables**, see `.env.example
 | `OPENAI_API_KEY` and/or `GROQ_API_KEY` (+ optional `CHAT_PROVIDER`, `OPENAI_MODEL`, `OPENAI_REASONING`, `GROQ_MODEL`, `GROQ_REASONING`) | The "Ask AI" chat. Without a key the chat button is hidden. |
 | `SITE_INDEXABLE=true` | Lets Google index the site. Set only once no `{{placeholder}}` is left. |
 | `NEXT_PUBLIC_SITE_URL` | Only when the site moves domain. Defaults to https://www.eam-global.lat. |
+| `ADMIN_PASSWORD` | The admin panel at `/admin` (at least 10 characters). Without it the panel stays locked. See "Admin panel". |
+| `OPENAI_ADMIN_KEY` | AI usage and cost in the admin panel (an OpenAI **admin** key, read-only use). Mark it *Sensitive*. |
 
 Environment variables apply on the next deployment: redeploy after changing one.
 
@@ -116,6 +118,24 @@ Today the webhook is a Google Sheet:
 After editing the script (for example the November 2026 version, which adds the AI score,
 AI summary and chat transcript columns and the "AI chat (Daniel)" lead type), use
 **Deploy → Manage deployments → Edit → New version** so the URL stays the same. To move to a CRM later, point `LEADS_WEBHOOK_URL` at its webhook.
+
+The admin panel reads the newest leads back from the same web app with a GET
+(`?action=list&limit=50&secret=…`, server to server only). Rows come back only when the
+script's `SECRET` is set and matches. Scripts deployed before this mode existed just answer
+the health check, and the panel asks for the update (a New version, as above).
+
+## Admin panel
+
+`/admin` (English only, never indexed, outside the language routes) shows, behind one shared
+password (`ADMIN_PASSWORD`):
+
+- **AI usage and cost** for the last 30 days, from OpenAI's organization Costs and Usage APIs
+  (`OPENAI_ADMIN_KEY`; `src/lib/admin/openai-usage.ts`). OpenAI's cost data can lag by a few hours.
+- **Leads** from the Sheet, newest first, with the AI score, summary and chat transcript.
+- **Daniel**: which AI answers, which keys are set (never their values) and his full instructions.
+
+Sessions last 7 days in an HTTP-only cookie signed with the password (`src/lib/admin/session.ts`);
+changing `ADMIN_PASSWORD` logs everyone out. The keys never reach the browser.
 
 ## Analytics
 

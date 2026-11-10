@@ -8,6 +8,12 @@
  * Script properties (Project Settings → Script properties):
  *   SECRET        the same value as LEADS_WEBHOOK_SECRET on Vercel
  *   NOTIFY_EMAIL  who gets an email per lead, comma-separated
+ *
+ * The website's admin panel (/admin) reads the newest leads back with a GET:
+ *   …/exec?action=list&limit=50&secret=SECRET  →  { ok: true, leads: [ … ] }
+ * Rows are only ever returned when SECRET is set and matches; without the
+ * action the GET stays a plain health check. After changing this file, deploy
+ * it again as a New version (Deploy → Manage deployments → Edit → New version).
  */
 
 const SHEET_NAME = "Leads";
@@ -81,9 +87,35 @@ function doPost(e) {
   }
 }
 
-/** Open the web app URL in a browser to check the deployment works. */
-function doGet() {
-  return reply({ ok: true, service: "EAM Global leads" });
+/**
+ * Open the web app URL in a browser to check the deployment works. With
+ * ?action=list&secret=… (the admin panel, server to server) it returns the
+ * newest leads, newest first, at most 50.
+ */
+function doGet(e) {
+  const params = (e && e.parameter) || {};
+  if (params.action !== "list") return reply({ ok: true, service: "EAM Global leads" });
+
+  // Reading needs a real secret: an empty SECRET never opens the Sheet to the web.
+  const secret = PropertiesService.getScriptProperties().getProperty("SECRET") || "";
+  if (!secret || params.secret !== secret) return reply({ ok: false, error: "unauthorised" });
+
+  const limit = Math.max(1, Math.min(50, Number(params.limit) || 50));
+  const sheet = leadsSheet();
+  const last = sheet.getLastRow();
+  if (last < 2) return reply({ ok: true, leads: [] });
+  const count = Math.min(limit, last - 1);
+  const rows = sheet.getRange(last - count + 1, 1, count, COLUMNS.length).getValues();
+  const leads = rows.reverse().map((row) => {
+    const lead = {};
+    COLUMNS.forEach(([key], i) => {
+      const value = row[i];
+      // The Sheet turns "2026-11-11 09:30" into a date; send it back in the same form.
+      lead[key] = value instanceof Date ? Utilities.formatDate(value, TIME_ZONE, "yyyy-MM-dd HH:mm") : value == null ? "" : String(value);
+    });
+    return lead;
+  });
+  return reply({ ok: true, leads: leads });
 }
 
 function leadsSheet() {

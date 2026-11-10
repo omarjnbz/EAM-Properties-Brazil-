@@ -150,9 +150,9 @@ export function danielTopic(path: string): DanielTopic | null {
   return DANIEL_TOPICS[clean] ?? (clean.startsWith("/guides/") ? DANIEL_TOPICS["/guides"] : null);
 }
 
-/** Pages where Daniel never pops up on his own: forms that convert, and print layouts. */
+/** Pages where Daniel never pops up on his own: forms that convert (the roadmap, the booking calendar) and print layouts. */
 export function danielQuietPage(path: string) {
-  return path === "/free-roadmap" || path.endsWith("/print");
+  return path === "/free-roadmap" || path === "/book" || path.endsWith("/print");
 }
 
 /**
