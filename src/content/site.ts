@@ -73,6 +73,29 @@ export const SITE = {
 } as const;
 
 /**
+ * The Brazilian company registration, from the Receita Federal registration
+ * card (Comprovante de Inscrição, issued 10 Nov 2026). For the chat assistant;
+ * the site itself shows only the CNPJ. The registered street address and the
+ * personal email and phone on the card are deliberately left out.
+ */
+export const BRAZIL_COMPANY = {
+  cnpj: SITE.cnpj,
+  registry: "Receita Federal (Cadastro Nacional da Pessoa Jurídica)",
+  form: "sole proprietorship (empresário individual) in the name of the founder, Alaa Marzouk; head office registration (matriz)",
+  city: "São Paulo, SP",
+  status: "active",
+  opened: "8 November 2026",
+  activities: [
+    "travel agency (main activity)",
+    "tour operator",
+    "tourism bookings and other tourism services",
+    "sales promotion",
+    "language teaching",
+    "organising fairs, conferences and events",
+  ],
+} as const;
+
+/**
  * The paid video consultation with the founder, booked on his Google Calendar
  * appointment page (no payment on the site: the team sends payment details after
  * booking). It is NOT free; the free offer is the written roadmap.

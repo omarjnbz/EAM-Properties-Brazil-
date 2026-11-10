@@ -19,7 +19,7 @@
  */
 import { after } from "next/server";
 import { track } from "@vercel/analytics/server";
-import { SYSTEM_PROMPT, CARDS_GUIDE } from "@/lib/chat/knowledge";
+import { SYSTEM_PROMPT, SYSTEM_PROMPT_COMPACT, CARDS_GUIDE } from "@/lib/chat/knowledge";
 import { chatProviders, type ChatProvider } from "@/lib/chat/providers";
 import { analyseLead, contactDetails, hasContactDetails } from "@/lib/chat/lead";
 import { deliverLead, pagePath } from "@/lib/leads";
@@ -147,11 +147,8 @@ export async function POST(request: Request) {
     leadsOffline &&
       "WEBSITE NOTE: Advisors cannot receive contact details through this chat right now. Do not ask for a name, phone number or email; point the visitor to WhatsApp, the free roadmap or the video call (/book) instead.",
   ].filter(Boolean);
-  const prompt: PromptMessage[] = [
-    { role: "system", content: SYSTEM_PROMPT },
-    ...(context.length ? [{ role: "system" as const, content: context.join("\n") }] : []),
-    ...messages,
-  ];
+  // Everything after the system prompt, which each provider gets in its own size (below).
+  const prompt: PromptMessage[] = [...(context.length ? [{ role: "system" as const, content: context.join("\n") }] : []), ...messages];
 
   const headers: Record<string, string> = { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" };
   if (hasContactDetails(messages.at(-1)!.content)) {
@@ -167,7 +164,9 @@ export async function POST(request: Request) {
   let used: ChatProvider | null = null;
   let status = 0;
   for (const provider of providers) {
-    const attempt = await ask(provider, prompt, request.signal);
+    // Groq's free tier (8K tokens a minute, reply included) only fits the compact prompt.
+    const system = provider.id === "groq" ? SYSTEM_PROMPT_COMPACT : SYSTEM_PROMPT;
+    const attempt = await ask(provider, [{ role: "system", content: system }, ...prompt], request.signal);
     status = attempt.status;
     if (attempt.response) {
       upstream = attempt.response;

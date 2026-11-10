@@ -37,7 +37,8 @@ export function BookingCalendar({ copy }: { copy: Dictionary["booking"] }) {
 
   return (
     <div>
-      <div className="relative h-[760px] md:h-[640px]">
+      {/* Tall enough for Google's booking form (name, email, phone and its own questions) to open without much scrolling. */}
+      <div className="relative h-[900px] md:h-[860px]">
         {!loaded && (
           <p className="absolute inset-0 grid place-items-center text-[14px] text-ink-3" aria-hidden>
             {copy.loading}
