@@ -1,4 +1,5 @@
-import logo from "@/assets/brand/eam-global-logo.png";
+// Square PNG: search engines and social sites expect a raster logo.
+import logo from "@/assets/brand/eam-global-logo-square.png";
 import { SEO } from "@/content/pages";
 import { FOUNDER, PRESENCE, SITE, SOCIAL } from "@/content/site";
 import { TESTIMONIALS, type TestimonialVideo } from "@/content/testimonials";

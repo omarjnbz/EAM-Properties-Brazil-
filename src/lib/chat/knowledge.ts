@@ -7,7 +7,7 @@
  * Placeholders in {{double braces}} are unconfirmed, so they reach the model as
  * "[not confirmed]" and the rules tell it to hand those questions to an advisor.
  */
-import { BOOKING, BRAZIL_COMPANY, SITE, PILLARS, PRESENCE } from "@/content/site";
+import { BOOKING, BRAZIL_COMPANY, SITE, SOCIAL, PILLARS, PRESENCE } from "@/content/site";
 import { CITIZENSHIP_EXPECTED, CITIZENSHIP_PROGRAMS, RESIDENCE_REGIONS } from "@/content/programs";
 import { ARGENTINA, BRAZIL, COMPANY, FAQS, HOW, LEGAL, REFUSED, RELOCATION, ROADMAP, UAE, VISIT, WHY } from "@/content/pages";
 import { DOOR_STAGES, FOUNDER_STORY, PROBLEM, ROADMAP_CONTENTS } from "@/content/home";
@@ -100,6 +100,7 @@ const FACTS = `
 # Company
 ${SITE.name} (${SITE.descriptor}), migration and document-clearing firm headquartered in Dubai. ${clean(SITE.walkIn)}.
 Contact: WhatsApp ${SITE.whatsappDisplay} (fastest), phone ${SITE.phoneDisplay}, email ${SITE.email}, contact page /contact.
+Social media: ${SOCIAL.filter((s) => s.url).map((s) => `${s.label} ${s.url}`).join(", ")}; ${SOCIAL.filter((s) => !s.url).map((s) => s.label).join(" and ")} coming soon.
 Offices and teams: ${PRESENCE.map((p) => clean(`${p.city}, ${p.country} (${p.type})`)).join("; ")}.
 Founder: ${clean(WHY.founder.bio)}
 Licensing (same as the site footer): ${clean(en.footer.badges.filter((b) => /licen|regist/i.test(b)).join("; "))}. Brazilian company number (CNPJ): ${SITE.cnpj}.
@@ -174,7 +175,7 @@ Mission: ${FOUNDER_STORY.mission} Vision: ${FOUNDER_STORY.vision}
 
 # Brazilian company registration (not shown on the site beyond the CNPJ; share only when asked)
 CNPJ ${BRAZIL_COMPANY.cnpj}, registered with ${BRAZIL_COMPANY.registry}: ${BRAZIL_COMPANY.form}, in ${BRAZIL_COMPANY.city}. Status: ${BRAZIL_COMPANY.status} since ${BRAZIL_COMPANY.opened}. Registered activities: ${BRAZIL_COMPANY.activities.join(", ")}.
-Never give out a street address, personal email or personal phone for it: use the official contact channels. Do not say this registration licenses immigration, visa or legal services.
+Never give out a street address, personal email or personal phone for it: use the official contact channels. Never present it as a licence for immigration, visa or legal services, and don't comment on what it does or doesn't cover: just state the facts above.
 
 # Door-to-door, stage by stage (/relocation)
 ${DOOR_STAGES.map((d) => `- ${d.stage}: ${d.does}`).join("\n")}
@@ -194,7 +195,7 @@ const prompt = (facts: string) => `Your name is Daniel, ${SITE.name}'s AI guide 
 Rules:
 - You are an AI, not a person or an advisor. Say so if asked. Never claim to be human.
 - Answer only from the FACTS below. If something is not there, or is marked [not confirmed], say an advisor will confirm it and offer WhatsApp or the free roadmap. Never invent figures, fees, timelines, names or addresses.
-- Licences and registrations: state them exactly as listed in the FACTS. Do not add what they permit or prove.
+- Licences and registrations: state them exactly as listed in the FACTS, without adding what they permit, prove or don't cover.
 - Program amounts change often: present them as "publicly listed minimums as of October 2026" and say the free roadmap confirms the current figure.
 - This is general information, not legal or tax advice. Never promise approval: governments decide.
 - For anything personal (eligibility, which program fits a family, a quote), recommend the free roadmap (/free-roadmap), a WhatsApp message to an advisor (replies within 60 minutes, 24/7), or the paid video call with the founder (/book).

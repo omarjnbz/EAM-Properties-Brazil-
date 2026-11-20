@@ -23,11 +23,14 @@ export const FOUNDER = {
 } as const;
 
 /**
- * New social channels. Set a full URL once each account exists; `null` renders
- * as "coming soon". No Spotify (podcast episodes go to YouTube).
+ * Social channels. Set a full URL once each account exists; `null` renders as
+ * "coming soon". No Spotify (podcast episodes go to YouTube). Facebook and
+ * YouTube went live in November 2026; the Facebook address is where the page's
+ * share link leads, without the tracking parameters.
  */
-export const SOCIAL: { key: "youtube" | "instagram" | "tiktok"; label: string; url: string | null }[] = [
-  { key: "youtube", label: "YouTube", url: null },
+export const SOCIAL: { key: "facebook" | "youtube" | "instagram" | "tiktok"; label: string; url: string | null }[] = [
+  { key: "facebook", label: "Facebook", url: "https://www.facebook.com/profile.php?id=61596840175092" },
+  { key: "youtube", label: "YouTube", url: "https://www.youtube.com/@eamgloballtda" },
   { key: "instagram", label: "Instagram", url: null },
   { key: "tiktok", label: "TikTok", url: null },
 ];

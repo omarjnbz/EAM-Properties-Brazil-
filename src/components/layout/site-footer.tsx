@@ -2,7 +2,7 @@ import Image from "next/image";
 import { EnvelopeSimple } from "@phosphor-icons/react/dist/ssr/EnvelopeSimple";
 import { Phone } from "@phosphor-icons/react/dist/ssr/Phone";
 import { WhatsappLogo } from "@phosphor-icons/react/dist/ssr/WhatsappLogo";
-import logo from "@/assets/brand/eam-global-logo.png";
+import logo from "@/assets/brand/eam-global-logo.svg";
 import { buildFooter } from "@/content/nav";
 import { PODCAST_LIVE } from "@/content/podcast";
 import { SITE } from "@/content/site";
@@ -25,7 +25,7 @@ export async function SiteFooter() {
         <div className="container-site pb-8 pt-16 md:pt-20">
           <div className="grid gap-14 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <Image src={logo} alt="EAM Global" width={120} height={47} className="h-11 w-auto brightness-0 invert" />
+              <Image src={logo} alt="EAM Global" width={155} height={48} className="h-12 w-auto brightness-0 invert" />
               <p className="mt-6 max-w-sm text-[22px] font-medium leading-snug tracking-[-0.025em]">{f.blurb}</p>
               <p className="mt-4 text-[13.5px] leading-relaxed text-white/55">
                 <Rich text={f.facts} />

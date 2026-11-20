@@ -1,3 +1,4 @@
+import { FacebookLogo } from "@phosphor-icons/react/dist/ssr/FacebookLogo";
 import { InstagramLogo } from "@phosphor-icons/react/dist/ssr/InstagramLogo";
 import { TiktokLogo } from "@phosphor-icons/react/dist/ssr/TiktokLogo";
 import { YoutubeLogo } from "@phosphor-icons/react/dist/ssr/YoutubeLogo";
@@ -5,10 +6,10 @@ import { SOCIAL } from "@/content/site";
 import { getDictionary } from "@/i18n/server";
 import { cn } from "@/lib/cn";
 
-const ICONS = { youtube: YoutubeLogo, instagram: InstagramLogo, tiktok: TiktokLogo } as const;
+const ICONS = { facebook: FacebookLogo, youtube: YoutubeLogo, instagram: InstagramLogo, tiktok: TiktokLogo } as const;
 
 /**
- * YouTube, Instagram and TikTok. Accounts without a URL yet show as
+ * Facebook, YouTube, Instagram and TikTok. Accounts without a URL yet show as
  * "coming soon" instead of a dead link.
  */
 export async function SocialLinks({ tone = "light", className }: { tone?: "light" | "dark"; className?: string }) {

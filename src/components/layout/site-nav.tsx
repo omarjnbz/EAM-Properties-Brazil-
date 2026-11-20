@@ -7,7 +7,8 @@ import { ArrowUpRight } from "@phosphor-icons/react/dist/csr/ArrowUpRight";
 import { CaretDown } from "@phosphor-icons/react/dist/csr/CaretDown";
 import { WhatsappLogo } from "@phosphor-icons/react/dist/csr/WhatsappLogo";
 import { Phone } from "@phosphor-icons/react/dist/csr/Phone";
-import logo from "@/assets/brand/eam-global-logo.png";
+import logo from "@/assets/brand/eam-global-logo.svg";
+import mark from "@/assets/brand/eam-global-mark.svg";
 import type { NavItem } from "@/content/nav";
 import type { Dictionary } from "@/content/i18n";
 import { SITE } from "@/content/site";
@@ -137,7 +138,9 @@ export function SiteNav({ locale, nav, copy }: Props) {
             className={cn("me-1 flex shrink-0 items-center rounded-full transition-[background-color,padding] duration-500 ease-fluid", onImage ? "bg-white/95 px-3 py-1" : "px-0 py-0")}
             aria-label={copy.nav.homeAria}
           >
-            <Image src={logo} alt="EAM Global" width={104} height={41} loading="eager" className="h-8 w-auto md:h-9" />
+            {/* The full logo from 360px; the smallest phones get the mark alone so the menu button still fits. */}
+            <Image src={logo} alt="EAM Global" width={129} height={40} loading="eager" className="hidden h-8 w-auto min-[360px]:block md:h-10" />
+            <Image src={mark} alt="EAM Global" width={28} height={32} loading="eager" className="h-8 w-auto min-[360px]:hidden" />
           </AppLink>
 
           <ul className="hidden flex-1 items-center justify-center gap-0.5 xl:flex">
@@ -163,8 +166,8 @@ export function SiteNav({ locale, nav, copy }: Props) {
           </ul>
 
           <div className="ms-auto flex items-center gap-1.5 xl:ms-0">
-            {/* Phones narrower than 390px pick their language in the menu instead. */}
-            <LanguageMenu locale={locale} label={copy.language.label} note={copy.language.note} onImage={onImage} className="hidden min-[390px]:block" />
+            {/* Phones narrower than 414px pick their language in the menu instead (no room beside the logo). */}
+            <LanguageMenu locale={locale} label={copy.language.label} note={copy.language.note} onImage={onImage} className="hidden min-[414px]:block" />
             <a
               href={SITE.whatsappHref}
               target="_blank"

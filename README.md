@@ -36,7 +36,7 @@ for another port, and `CHROME_PATH=...` if Chrome is not in the default macOS lo
 | `/podcast` | YouTube episodes with click-to-play previews. Add episodes in `src/content/podcast.ts`. |
 | `/free-roadmap` | The personal roadmap form. `?destination=brazil` and `?goal=refused` preselect it. |
 
-Social accounts (YouTube, Instagram, TikTok) live in `SOCIAL` in `src/content/site.ts`; until a URL
+Social accounts (Facebook, YouTube, Instagram, TikTok) live in `SOCIAL` in `src/content/site.ts`; until a URL
 is set they show as "coming soon". Founder facts (years, arrival in Brazil) live in `FOUNDER` there too.
 
 The guide PDFs are printed from `/guides/<country>/print`, using the same facts as the country pages.

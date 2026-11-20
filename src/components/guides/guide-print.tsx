@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "@/assets/brand/eam-global-logo.png";
+import logo from "@/assets/brand/eam-global-logo.svg";
 import { GUIDES_PAGE, type Guide, type GuideSection } from "@/content/guides";
 import { FOUNDER, SITE } from "@/content/site";
 import { Rich } from "@/components/ui/rich";
@@ -40,7 +40,7 @@ export function GuidePrint({ guide }: { guide: Guide }) {
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/50 via-ink/20 to-ink/90" />
         <div className="flex items-center justify-between">
           <span className="rounded-full bg-white px-3 py-1.5">
-            <Image src={logo} alt="EAM Global" width={92} height={36} className="h-8 w-auto" />
+            <Image src={logo} alt="EAM Global" width={103} height={32} className="h-8 w-auto" />
           </span>
           <span className="rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium ring-1 ring-white/25">Free guide</span>
         </div>
