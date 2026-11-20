@@ -48,7 +48,7 @@ export async function VideoShowcase() {
             <SectionHeading eyebrow={t.eyebrow} title={t.title} intro={t.intro} />
 
             <Reveal delay={160} className="mt-8">
-              <div className="rounded-[24px] bg-white p-6 shadow-[0_1px_2px_rgba(11,27,47,0.05)] ring-1 ring-ink/[0.05] md:p-7">
+              <div className="rounded-[24px] bg-white p-6 shadow-[0_1px_2px_rgba(11,31,26,0.05)] ring-1 ring-ink/[0.05] md:p-7">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <div className="text-[20px] font-semibold tracking-[-0.025em]">

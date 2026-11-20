@@ -32,7 +32,7 @@ export default function PodcastPage() {
         ctas={false}
         aside={
           <div className="rounded-[28px] bg-ink p-7 text-white md:p-9">
-            <span className="grid size-14 place-items-center rounded-full bg-white/10 text-[#8fc24a]">
+            <span className="grid size-14 place-items-center rounded-full bg-white/10 text-[#6fd6b0]">
               <Microphone weight="fill" className="size-7" aria-hidden />
             </span>
             <div className="mt-8 text-[13px] font-medium text-white/60">The EAM Global podcast</div>

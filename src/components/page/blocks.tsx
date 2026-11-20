@@ -35,7 +35,7 @@ export function NumberedSteps({ steps, tone = "paper" }: { steps: readonly { tit
           <div
             className={cn(
               "flex h-full gap-5 rounded-[1.6rem] p-6 ring-1 md:p-7",
-              tone === "ink" ? "bg-white/[0.04] ring-white/10" : "bg-[#fbf9f4] shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_24px_48px_-38px_rgba(11,27,47,0.35)] ring-ink/[0.06]",
+              tone === "ink" ? "bg-white/[0.04] ring-white/10" : "bg-[#fbf9f4] shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_24px_48px_-38px_rgba(11,31,26,0.35)] ring-ink/[0.06]",
             )}
           >
             <span className={cn("font-display text-[2.4rem] leading-none", tone === "ink" ? "text-sun" : "text-leaf-deep")}>{String(i + 1).padStart(2, "0")}</span>

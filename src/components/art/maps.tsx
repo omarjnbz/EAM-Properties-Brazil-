@@ -65,7 +65,7 @@ export function WorldRoutes({ className, tone = "paper", labels = true }: { clas
     { key: "asuncion", label: "Asunción" },
     { key: "belgrade", label: "Belgrade" },
   ] as const;
-  const stroke = tone === "ink" ? "#e7b53c" : "#0e569e";
+  const stroke = tone === "ink" ? "#e7b53c" : "#055f4c";
   const light = tone === "ink";
 
   return (
@@ -183,7 +183,7 @@ const TONE_BG: Record<ArtTone, string> = {
 export function CountryArt({ shape, tone, className }: { shape: ShapeKey; tone: ArtTone; className?: string }) {
   return (
     <div className={cn("relative overflow-hidden", className)} style={{ background: TONE_BG[tone] }} aria-hidden>
-      <div className="absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(11,27,47,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(11,27,47,0.06)_1px,transparent_1px)] [background-size:22px_22px]" />
+      <div className="absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(11,31,26,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(11,31,26,0.06)_1px,transparent_1px)] [background-size:22px_22px]" />
       <img src={`/art/country-${shape}-${tone}.svg`} alt="" loading="lazy" decoding="async" className="absolute inset-0 size-full object-contain p-3" />
     </div>
   );

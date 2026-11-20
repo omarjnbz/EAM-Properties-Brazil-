@@ -19,7 +19,7 @@ export async function Hero() {
         </div>
       </div>
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/55 via-ink/10 to-ink/85" />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-3/4 bg-[radial-gradient(ellipse_60%_55%_at_50%_75%,rgba(11,27,47,0.45),transparent)]" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-3/4 bg-[radial-gradient(ellipse_60%_55%_at_50%_75%,rgba(11,31,26,0.45),transparent)]" />
 
       <div className="container-site flex flex-col items-center pb-10 pt-36 text-center md:pb-12" data-hero-fade suppressHydrationWarning>
         <div className="load-blur" style={d(60)}>

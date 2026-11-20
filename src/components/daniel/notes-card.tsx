@@ -65,7 +65,7 @@ export function NotesCard({
 
   return (
     <form
-      className="daniel-rise rounded-2xl bg-surface p-4 shadow-[0_1px_2px_rgba(11,27,47,0.05),0_10px_24px_-16px_rgba(11,27,47,0.3)] ring-1 ring-navy/15"
+      className="daniel-rise rounded-2xl bg-surface p-4 shadow-[0_1px_2px_rgba(11,31,26,0.05),0_10px_24px_-16px_rgba(11,31,26,0.3)] ring-1 ring-navy/15"
       onSubmit={(e) => {
         e.preventDefault();
         onSend();

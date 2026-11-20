@@ -183,7 +183,7 @@ export function RoadmapForm({ variant = "compact", className, copy, destinations
         <button
           type="submit"
           disabled={status === "sending"}
-          className="group inline-flex h-12 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-leaf px-6 text-[15px] font-medium text-white shadow-[0_8px_20px_-10px_rgba(62,105,11,0.7)] transition-[transform,background-color,opacity] duration-300 ease-fluid hover:bg-leaf-deep active:scale-[0.97] disabled:opacity-60"
+          className="group inline-flex h-12 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-leaf px-6 text-[15px] font-medium text-white shadow-[0_8px_20px_-10px_rgba(3,107,81,0.7)] transition-[transform,background-color,opacity] duration-300 ease-fluid hover:bg-leaf-deep active:scale-[0.97] disabled:opacity-60"
         >
           {status === "sending" ? copy.sending : copy.submit}
           <ArrowUpRight weight="bold" className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" aria-hidden />

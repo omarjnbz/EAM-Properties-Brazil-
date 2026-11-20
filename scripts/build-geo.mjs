@@ -124,7 +124,7 @@ for (let row = 0, y = STEP / 2; y < H; row++, y += STEP * 0.866) {
 mkdirSync(new URL("../public/art/", import.meta.url), { recursive: true });
 writeFileSync(
   new URL("../public/art/world-dots.svg", import.meta.url),
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" fill="none"><path d="${dots}" stroke="#0B1B2F" stroke-width="3.6" stroke-linecap="round"/></svg>\n`,
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" fill="none"><path d="${dots}" stroke="#0b1f1a" stroke-width="3.6" stroke-linecap="round"/></svg>\n`,
 );
 
 const worldPoints = Object.fromEntries(
@@ -243,7 +243,7 @@ writeFileSync(
 );
 writeFileSync(
   new URL("../public/art/south-america-light.svg", import.meta.url),
-  saSvg({ land: "#E9E1D2", landStroke: "#D8CCB6", brazilFill: "#F5F0E6", brazilStroke: "#578A10", dot: "#0E569E", dotOpacity: 0.55 }),
+  saSvg({ land: "#E9E1D2", landStroke: "#D8CCB6", brazilFill: "#F5F0E6", brazilStroke: "#578A10", dot: "#055f4c", dotOpacity: 0.55 }),
 );
 writeFileSync(
   new URL("../public/art/world-dots-light.svg", import.meta.url),
@@ -275,9 +275,9 @@ for (const [key, tone] of ART_COMBOS) {
   const [, , vw, vh] = sh.viewBox.split(" ").map(Number);
   const r = Math.max(vw, vh) / 70;
   const pin = sh.pin
-    ? `<circle cx="${sh.pin[0]}" cy="${sh.pin[1]}" r="${(r * 2.4).toFixed(1)}" fill="#0b1b2f" fill-opacity="0.14"/>` +
+    ? `<circle cx="${sh.pin[0]}" cy="${sh.pin[1]}" r="${(r * 2.4).toFixed(1)}" fill="#0b1f1a" fill-opacity="0.14"/>` +
       `<circle cx="${sh.pin[0]}" cy="${sh.pin[1]}" r="${(r + 2).toFixed(1)}" fill="#fbf9f4"/>` +
-      `<circle cx="${sh.pin[0]}" cy="${sh.pin[1]}" r="${r.toFixed(1)}" fill="#0b1b2f"/>`
+      `<circle cx="${sh.pin[0]}" cy="${sh.pin[1]}" r="${r.toFixed(1)}" fill="#0b1f1a"/>`
     : "";
   writeFileSync(
     new URL(`../public/art/country-${key}-${tone}.svg`, import.meta.url),

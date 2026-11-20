@@ -23,7 +23,7 @@ export default function HowItWorksPage() {
           <ol className="grid gap-4 lg:grid-cols-5">
             {HOW.steps.map((s, i) => (
               <Reveal as="li" key={s.step} delay={i * 90}>
-                <div className="relative flex h-full flex-col rounded-[1.8rem] bg-[#fbf9f4] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_24px_48px_-38px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.06]">
+                <div className="relative flex h-full flex-col rounded-[1.8rem] bg-[#fbf9f4] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_24px_48px_-38px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.06]">
                   <span className="font-display text-[3.4rem] leading-none text-leaf-deep">{i + 1}</span>
                   <h2 className="mt-6 font-display text-[1.5rem] leading-tight">{s.step}</h2>
                   <p className="mt-3 text-[14.5px] leading-relaxed text-ink-3">{s.what}</p>

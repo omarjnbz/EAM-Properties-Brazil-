@@ -129,7 +129,7 @@ export function SiteNav({ locale, nav, copy }: Props) {
           className={cn(
             "relative z-[2] mx-auto flex items-center gap-2 rounded-full transition-[max-width,background-color,box-shadow,padding] duration-500 ease-fluid",
             condensed
-              ? "max-w-[1100px] xl:min-w-fit bg-white/92 py-1.5 ps-4 pe-1.5 shadow-[0_1px_2px_rgba(11,27,47,0.06),0_18px_40px_-20px_rgba(11,27,47,0.28)] ring-1 ring-ink/[0.06] backdrop-blur-xl"
+              ? "max-w-[1100px] xl:min-w-fit bg-white/92 py-1.5 ps-4 pe-1.5 shadow-[0_1px_2px_rgba(11,31,26,0.06),0_18px_40px_-20px_rgba(11,31,26,0.28)] ring-1 ring-ink/[0.06] backdrop-blur-xl"
               : "max-w-[1240px] bg-transparent py-2 ps-2 pe-2 md:ps-4",
           )}
         >
@@ -185,7 +185,7 @@ export function SiteNav({ locale, nav, copy }: Props) {
             </a>
             <AppLink
               href="/free-roadmap"
-              className="inline-flex h-10 items-center whitespace-nowrap rounded-full bg-leaf px-4 text-[14px] font-medium text-white shadow-[0_8px_20px_-10px_rgba(62,105,11,0.7)] transition-[background-color,transform] duration-300 hover:bg-leaf-deep active:scale-[0.97]"
+              className="inline-flex h-10 items-center whitespace-nowrap rounded-full bg-leaf px-4 text-[14px] font-medium text-white shadow-[0_8px_20px_-10px_rgba(3,107,81,0.7)] transition-[background-color,transform] duration-300 hover:bg-leaf-deep active:scale-[0.97]"
             >
               {copy.common.freeRoadmap}
             </AppLink>
@@ -228,7 +228,7 @@ function MenuPanel({ item, note, open, onEnter }: { item: NavItem; note: string;
     >
       <div
         className={cn(
-          "rounded-[24px] bg-white p-6 shadow-[0_1px_2px_rgba(11,27,47,0.06),0_30px_70px_-30px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.06] transition-[opacity,transform,filter] duration-500 ease-fluid",
+          "rounded-[24px] bg-white p-6 shadow-[0_1px_2px_rgba(11,31,26,0.06),0_30px_70px_-30px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.06] transition-[opacity,transform,filter] duration-500 ease-fluid",
           open ? "translate-y-0 opacity-100 blur-0" : "-translate-y-1.5 opacity-0 blur-[2px]",
         )}
       >
@@ -317,7 +317,7 @@ function MobileMenu({ nav, copy, locale, open, onClose }: { nav: NavItem[]; copy
                 </summary>
                 <div className="flex flex-col gap-1 pb-5">
                   {item.pinned?.map((p) => (
-                    <AppLink key={p.href} href={p.href} onClick={onClose} className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-[15px] font-medium shadow-[0_1px_2px_rgba(11,27,47,0.06)]">
+                    <AppLink key={p.href} href={p.href} onClick={onClose} className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-[15px] font-medium shadow-[0_1px_2px_rgba(11,31,26,0.06)]">
                       {p.label}
                       {p.badge && <span className="text-[11px] font-medium text-leaf-deep">{p.badge}</span>}
                     </AppLink>

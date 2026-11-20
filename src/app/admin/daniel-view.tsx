@@ -1,6 +1,7 @@
 import { CARDS_GUIDE, SYSTEM_PROMPT } from "@/lib/chat/knowledge";
 import { chatProviders } from "@/lib/chat/providers";
 import { cn } from "@/lib/cn";
+import { isIndexable } from "@/lib/indexing";
 import { Card, PageIntro, whole } from "./ui";
 
 /** Who answers (OpenAI only), which keys are set, and Daniel's full instructions. */
@@ -15,7 +16,7 @@ export function DanielView() {
       !hook ? "not set: in production, leads are refused and visitors go to WhatsApp" : !process.env.LEADS_WEBHOOK_SECRET ? "set, but LEADS_WEBHOOK_SECRET is missing" : "leads reach the Sheet and the team's email",
     ],
     ["OpenAI admin key", !!process.env.OPENAI_ADMIN_KEY, "AI costs in this admin"],
-    ["Search engines", process.env.SITE_INDEXABLE === "true", "SITE_INDEXABLE: off until launch"],
+    ["Search engines", isIndexable(), "Google can find the live site (off on previews, or with SITE_INDEXABLE=false)"],
   ];
   // What the chat sends with every question: the instructions plus the card guide.
   const prompt = `${SYSTEM_PROMPT}\n\n${CARDS_GUIDE}`;

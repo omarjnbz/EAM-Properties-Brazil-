@@ -28,7 +28,7 @@ export async function StartSection() {
 
         <div className="mt-12 grid gap-4 md:mt-16 lg:grid-cols-12">
           <Reveal variant="scale" className="lg:col-span-7">
-            <div className="h-full rounded-[28px] bg-white shadow-[0_1px_2px_rgba(11,27,47,0.05),0_30px_70px_-40px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.05]">
+            <div className="h-full rounded-[28px] bg-white shadow-[0_1px_2px_rgba(11,31,26,0.05),0_30px_70px_-40px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.05]">
               <div className="flex items-center gap-3 border-b border-line px-6 py-5 sm:px-8 md:px-10">
                 <span className="grid size-8 place-items-center rounded-full bg-ink text-[13px] font-semibold text-white">1</span>
                 <div>
@@ -83,7 +83,7 @@ export async function StartSection() {
         <Reveal delay={120} className="mt-4">
           <AppLink
             href="/book"
-            className="group flex flex-col gap-4 rounded-[24px] bg-white px-6 py-5 shadow-[0_1px_2px_rgba(11,27,47,0.05),0_20px_50px_-36px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.05] transition-shadow duration-300 hover:ring-ink/15 sm:flex-row sm:items-center sm:px-8 md:px-10"
+            className="group flex flex-col gap-4 rounded-[24px] bg-white px-6 py-5 shadow-[0_1px_2px_rgba(11,31,26,0.05),0_20px_50px_-36px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.05] transition-shadow duration-300 hover:ring-ink/15 sm:flex-row sm:items-center sm:px-8 md:px-10"
           >
             <span className="flex items-center gap-3">
               <span className="grid size-8 shrink-0 place-items-center rounded-full bg-navy text-[13px] font-semibold text-white">3</span>

@@ -13,7 +13,7 @@ export function RoadmapDoc({ className, compact = false }: { className?: string;
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-[1.25rem] bg-[#fbf9f4] p-5 text-ink shadow-[0_40px_70px_-42px_rgba(11,27,47,0.5)] ring-1 ring-ink/[0.07] sm:p-6",
+        "relative overflow-hidden rounded-[1.25rem] bg-[#fbf9f4] p-5 text-ink shadow-[0_40px_70px_-42px_rgba(11,31,26,0.5)] ring-1 ring-ink/[0.07] sm:p-6",
         className,
       )}
     >
@@ -58,8 +58,8 @@ export function ChatCard({ className, dark = false }: { className?: string; dark
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-[1.25rem] p-4 shadow-[0_30px_60px_-36px_rgba(11,27,47,0.5)] ring-1",
-        dark ? "bg-[#0f2540] text-paper ring-white/10" : "bg-[#fbf9f4] text-ink ring-ink/[0.07]",
+        "relative overflow-hidden rounded-[1.25rem] p-4 shadow-[0_30px_60px_-36px_rgba(11,31,26,0.5)] ring-1",
+        dark ? "bg-[#0c2a22] text-paper ring-white/10" : "bg-[#fbf9f4] text-ink ring-ink/[0.07]",
         className,
       )}
     >
@@ -101,7 +101,7 @@ export function GuaranteeReceipt({ className, id = "receipt" }: { className?: st
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-[1.25rem] bg-[#fbf9f4] p-5 pb-16 text-ink shadow-[0_30px_60px_-36px_rgba(11,27,47,0.5)] ring-1 ring-ink/[0.07]",
+        "relative overflow-hidden rounded-[1.25rem] bg-[#fbf9f4] p-5 pb-16 text-ink shadow-[0_30px_60px_-36px_rgba(11,31,26,0.5)] ring-1 ring-ink/[0.07]",
         className,
       )}
     >

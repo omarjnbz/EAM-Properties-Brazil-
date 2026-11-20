@@ -53,7 +53,7 @@ export function AskInput({
         }}
         ref={formRef}
         className={cn(
-          "relative flex items-center gap-2 rounded-full bg-white ps-5 pe-1.5 shadow-[0_1px_2px_rgba(11,27,47,0.06),0_14px_34px_-20px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.08] transition-shadow focus-within:ring-navy/35",
+          "relative flex items-center gap-2 rounded-full bg-white ps-5 pe-1.5 shadow-[0_1px_2px_rgba(11,31,26,0.06),0_14px_34px_-20px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.08] transition-shadow focus-within:ring-navy/35",
           size === "lg" ? "h-14" : "h-12",
         )}
       >

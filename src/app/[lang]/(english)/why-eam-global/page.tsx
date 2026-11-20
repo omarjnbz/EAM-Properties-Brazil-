@@ -93,7 +93,7 @@ export default function WhyPage() {
               const Icon = PILLAR_ICONS[p.key];
               return (
                 <Reveal as="li" key={p.key} delay={(i % 4) * 70} className={cn(i === 6 && "sm:col-span-2 lg:col-span-1")}>
-                  <a href={ANCHORS[p.key]} className="group flex h-full flex-col rounded-[1.6rem] bg-[#fbf9f4] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_24px_48px_-38px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.06] transition-transform duration-700 ease-fluid hover:-translate-y-1">
+                  <a href={ANCHORS[p.key]} className="group flex h-full flex-col rounded-[1.6rem] bg-[#fbf9f4] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_24px_48px_-38px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.06] transition-transform duration-700 ease-fluid hover:-translate-y-1">
                     <span className="flex items-center justify-between">
                       <span className="grid size-11 place-items-center rounded-full bg-paper-2 text-ink">
                         <Icon weight="light" className="size-5" aria-hidden />

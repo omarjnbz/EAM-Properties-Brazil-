@@ -195,7 +195,7 @@ export function ChatLauncher({ copy }: { copy: Dictionary["chat"] }) {
         title={hint}
         data-shown={shown ? "" : undefined}
         className={cn(
-          "daniel-fab group fixed bottom-[max(1rem,env(safe-area-inset-bottom))] end-4 z-30 inline-flex touch-manipulation select-none items-center gap-2.5 rounded-full bg-ink py-1.5 ps-1.5 pe-4 text-[14.5px] font-medium text-white shadow-[0_18px_40px_-14px_rgba(11,27,47,0.6)] ring-1 ring-white/10 active:scale-[0.97] md:bottom-6 md:end-6 md:text-[14px]",
+          "daniel-fab group fixed bottom-[max(1rem,env(safe-area-inset-bottom))] end-4 z-30 inline-flex touch-manipulation select-none items-center gap-2.5 rounded-full bg-ink py-1.5 ps-1.5 pe-4 text-[14.5px] font-medium text-white shadow-[0_18px_40px_-14px_rgba(11,31,26,0.6)] ring-1 ring-white/10 active:scale-[0.97] md:bottom-6 md:end-6 md:text-[14px]",
           open && "max-md:pointer-events-none max-md:opacity-0",
         )}
       >

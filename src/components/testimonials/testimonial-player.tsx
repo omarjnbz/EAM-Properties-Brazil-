@@ -41,7 +41,7 @@ export function TestimonialPlayer({ video, label, className, sizes = "(min-width
   }, [playing]);
 
   return (
-    <div className={cn("relative aspect-[9/16] overflow-hidden rounded-[28px] bg-ink shadow-[0_40px_80px_-40px_rgba(11,27,47,0.6)]", className)}>
+    <div className={cn("relative aspect-[9/16] overflow-hidden rounded-[28px] bg-ink shadow-[0_40px_80px_-40px_rgba(11,31,26,0.6)]", className)}>
       {playing ? (
         <video
           ref={fullRef}

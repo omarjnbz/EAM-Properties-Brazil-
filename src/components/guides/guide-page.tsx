@@ -67,7 +67,7 @@ export function GuidePage({ guide }: { guide: Guide }) {
 
           <div className="lg:col-span-7">
             <Reveal variant="scale" className="lg:sticky lg:top-28">
-              <div className="rounded-[28px] bg-white shadow-[0_1px_2px_rgba(11,27,47,0.05),0_30px_70px_-40px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.05]">
+              <div className="rounded-[28px] bg-white shadow-[0_1px_2px_rgba(11,31,26,0.05),0_30px_70px_-40px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.05]">
                 <div className="border-b border-line px-6 pb-5 pt-7 sm:px-8 md:px-9">
                   <h2 className="text-[1.6rem] font-medium leading-tight tracking-[-0.03em]">Get your free {guide.country} guide</h2>
                   <p className="mt-1.5 text-[14.5px] text-ink-3">Leave your details and the PDF downloads straight away.</p>

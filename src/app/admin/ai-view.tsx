@@ -42,7 +42,7 @@ export async function AiView() {
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-12">
         <div className="admin-rise rounded-[28px] bg-ink/[0.025] p-1.5 ring-1 ring-ink/[0.04] md:col-span-7" style={{ "--d": 60 } as React.CSSProperties}>
-          <div className="flex h-full flex-col justify-between gap-8 rounded-[22px] bg-ink p-6 text-white shadow-[0_22px_50px_-30px_rgba(11,27,47,0.6)] sm:p-7">
+          <div className="flex h-full flex-col justify-between gap-8 rounded-[22px] bg-ink p-6 text-white shadow-[0_22px_50px_-30px_rgba(11,31,26,0.6)] sm:p-7">
             <p className="text-[14px] text-white/60">Spent in the last 30 days</p>
             <div>
               <p className="text-[clamp(3rem,7vw,4.4rem)] font-medium leading-none tracking-[-0.045em] tabular-nums">{usd(t.cost)}</p>
@@ -182,7 +182,7 @@ function CostChart({ days }: { days: Usage["days"] }) {
             return (
               <li key={d.day} tabIndex={0} aria-label={`${shortDay(d.day)}: ${usd(d.cost)}, ${d.requests} replies`} className="group relative flex h-full flex-1 items-end outline-none">
                 <span className="block w-full rounded-t-[4px] bg-navy transition-colors duration-200 group-hover:bg-navy-deep group-focus-visible:bg-navy-deep" style={{ height: `${h}%` }} />
-                <span className="pointer-events-none absolute bottom-full start-1/2 z-10 mb-1.5 hidden w-max -translate-x-1/2 rounded-xl bg-ink px-2.5 py-1.5 text-[12px] leading-snug text-white shadow-[0_12px_30px_-12px_rgba(11,27,47,0.6)] group-hover:block group-focus-visible:block">
+                <span className="pointer-events-none absolute bottom-full start-1/2 z-10 mb-1.5 hidden w-max -translate-x-1/2 rounded-xl bg-ink px-2.5 py-1.5 text-[12px] leading-snug text-white shadow-[0_12px_30px_-12px_rgba(11,31,26,0.6)] group-hover:block group-focus-visible:block">
                   <span className="block font-medium">{shortDay(d.day)}</span>
                   {usd(d.cost)} · {whole.format(d.requests)} replies
                 </span>

@@ -30,7 +30,7 @@ export function Eyebrow({
     <span
       className={cn(
         "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[12.5px] font-medium leading-none tracking-[-0.005em]",
-        tone === "paper" && "bg-white text-ink-2 shadow-[0_1px_2px_rgba(11,27,47,0.06)] ring-1 ring-ink/[0.06]",
+        tone === "paper" && "bg-white text-ink-2 shadow-[0_1px_2px_rgba(11,31,26,0.06)] ring-1 ring-ink/[0.06]",
         tone === "ink" && "bg-white/[0.08] text-white/85 ring-1 ring-white/15",
         tone === "glass" && "bg-white/15 text-white ring-1 ring-white/25 backdrop-blur-md",
         className,
@@ -71,9 +71,9 @@ export function Badge({ children, tone = "leaf", className }: { children: React.
 type ButtonVariant = "leaf" | "ink" | "paper" | "ghost" | "ghost-light" | "glass";
 
 const VARIANTS: Record<ButtonVariant, string> = {
-  leaf: "bg-leaf text-white hover:bg-leaf-deep shadow-[0_8px_20px_-10px_rgba(62,105,11,0.7)]",
+  leaf: "bg-leaf text-white hover:bg-leaf-deep shadow-[0_8px_20px_-10px_rgba(3,107,81,0.7)]",
   ink: "bg-ink text-white hover:bg-ink-2",
-  paper: "bg-white text-ink hover:bg-white/85 shadow-[0_1px_2px_rgba(11,27,47,0.08)]",
+  paper: "bg-white text-ink hover:bg-white/85 shadow-[0_1px_2px_rgba(11,31,26,0.08)]",
   ghost: "bg-white text-ink ring-1 ring-ink/10 hover:ring-ink/25",
   "ghost-light": "bg-white/10 text-white ring-1 ring-white/25 hover:bg-white/20",
   glass: "bg-white/15 text-white ring-1 ring-white/25 backdrop-blur-md hover:bg-white/25",
@@ -148,7 +148,7 @@ export function Bezel({
       <div
         className={cn(
           "relative h-full overflow-hidden rounded-[24px]",
-          !dark && "bg-white shadow-[0_1px_2px_rgba(11,27,47,0.04),0_16px_40px_-24px_rgba(11,27,47,0.18)]",
+          !dark && "bg-white shadow-[0_1px_2px_rgba(11,31,26,0.04),0_16px_40px_-24px_rgba(11,31,26,0.18)]",
           tone === "ink" && "bg-ink text-white",
           tone === "ink-soft" && "bg-white/[0.05] text-white ring-1 ring-white/10",
           tone === "leaf" && "bg-leaf-deep text-white",
@@ -184,7 +184,7 @@ export function Section({
         tone === "paper" && "bg-canvas text-ink",
         tone === "paper-2" && "bg-paper-2 text-ink",
         tone === "ink" && "bg-ink text-white",
-        tone === "navy" && "bg-[#0a223d] text-white",
+        tone === "navy" && "bg-[#072a22] text-white",
         className,
       )}
     >

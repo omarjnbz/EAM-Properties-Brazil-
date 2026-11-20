@@ -25,7 +25,7 @@ export function BoardingPass({
   return (
     <div
       className={cn(
-        "@container relative flex overflow-hidden rounded-[1.4rem] bg-[#fbf9f4] text-ink shadow-[0_40px_70px_-40px_rgba(11,27,47,0.55),0_2px_0_rgba(255,255,255,0.9)_inset] ring-1 ring-ink/[0.07]",
+        "@container relative flex overflow-hidden rounded-[1.4rem] bg-[#fbf9f4] text-ink shadow-[0_40px_70px_-40px_rgba(11,31,26,0.55),0_2px_0_rgba(255,255,255,0.9)_inset] ring-1 ring-ink/[0.07]",
         className,
       )}
       style={{

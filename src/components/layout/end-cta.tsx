@@ -17,7 +17,7 @@ export async function EndCta() {
         <div className="absolute inset-x-0 -top-[12%] -z-10 h-[124%]" data-parallax="8" suppressHydrationWarning>
           <Image src={sugarloaf} alt="" fill placeholder="blur" sizes="100vw" className="object-cover object-[50%_62%]" />
         </div>
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(11,27,47,0.35),rgba(11,27,47,0.75))]" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(11,31,26,0.35),rgba(11,31,26,0.75))]" />
 
         <div className="flex max-w-3xl flex-col items-center gap-6">
           <Reveal>

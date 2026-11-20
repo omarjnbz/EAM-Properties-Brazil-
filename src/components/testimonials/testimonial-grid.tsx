@@ -11,11 +11,11 @@ import { Rich, plain } from "@/components/ui/rich";
 import { useLiteNetwork } from "@/components/ui/app-link";
 
 const TONES: Record<Testimonial["tone"], string> = {
-  navy: "from-[#0e569e] via-[#0a3b70] to-[#0b1b2f]",
+  navy: "from-[#055f4c] via-[#054d3c] to-[#0b1f1a]",
   leaf: "from-[#6c9a2a] via-[#3b5f0a] to-[#16260a]",
   sun: "from-[#e7b53c] via-[#b98a1e] to-[#4a3608]",
   clay: "from-[#c97a52] via-[#8d4b2c] to-[#2e170c]",
-  ink: "from-[#33465f] via-[#1d2f45] to-[#0b1b2f]",
+  ink: "from-[#34463f] via-[#1d2f29] to-[#0b1f1a]",
   lagoon: "from-[#4f9f8f] via-[#2b6c60] to-[#0e2a25]",
 };
 

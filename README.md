@@ -81,7 +81,7 @@ Environment variables (**Settings → Environment Variables**, see `.env.example
 | --- | --- |
 | `LEADS_WEBHOOK_URL`, `LEADS_WEBHOOK_SECRET` | Form leads. Required: without them production forms send visitors to WhatsApp. See "Website leads". |
 | `OPENAI_API_KEY` (+ optional `OPENAI_MODEL`, `OPENAI_REASONING`) | Daniel, the AI chat. Without the key Daniel is hidden. |
-| `SITE_INDEXABLE=true` | Lets Google index the site. Set only once no `{{placeholder}}` is left. |
+| `SITE_INDEXABLE` | Not needed: the live site is open to Google and previews are not. Set `false` to hide the live site from search engines. |
 | `NEXT_PUBLIC_SITE_URL` | Only when the site moves domain. Defaults to https://www.eam-global.lat. |
 | `ADMIN_PASSWORD` | The admin panel at `/admin` (at least 10 characters). Without it the panel stays locked. See "Admin panel". |
 | `OPENAI_ADMIN_KEY` | AI usage and cost in the admin panel (an OpenAI **admin** key, read-only use). Mark it *Sensitive*. |

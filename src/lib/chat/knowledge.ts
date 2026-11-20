@@ -100,7 +100,7 @@ const FACTS = `
 # Company
 ${SITE.name} (${SITE.descriptor}), migration and document-clearing firm headquartered in Dubai. ${clean(SITE.walkIn)}.
 Contact: WhatsApp ${SITE.whatsappDisplay} (fastest), phone ${SITE.phoneDisplay}, email ${SITE.email}, contact page /contact.
-Social media: ${SOCIAL.filter((s) => s.url).map((s) => `${s.label} ${s.url}`).join(", ")}; ${SOCIAL.filter((s) => !s.url).map((s) => s.label).join(" and ")} coming soon.
+Social media: ${SOCIAL.filter((s) => s.url).map((s) => `${s.label} ${s.url}`).join(", ")}${SOCIAL.some((s) => !s.url) ? `; ${SOCIAL.filter((s) => !s.url).map((s) => s.label).join(" and ")} coming soon` : ""}.
 Offices and teams: ${PRESENCE.map((p) => clean(`${p.city}, ${p.country} (${p.type})`)).join("; ")}.
 Founder: ${clean(WHY.founder.bio)}
 Licensing (same as the site footer): ${clean(en.footer.badges.filter((b) => /licen|regist/i.test(b)).join("; "))}. Brazilian company number (CNPJ): ${SITE.cnpj}.

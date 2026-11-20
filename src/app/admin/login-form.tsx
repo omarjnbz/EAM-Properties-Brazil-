@@ -9,9 +9,9 @@ export function LoginForm({ configured, next }: { configured: boolean; next: str
   const [state, action, pending] = useActionState<LoginState, FormData>(login, null);
   return (
     <main className="relative grid min-h-dvh place-items-center overflow-hidden px-4">
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_0%,rgba(127,180,234,0.22),transparent)]" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_0%,rgba(111,214,176,0.22),transparent)]" />
       <div className="admin-rise relative w-full max-w-[400px] rounded-[30px] bg-ink/[0.025] p-1.5 ring-1 ring-ink/[0.04]">
-        <form action={action} className="rounded-[24px] bg-white p-6 shadow-[0_1px_2px_rgba(11,27,47,0.04),0_30px_70px_-40px_rgba(11,27,47,0.35)] sm:p-8">
+        <form action={action} className="rounded-[24px] bg-white p-6 shadow-[0_1px_2px_rgba(11,31,26,0.04),0_30px_70px_-40px_rgba(11,31,26,0.35)] sm:p-8">
           <input type="hidden" name="next" value={next} />
           <span className="grid size-11 place-items-center rounded-full bg-paper text-ink-2">
             <LockSimple weight="light" className="size-5" aria-hidden />

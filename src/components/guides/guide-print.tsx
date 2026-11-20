@@ -17,8 +17,8 @@ export function GuidePrint({ guide }: { guide: Guide }) {
     @page {
       size: A4;
       margin: 16mm 16mm 18mm;
-      @bottom-left { content: "${running}"; font-family: "Instrument Sans", sans-serif; font-size: 7.5pt; color: #5f6a7b; }
-      @bottom-right { content: counter(page); font-family: "Instrument Sans", sans-serif; font-size: 7.5pt; color: #5f6a7b; }
+      @bottom-left { content: "${running}"; font-family: "Instrument Sans", sans-serif; font-size: 7.5pt; color: #5b6b66; }
+      @bottom-right { content: counter(page); font-family: "Instrument Sans", sans-serif; font-size: 7.5pt; color: #5b6b66; }
     }
     @page :first { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
     html, body { background: #fff !important; }
@@ -86,7 +86,7 @@ export function GuidePrint({ guide }: { guide: Guide }) {
 
         {/* How we help */}
         <section className="guide-keep mt-12 rounded-[18px] bg-ink p-7 text-white">
-          <div className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#8fc24a]">{String(guide.sections.length + 1).padStart(2, "0")}</div>
+          <div className="text-[11px] font-medium uppercase tracking-[0.08em] text-[#6fd6b0]">{String(guide.sections.length + 1).padStart(2, "0")}</div>
           <h2 className="mt-1 text-[26px] font-medium leading-tight tracking-[-0.035em]">How EAM Global helps</h2>
           <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-[12.5px] leading-snug text-white/85">
             {[
@@ -98,7 +98,7 @@ export function GuidePrint({ guide }: { guide: Guide }) {
               "One fixed fee, agreed in writing before you pay",
             ].map((t) => (
               <li key={t} className="flex gap-2">
-                <span className="mt-[5px] size-1.5 shrink-0 rounded-full bg-[#8fc24a]" aria-hidden />
+                <span className="mt-[5px] size-1.5 shrink-0 rounded-full bg-[#6fd6b0]" aria-hidden />
                 {t}
               </li>
             ))}

@@ -18,11 +18,11 @@ export async function DanielBand() {
   return (
     <section aria-label={chat.dialogLabel} data-daniel-anchor className="bg-canvas pt-10 md:pt-14">
       <Container>
-        <Reveal className="relative overflow-hidden rounded-[28px] bg-white p-4 shadow-[0_1px_2px_rgba(11,27,47,0.05),0_24px_60px_-40px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.05] sm:p-8 lg:p-10">
+        <Reveal className="relative overflow-hidden rounded-[28px] bg-white p-4 shadow-[0_1px_2px_rgba(11,31,26,0.05),0_24px_60px_-40px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.05] sm:p-8 lg:p-10">
           <div
             aria-hidden
             data-decor
-            className="pointer-events-none absolute -top-24 end-[-10%] size-[26rem] rounded-full bg-[radial-gradient(closest-side,rgba(127,180,234,0.22),transparent)]"
+            className="pointer-events-none absolute -top-24 end-[-10%] size-[26rem] rounded-full bg-[radial-gradient(closest-side,rgba(111,214,176,0.22),transparent)]"
           />
           <div className="relative grid items-center gap-5 sm:gap-8 lg:grid-cols-12 lg:gap-12">
             <div className="flex flex-col gap-3 px-2 pt-2 sm:gap-4 sm:px-0 sm:pt-0 lg:col-span-5">

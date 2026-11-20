@@ -15,7 +15,7 @@ export function Card({ children, className, inner, delay = 0 }: { children: Reac
     <div className={cn("admin-rise rounded-[28px] bg-ink/[0.025] p-1.5 ring-1 ring-ink/[0.04]", className)} style={{ "--d": delay } as React.CSSProperties}>
       <div
         className={cn(
-          "h-full rounded-[22px] bg-white p-5 shadow-[0_1px_2px_rgba(11,27,47,0.04),0_22px_50px_-34px_rgba(11,27,47,0.28)] sm:p-6",
+          "h-full rounded-[22px] bg-white p-5 shadow-[0_1px_2px_rgba(11,31,26,0.04),0_22px_50px_-34px_rgba(11,31,26,0.28)] sm:p-6",
           inner,
         )}
       >
@@ -62,8 +62,8 @@ export type SectionKey = (typeof SECTIONS)[number]["key"];
 export function Shell({ active, children }: { active: SectionKey; children: React.ReactNode }) {
   return (
     <div className="relative min-h-dvh overflow-x-clip">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-0 h-[420px] bg-[radial-gradient(60%_80%_at_70%_0%,rgba(127,180,234,0.18),transparent)]" />
-      <header className="sticky top-3 z-20 mx-auto mt-3 flex w-[calc(100%-1.5rem)] max-w-[1120px] flex-wrap items-center gap-2 rounded-[22px] bg-white/85 p-1.5 shadow-[0_1px_2px_rgba(11,27,47,0.05),0_16px_40px_-28px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.06] backdrop-blur-xl sm:rounded-full">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-0 h-[420px] bg-[radial-gradient(60%_80%_at_70%_0%,rgba(111,214,176,0.18),transparent)]" />
+      <header className="sticky top-3 z-20 mx-auto mt-3 flex w-[calc(100%-1.5rem)] max-w-[1120px] flex-wrap items-center gap-2 rounded-[22px] bg-white/85 p-1.5 shadow-[0_1px_2px_rgba(11,31,26,0.05),0_16px_40px_-28px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.06] backdrop-blur-xl sm:rounded-full">
         <Link href="/admin" className="flex items-center gap-2 rounded-full py-1.5 ps-3 pe-2">
           <span className="grid size-7 place-items-center rounded-full bg-ink text-[11px] font-semibold text-white">E</span>
           <span className="text-[14px] font-medium tracking-[-0.01em]">EAM Global</span>
@@ -76,7 +76,7 @@ export function Shell({ active, children }: { active: SectionKey; children: Reac
               aria-current={s.key === active ? "page" : undefined}
               className={cn(
                 "flex-1 rounded-full px-4 py-2 text-center text-[14px] font-medium transition-[background-color,color,box-shadow] duration-300 ease-fluid sm:flex-none",
-                s.key === active ? "bg-white text-ink shadow-[0_1px_2px_rgba(11,27,47,0.08)] ring-1 ring-ink/[0.06]" : "text-ink-3 hover:text-ink",
+                s.key === active ? "bg-white text-ink shadow-[0_1px_2px_rgba(11,31,26,0.08)] ring-1 ring-ink/[0.06]" : "text-ink-3 hover:text-ink",
               )}
             >
               {s.label}

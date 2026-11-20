@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 export type DanielState = "idle" | "listening" | "thinking" | "speaking";
 
 /**
- * Daniel's face: a navy "D" inside a brand ring. No image, no video; the motion
+ * Daniel's face: an emerald "D" inside a brand ring. No image, no video; the motion
  * lives in globals.css (.daniel-mark) and only runs under `.motion`.
  * `live` marks move (the launcher, the chat header, the greeting); every other
  * mark stays still, so pages full of "Ask Daniel" buttons stay cheap to render.

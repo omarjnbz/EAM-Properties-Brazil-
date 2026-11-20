@@ -146,7 +146,7 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <article className="daniel-rise rounded-2xl bg-surface p-4 shadow-[0_1px_2px_rgba(11,27,47,0.05),0_10px_24px_-16px_rgba(11,27,47,0.3)] ring-1 ring-ink/[0.07]">
+    <article className="daniel-rise rounded-2xl bg-surface p-4 shadow-[0_1px_2px_rgba(11,31,26,0.05),0_10px_24px_-16px_rgba(11,31,26,0.3)] ring-1 ring-ink/[0.07]">
       <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.08em] text-ink-3">
         <span className="text-navy">{kind}</span>
         <span aria-hidden>·</span>
@@ -180,11 +180,11 @@ export function whatsappWith(text?: string) {
 export function HandoffCard({ copy, onNavigate, whatsappText, passing }: { copy: Copy; onNavigate: () => void; whatsappText?: string; passing?: boolean }) {
   const h = copy.handoff;
   return (
-    <article className="daniel-rise overflow-hidden rounded-2xl bg-ink text-white shadow-[0_14px_30px_-18px_rgba(11,27,47,0.7)]">
+    <article className="daniel-rise overflow-hidden rounded-2xl bg-ink text-white shadow-[0_14px_30px_-18px_rgba(11,31,26,0.7)]">
       {passing && (
         <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.04] px-4 py-2 text-[12px] text-white/75">
           <DanielMark size={18} />
-          <span aria-hidden className="h-px w-5 bg-gradient-to-r from-white/50 to-[#8fc24a] rtl:bg-gradient-to-l" />
+          <span aria-hidden className="h-px w-5 bg-gradient-to-r from-white/50 to-[#6fd6b0] rtl:bg-gradient-to-l" />
           <span className="grid size-[18px] place-items-center rounded-full bg-leaf text-[9px] font-semibold">AM</span>
           <span className="ms-1">{h.passing}</span>
         </div>
@@ -225,7 +225,7 @@ export function PlanButton({ label, onPlan }: { label: string; onPlan: () => voi
     <button
       type="button"
       onClick={onPlan}
-      className="daniel-rise inline-flex items-center gap-2 self-start rounded-full bg-navy px-4 py-2 text-[13.5px] font-medium text-white shadow-[0_8px_18px_-10px_rgba(14,86,158,0.8)] transition-colors hover:bg-navy-deep"
+      className="daniel-rise inline-flex items-center gap-2 self-start rounded-full bg-navy px-4 py-2 text-[13.5px] font-medium text-white shadow-[0_8px_18px_-10px_rgba(5,95,76,0.8)] transition-colors hover:bg-navy-deep"
     >
       <ListChecks weight="bold" className="size-4" aria-hidden />
       {label}

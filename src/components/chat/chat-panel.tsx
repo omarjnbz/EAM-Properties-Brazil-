@@ -435,7 +435,7 @@ export default function ChatPanel({
         if (menu) setMenu(false);
         else onClose();
       }}
-      className="daniel-ui daniel-sheet fixed inset-x-0 bottom-0 z-50 flex h-[min(88dvh,720px)] flex-col overflow-hidden rounded-t-[26px] bg-surface pb-[env(safe-area-inset-bottom)] text-ink shadow-[0_-20px_60px_-20px_rgba(11,27,47,0.45)] ring-1 ring-ink/[0.08] md:inset-x-auto md:bottom-[84px] md:end-6 md:h-[min(74vh,640px)] md:w-[400px] md:rounded-[24px] md:pb-0 md:shadow-[0_30px_80px_-20px_rgba(11,27,47,0.45)]"
+      className="daniel-ui daniel-sheet fixed inset-x-0 bottom-0 z-50 flex h-[min(88dvh,720px)] flex-col overflow-hidden rounded-t-[26px] bg-surface pb-[env(safe-area-inset-bottom)] text-ink shadow-[0_-20px_60px_-20px_rgba(11,31,26,0.45)] ring-1 ring-ink/[0.08] md:inset-x-auto md:bottom-[84px] md:end-6 md:h-[min(74vh,640px)] md:w-[400px] md:rounded-[24px] md:pb-0 md:shadow-[0_30px_80px_-20px_rgba(11,31,26,0.45)]"
     >
       {/* Header: Daniel's mark mirrors what he is doing. On phones it is also the handle that drags the sheet down. */}
       <header
@@ -476,7 +476,7 @@ export default function ChatPanel({
         </button>
 
         {menu && (
-          <div role="menu" aria-label={copy.menu.label} className="daniel-rise absolute end-3 top-[calc(100%-4px)] z-10 flex w-64 flex-col rounded-2xl bg-surface p-1.5 shadow-[0_18px_40px_-16px_rgba(11,27,47,0.45)] ring-1 ring-ink/[0.08]">
+          <div role="menu" aria-label={copy.menu.label} className="daniel-rise absolute end-3 top-[calc(100%-4px)] z-10 flex w-64 flex-col rounded-2xl bg-surface p-1.5 shadow-[0_18px_40px_-16px_rgba(11,31,26,0.45)] ring-1 ring-ink/[0.08]">
             <MenuItem icon={<ListChecks className="size-4" aria-hidden />} onClick={startPlan} disabled={busy}>
               {copy.planChip}
             </MenuItem>
@@ -644,7 +644,7 @@ export default function ChatPanel({
           }}
           className={cn(
             "flex items-end gap-1.5 rounded-2xl bg-paper px-3 py-2 ring-1 transition-shadow",
-            dictation.listening ? "ring-navy/40 shadow-[0_0_0_4px_rgba(14,86,158,0.08)]" : "ring-transparent focus-within:ring-navy/30",
+            dictation.listening ? "ring-navy/40 shadow-[0_0_0_4px_rgba(5,95,76,0.08)]" : "ring-transparent focus-within:ring-navy/30",
           )}
         >
           <label htmlFor="chat-input" className="sr-only">

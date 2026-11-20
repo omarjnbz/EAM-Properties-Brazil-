@@ -16,7 +16,7 @@ export async function AdvisorStatus() {
   const { home } = await getDictionary();
   const a = home.advisor;
   return (
-    <div className="rounded-[24px] bg-white p-5 shadow-[0_1px_2px_rgba(11,27,47,0.05),0_24px_60px_-40px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.05] sm:p-6">
+    <div className="rounded-[24px] bg-white p-5 shadow-[0_1px_2px_rgba(11,31,26,0.05),0_24px_60px_-40px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.05] sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <span className="inline-flex items-center gap-2 text-[14px] font-medium text-ink">
           <LiveDot className="size-2" /> {a.online}

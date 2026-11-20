@@ -58,7 +58,7 @@ export async function PillarsGrid() {
               <Reveal as="li" key={pillar.key} delay={(i % 4) * 80} className="w-[78vw] max-w-[320px] shrink-0 snap-start sm:w-auto sm:max-w-none">
                 <AppLink
                   href={HREFS[pillar.key]}
-                  className="group flex h-full flex-col rounded-[22px] bg-white p-6 shadow-[0_1px_2px_rgba(11,27,47,0.05)] ring-1 ring-ink/[0.05] transition-[transform,box-shadow] duration-500 ease-fluid hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(11,27,47,0.35)]"
+                  className="group flex h-full flex-col rounded-[22px] bg-white p-6 shadow-[0_1px_2px_rgba(11,31,26,0.05)] ring-1 ring-ink/[0.05] transition-[transform,box-shadow] duration-500 ease-fluid hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(11,31,26,0.35)]"
                 >
                   <div className="flex items-center justify-between">
                     <span className="grid size-11 place-items-center rounded-full bg-canvas text-ink transition-colors duration-300 group-hover:bg-leaf group-hover:text-white">

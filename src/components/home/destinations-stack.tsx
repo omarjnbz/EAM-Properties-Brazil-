@@ -37,7 +37,7 @@ export async function DestinationsStack() {
             const { image, position, href, badgeTone } = DESTINATIONS[dst.key];
             return (
             <li key={dst.key} data-stack-card className="sticky" style={{ top: `calc(5.75rem + ${i * 14}px)` }}>
-              <article suppressHydrationWarning className="relative isolate flex h-[min(76svh,620px)] min-h-[520px] origin-top flex-col justify-end overflow-hidden rounded-[28px] bg-ink text-white shadow-[0_30px_80px_-40px_rgba(11,27,47,0.6)]">
+              <article suppressHydrationWarning className="relative isolate flex h-[min(76svh,620px)] min-h-[520px] origin-top flex-col justify-end overflow-hidden rounded-[28px] bg-ink text-white shadow-[0_30px_80px_-40px_rgba(11,31,26,0.6)]">
                 <Image
                   src={image}
                   alt={dst.country}

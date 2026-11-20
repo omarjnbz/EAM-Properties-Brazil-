@@ -112,7 +112,7 @@ export function CountryPage({ data }: { data: CountryPageData }) {
             <div className="lg:col-span-7">
               <SectionHeading eyebrow={`Watch · ${data.explainer.item.video.duration}`} title={data.explainer.title} intro={data.explainer.item.summary} tone="ink" />
               <Reveal delay={160} className="mt-8 rounded-[22px] bg-white/[0.06] p-6 ring-1 ring-white/10">
-                <div className="text-[13px] font-medium text-[#8fc24a]">How you get there</div>
+                <div className="text-[13px] font-medium text-[#6fd6b0]">How you get there</div>
                 <p className="mt-2 text-[15.5px] leading-relaxed text-white/80">
                   <Rich text={data.explainer.note} />
                 </p>

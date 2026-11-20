@@ -57,7 +57,7 @@ export function LanguageMenu({ locale, label, note, onImage, className }: { loca
       <div
         id={id}
         hidden={!open}
-        className="absolute end-0 top-full z-[3] mt-2 w-60 rounded-[20px] bg-white p-2 text-ink shadow-[0_1px_2px_rgba(11,27,47,0.06),0_24px_60px_-24px_rgba(11,27,47,0.35)] ring-1 ring-ink/[0.06]"
+        className="absolute end-0 top-full z-[3] mt-2 w-60 rounded-[20px] bg-white p-2 text-ink shadow-[0_1px_2px_rgba(11,31,26,0.06),0_24px_60px_-24px_rgba(11,31,26,0.35)] ring-1 ring-ink/[0.06]"
       >
         <p className="px-3 pb-1 pt-2 text-[12px] font-medium text-ink-3">{label}</p>
         <ul>

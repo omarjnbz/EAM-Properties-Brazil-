@@ -65,7 +65,7 @@ export function SelectionAsk({ label, template, onAsk }: { label: string; templa
         setSpot(null);
       }}
       style={{ left: spot.x, top: spot.y }}
-      className={`daniel-ui daniel-rise fixed z-[60] inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-ink py-1 ps-1 pe-3 text-[12.5px] font-medium text-white shadow-[0_12px_30px_-10px_rgba(11,27,47,0.6)] ring-1 ring-white/10 ${spot.below ? "" : "-translate-y-full"}`}
+      className={`daniel-ui daniel-rise fixed z-[60] inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-ink py-1 ps-1 pe-3 text-[12.5px] font-medium text-white shadow-[0_12px_30px_-10px_rgba(11,31,26,0.6)] ring-1 ring-white/10 ${spot.below ? "" : "-translate-y-full"}`}
     >
       <DanielMark size={22} />
       {label}

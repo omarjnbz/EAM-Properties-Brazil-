@@ -27,7 +27,7 @@ export async function ProblemSection() {
           <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 md:gap-2.5 lg:col-span-8">
             {p.countries.map((c, i) => (
               <Reveal as="li" key={c.code} delay={i * 45}>
-                <div className="flex h-full min-h-[64px] items-center justify-center gap-2.5 rounded-2xl bg-white px-3 py-4 shadow-[0_1px_2px_rgba(11,27,47,0.05)] ring-1 ring-ink/[0.05] md:min-h-[84px]">
+                <div className="flex h-full min-h-[64px] items-center justify-center gap-2.5 rounded-2xl bg-white px-3 py-4 shadow-[0_1px_2px_rgba(11,31,26,0.05)] ring-1 ring-ink/[0.05] md:min-h-[84px]">
                   <span aria-hidden className="grid size-7 shrink-0 place-items-center rounded-full bg-ink text-[10.5px] font-semibold tracking-[0.04em] text-white">
                     {c.code}
                   </span>
@@ -80,7 +80,7 @@ export async function ProblemSection() {
             const Icon = ICONS[pain.key];
             return (
               <Reveal as="li" key={pain.key} delay={i * 90}>
-                <div className="flex h-full flex-col rounded-[22px] bg-white p-6 shadow-[0_1px_2px_rgba(11,27,47,0.05)] ring-1 ring-ink/[0.05] md:p-7">
+                <div className="flex h-full flex-col rounded-[22px] bg-white p-6 shadow-[0_1px_2px_rgba(11,31,26,0.05)] ring-1 ring-ink/[0.05] md:p-7">
                   <div className="flex items-center justify-between">
                     <span className="grid size-11 place-items-center rounded-full bg-[#fbeee8] text-[#a4471f]">
                       <Icon className="size-5" aria-hidden />

@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { isIndexable } from "./src/lib/indexing";
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
@@ -29,10 +30,11 @@ const nextConfig: NextConfig = {
       fallback: [],
     };
   },
-  // Draft protection: until SITE_INDEXABLE=true is set (at launch), every page,
-  // PDF and image tells search engines not to index it. Link previews still work.
+  // Search engines index the live site only. Previews and local builds send
+  // "noindex" on every page, PDF and image (see src/lib/indexing.ts); link
+  // previews still work.
   async headers() {
-    if (process.env.SITE_INDEXABLE === "true") return [];
+    if (isIndexable()) return [];
     return [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }];
   },
   images: {

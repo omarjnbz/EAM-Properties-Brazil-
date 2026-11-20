@@ -35,7 +35,7 @@ export async function SiteFooter() {
               <ul className="mt-8 flex flex-col gap-3 text-[14.5px]">
                 <li>
                   <a href={SITE.whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-white/80 transition-colors hover:text-white">
-                    <WhatsappLogo className="size-4 text-[#7fbf3a]" aria-hidden /> {t.common.whatsapp}: <bdi dir="ltr">{SITE.whatsappDisplay}</bdi>
+                    <WhatsappLogo className="size-4 text-[#6fd6b0]" aria-hidden /> {t.common.whatsapp}: <bdi dir="ltr">{SITE.whatsappDisplay}</bdi>
                   </a>
                 </li>
                 <li>

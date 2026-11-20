@@ -51,7 +51,7 @@ export default function DanielTeaser({
       aria-label={copy.teaser.label}
       className="daniel-ui daniel-bubble fixed bottom-[calc(max(1rem,env(safe-area-inset-bottom))+62px)] end-4 z-30 w-[min(310px,calc(100vw-2rem))] md:bottom-[86px] md:end-6"
     >
-      <div className="daniel-seq rounded-[22px] rounded-ee-[6px] bg-surface p-4 text-ink shadow-[0_24px_60px_-18px_rgba(11,27,47,0.5)] ring-1 ring-ink/[0.08]" data-play="">
+      <div className="daniel-seq rounded-[22px] rounded-ee-[6px] bg-surface p-4 text-ink shadow-[0_24px_60px_-18px_rgba(11,31,26,0.5)] ring-1 ring-ink/[0.08]" data-play="">
         <div className="flex items-center gap-1.5">
           <p className="text-[13px] font-semibold tracking-[-0.01em]">{copy.name}</p>
           <AiChip label={copy.ai} />

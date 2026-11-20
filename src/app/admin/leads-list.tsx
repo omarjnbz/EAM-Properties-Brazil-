@@ -59,7 +59,7 @@ export function LeadsList({ leads }: { leads: LeadItem[] }) {
       <div className="grid grid-cols-3 gap-2 sm:gap-3 lg:grid-cols-12">
         <div className="admin-rise col-span-3 rounded-[28px] bg-ink/[0.025] p-1.5 ring-1 ring-ink/[0.04] lg:col-span-3" style={{ "--d": 60 } as React.CSSProperties}>
           {/* Phones: one row (number, then the sentence). Desktop: the same order as the rating tiles beside it. */}
-          <div className="flex h-full flex-col justify-between gap-6 rounded-[22px] bg-ink p-5 text-white shadow-[0_22px_50px_-30px_rgba(11,27,47,0.6)] sm:p-6">
+          <div className="flex h-full flex-col justify-between gap-6 rounded-[22px] bg-ink p-5 text-white shadow-[0_22px_50px_-30px_rgba(11,31,26,0.6)] sm:p-6">
             <p className="hidden text-[13.5px] text-white/60 lg:block">New leads</p>
             <div className="flex items-center gap-4 lg:flex-col lg:items-start lg:gap-2">
               <p className="text-[2.8rem] font-medium leading-none tracking-[-0.04em] tabular-nums lg:text-[2.4rem]">{today}</p>
@@ -84,7 +84,7 @@ export function LeadsList({ leads }: { leads: LeadItem[] }) {
                 active ? "bg-navy/10 ring-navy/25" : "bg-ink/[0.025] ring-ink/[0.04] hover:bg-ink/[0.05]",
               )}
             >
-              <span className="flex h-full flex-col justify-between gap-4 rounded-[20px] bg-white p-3.5 shadow-[0_1px_2px_rgba(11,27,47,0.04),0_22px_50px_-34px_rgba(11,27,47,0.28)] sm:gap-6 sm:rounded-[22px] sm:p-5">
+              <span className="flex h-full flex-col justify-between gap-4 rounded-[20px] bg-white p-3.5 shadow-[0_1px_2px_rgba(11,31,26,0.04),0_22px_50px_-34px_rgba(11,31,26,0.28)] sm:gap-6 sm:rounded-[22px] sm:p-5">
                 <span className="flex items-center justify-between gap-2">
                   <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-semibold", SCORES[s].tone)}>
                     <span className={cn("size-1.5 rounded-full", SCORES[s].dot)} aria-hidden />
@@ -135,7 +135,7 @@ function LeadCard({ lead: l, delay }: { lead: LeadItem; delay: number }) {
 
   return (
     <article className="admin-rise rounded-[28px] bg-ink/[0.025] p-1.5 ring-1 ring-ink/[0.04]" style={{ "--d": delay } as React.CSSProperties}>
-      <div className="rounded-[22px] bg-white p-4 shadow-[0_1px_2px_rgba(11,27,47,0.04),0_22px_50px_-34px_rgba(11,27,47,0.28)] sm:p-5">
+      <div className="rounded-[22px] bg-white p-4 shadow-[0_1px_2px_rgba(11,31,26,0.04),0_22px_50px_-34px_rgba(11,31,26,0.28)] sm:p-5">
         <div className="flex gap-3.5 sm:gap-4">
           <span className={cn("grid size-11 shrink-0 place-items-center rounded-full text-[14px] font-semibold", score.tone)} aria-hidden>
             {initials || "?"}

@@ -99,7 +99,7 @@ export function GuideForm({ guide, className }: { guide: Guide; className?: stri
       </div>
 
       <label className="flex cursor-pointer items-start gap-3 text-[13.5px] leading-snug text-ink-3">
-        <input type="checkbox" name="consent" value="yes" required className="mt-0.5 size-4 shrink-0 accent-[#4c7f0e]" />
+        <input type="checkbox" name="consent" value="yes" required className="mt-0.5 size-4 shrink-0 accent-[#03805f]" />
         <span>
           Send me the guide and occasional updates from EAM Global. I can unsubscribe at any time. See our{" "}
           <AppLink href="/privacy" className="underline underline-offset-2">
@@ -113,7 +113,7 @@ export function GuideForm({ guide, className }: { guide: Guide; className?: stri
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex h-12 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-leaf px-6 text-[15px] font-medium text-white shadow-[0_8px_20px_-10px_rgba(62,105,11,0.7)] transition-[transform,background-color,opacity] duration-300 ease-fluid hover:bg-leaf-deep active:scale-[0.97] disabled:opacity-60"
+          className="inline-flex h-12 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-leaf px-6 text-[15px] font-medium text-white shadow-[0_8px_20px_-10px_rgba(3,107,81,0.7)] transition-[transform,background-color,opacity] duration-300 ease-fluid hover:bg-leaf-deep active:scale-[0.97] disabled:opacity-60"
         >
           <DownloadSimple weight="bold" className="size-4" aria-hidden />
           {status === "sending" ? "Preparing…" : `Get the free ${guide.country} guide`}

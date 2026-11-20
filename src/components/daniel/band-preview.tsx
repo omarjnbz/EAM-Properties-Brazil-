@@ -98,7 +98,7 @@ function Said({ t, children }: { t: number; children: React.ReactNode }) {
       <div
         dir="auto"
         style={{ "--t": `${t}ms`, "--dots-x": "1rem" } as React.CSSProperties}
-        className="daniel-said max-w-[88%] rounded-2xl rounded-ss-md bg-white px-4 py-2.5 text-ink-2 shadow-[0_1px_2px_rgba(11,27,47,0.05)]"
+        className="daniel-said max-w-[88%] rounded-2xl rounded-ss-md bg-white px-4 py-2.5 text-ink-2 shadow-[0_1px_2px_rgba(11,31,26,0.05)]"
       >
         <span className="daniel-typing" aria-hidden>
           <span />

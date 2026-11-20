@@ -21,7 +21,7 @@ export async function MissionVision({ tone = "paper", className }: { tone?: "pap
       {items.map((it, i) => (
         <Reveal as="li" key={it.label} delay={i * 80}>
           <div className={cn("h-full rounded-[22px] p-6 ring-1", dark ? "bg-white/[0.05] ring-white/10" : "bg-white ring-ink/[0.05]")}>
-            <div className={cn("text-[12.5px] font-medium", dark ? "text-[#8fc24a]" : "text-leaf-deep")}>{it.label}</div>
+            <div className={cn("text-[12.5px] font-medium", dark ? "text-[#6fd6b0]" : "text-leaf-deep")}>{it.label}</div>
             <p className={cn("mt-2 text-[17px] font-medium leading-snug tracking-[-0.02em]", dark && "text-white")}>{it.text}</p>
           </div>
         </Reveal>
@@ -111,7 +111,7 @@ export async function FounderStory() {
 
           <Reveal className="mt-3">
             <figure className="rounded-[24px] bg-ink p-7 text-white md:p-9">
-              <Quotes weight="fill" className="size-8 text-[#8fc24a]" aria-hidden />
+              <Quotes weight="fill" className="size-8 text-[#6fd6b0]" aria-hidden />
               <blockquote className="mt-4 text-[clamp(1.2rem,2vw,1.5rem)] font-medium leading-snug tracking-[-0.02em]">“{s.quote}”</blockquote>
               <figcaption className="mt-6 text-[14px] text-white/60">
                 {s.name} · {s.quoteRole}

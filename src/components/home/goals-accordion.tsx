@@ -57,7 +57,7 @@ export function GoalsAccordion({ items }: { items: readonly Item[] }) {
               data-reveal=""
               suppressHydrationWarning
               style={{ "--d": i * 70 } as React.CSSProperties}
-              className={cn("rounded-[22px] bg-white shadow-[0_1px_2px_rgba(11,27,47,0.05)] ring-1 transition-[box-shadow] duration-500", isOpen ? "ring-ink/[0.09]" : "ring-ink/[0.05]")}
+              className={cn("rounded-[22px] bg-white shadow-[0_1px_2px_rgba(11,31,26,0.05)] ring-1 transition-[box-shadow] duration-500", isOpen ? "ring-ink/[0.09]" : "ring-ink/[0.05]")}
             >
               <h3>
                 <button
